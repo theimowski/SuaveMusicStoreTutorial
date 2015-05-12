@@ -55,6 +55,7 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Db.fs" />
     <Compile Include="Path.fs" />
     <Compile Include="View.fs" />
     <Compile Include="App.fs" />
@@ -72,7 +73,11 @@
       <HintPath>packages\FSharp.Core.3.1.2.5\lib\net40\FSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Data.SqlProvider">
+      <HintPath>packages\SQLProvider.0.0.9-alpha\lib\net40\FSharp.Data.SqlProvider.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+	<Reference Include="mscorlib" />
     <Reference Include="Suave">
       <HintPath>packages\Suave.1.0.0\lib\net40\Suave.dll</HintPath>
       <Private>True</Private>
@@ -83,6 +88,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
