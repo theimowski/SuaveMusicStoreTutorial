@@ -27,14 +27,23 @@ let overview = warbler (fun _ ->
     |> View.store 
     |> html)
 
+let details id =
+    match Db.getAlbumDetails id (Db.getContext()) with
+    | Some album ->
+        html (View.details album)
+    | None ->
+        never
+
 let webPart = 
     choose [
         path Path.home >=> html View.home
         path Path.Store.overview >=> overview
         path Path.Store.browse >=> browse
-        pathScan Path.Store.details (fun id -> html (View.details id))
+        pathScan Path.Store.details details
 
-        pathRegex "(.*)\.(css|png)" >=> Files.browseHome
+        pathRegex "(.*)\.(css|png|gif)" >=> Files.browseHome
+
+        html View.notFound
     ]
 
 startWebServer defaultConfig webPart
