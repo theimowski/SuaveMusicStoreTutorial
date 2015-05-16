@@ -2,6 +2,8 @@ module SuaveMusicStore.App
 
 open Suave
 open Suave.Filters
+open Suave.Form
+open Suave.Model.Binding
 open Suave.Operators
 open Suave.RequestErrors
 open Suave.Successful
@@ -40,6 +42,25 @@ let manage = warbler (fun _ ->
     |> View.manage
     |> html)
 
+let bindToForm form handler =
+    bindReq (bindForm form) handler BAD_REQUEST
+
+let createAlbum =
+    let ctx = Db.getContext()
+    choose [
+        GET >=> warbler (fun _ -> 
+            let genres = 
+                Db.getGenres ctx 
+                |> List.map (fun g -> decimal g.GenreId, g.Name)
+            let artists = 
+                Db.getArtists ctx
+                |> List.map (fun g -> decimal g.ArtistId, g.Name)
+            html (View.createAlbum genres artists))
+        POST >=> bindToForm Form.album (fun form ->
+            Db.createAlbum (int form.ArtistId, int form.GenreId, form.Price, form.Title) ctx
+            Redirection.FOUND Path.Admin.manage)
+    ]
+
 let deleteAlbum id =
     let ctx = Db.getContext()
     match Db.getAlbum id ctx with
@@ -62,6 +83,7 @@ let webPart =
         pathScan Path.Store.details details
 
         path Path.Admin.manage >=> manage
+        path Path.Admin.createAlbum >=> createAlbum
         pathScan Path.Admin.deleteAlbum deleteAlbum
 
         pathRegex "(.*)\.(css|png|gif)" >=> Files.browseHome

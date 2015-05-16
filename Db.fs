@@ -9,6 +9,7 @@ type Sql =
 
 type DbContext = Sql.dataContext
 type Album = DbContext.``[dbo].[Albums]Entity``
+type Artist = DbContext.``[dbo].[Artists]Entity``
 type Genre = DbContext.``[dbo].[Genres]Entity``
 type AlbumDetails = DbContext.``[dbo].[AlbumDetails]Entity``
 
@@ -18,6 +19,9 @@ let firstOrNone s = s |> Seq.tryFind (fun _ -> true)
 
 let getGenres (ctx : DbContext) : Genre list = 
     ctx.``[dbo].[Genres]`` |> Seq.toList
+
+let getArtists (ctx : DbContext) : Artist list = 
+    ctx.``[dbo].[Artists]`` |> Seq.toList
 
 let getAlbumsForGenre genreName (ctx : DbContext) : Album list = 
     query { 
@@ -44,6 +48,10 @@ let getAlbum id (ctx : DbContext) : Album option =
             where (album.AlbumId = id)
             select album
     } |> firstOrNone
+
+let createAlbum (artistId, genreId, price, title) (ctx : DbContext) =
+    ctx.``[dbo].[Albums]``.Create(artistId, genreId, price, title) |> ignore
+    ctx.SubmitUpdates()
 
 let deleteAlbum (album : Album) (ctx : DbContext) = 
     album.Delete()
