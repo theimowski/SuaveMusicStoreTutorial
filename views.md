@@ -14,7 +14,7 @@ To use the package, we need to take a dependency on the following NuGet:
 
 Before we start defining views, let's organize our `App.fs` source file by adding following line at the beginning of the file:
 
-```
+```fsharp
 module SuaveMusicStore.App
 
 open Suave
@@ -25,7 +25,7 @@ The line means that whatever we define in the file will be placed in `SuaveMusic
 Read [here](http://fsharpforfunandprofit.com/posts/recipe-part3/) for more info about organizing and structuring F# code.
 Now let's add a new file `View.fs` to the project just before the `App.fs` file and place the following module definition at the very top:
 
-```
+```fsharp
 module SuaveMusicStore.View
 ```
 
@@ -35,7 +35,7 @@ We'll follow this convention throughout the tutorial to have a clear understandi
 
 With the `View.fs` file in place, let's add our first view:
 
-```
+```fsharp
 module SuaveMusicStore.View
 
 open Suave.Html
@@ -94,7 +94,7 @@ In F#, the `|>` operator basically means: take the value on the left side and ap
 In this very case it simply means: invoke the `xmlToString` function on the HTML object model.
 
 Let's test the `index` view in our `App.fs`:
-```
+```fsharp
     path "/" >>= (OK View.index)
 ```
 
@@ -102,7 +102,7 @@ If you navigate to the root url of the application, you should see that proper H
 
 Before we move on to defining views for the rest of the application, let's introduce one more file - `Path.fs` and insert it **before** `View.fs`:
 
-```
+```fsharp
 module SuaveMusicStore.Path
 
 type IntPath = PrintfFormat<(int -> string),unit,string,string,int>
@@ -127,7 +127,7 @@ We'll see in a moment how we can use `details` in `App` and `View` modules, with
 
 Let's use the routes from `Path` module in our `App`:
 
-```
+```fsharp
 let webPart = 
     choose [
         path Path.home >>= (OK View.index)
@@ -139,7 +139,7 @@ let webPart =
 
 as well as in our `View` for `aHref` to `home`:
 
-```
+```fsharp
     divId "header" [
         h1 (aHref Path.home (text "F# Suave Music Store"))
     ]
@@ -155,7 +155,7 @@ Add the `Site.css` stylesheet to the project, and don't forget to set the `Copy 
 
 In order to include the stylesheet in our HTML markup, let's add the following to our `View`:
 
-```
+```fsharp
 let cssLink href = linkAttr [ "href", href; " rel", "stylesheet"; " type", "text/css" ]
 
 let index = 
@@ -175,7 +175,7 @@ A browser, when asked to include a CSS file, sends back a request to the server 
 If we have a look at our main `WebPart` we'll notice that there's really no handler capable of serving this file.
 That's why we need to add another alternative to our `choose` `WebPart`:
 
-```
+```fsharp
     pathRegex "(.*)\.css" >>= Files.browseHome
 ```
 
@@ -189,7 +189,7 @@ The CSS depends on `logo.png` asset, which can be downloaded from [here](https:/
 Add `logo.png` to the project, and again don't forget to select `Copy If Newer` for `Copy To Output Directory` property for the asset.
 Again, when browser wants to render an image asset, it needs to GET it from the server, so we need to extend our regular expression to allow browsing of `.png` files as well:
 
-```
+```fsharp
     pathRegex "(.*)\.(css|png)" >>= Files.browseHome
 ```
 
@@ -198,7 +198,7 @@ Now you should be able to see the styles applied to our HTML markup.
 With styles in place, let's get our hands on extracting a shared layout for all future views to come.
 Start by adding `container` parameter to `index` in `View`:
 
-```
+```fsharp
 let index container = 
     html [
 ...
@@ -206,7 +206,7 @@ let index container =
 
 and div with id "container" just after the div "header":
 
-```
+```fsharp
     divId "header" [
         h1 (aHref Path.home (text "F# Suave Music Store"))
     ]
@@ -218,7 +218,7 @@ and div with id "container" just after the div "header":
 
 We can now define actual container for the "home" page:
 
-```
+```fsharp
 let home = [
     text "Home"
 ]
@@ -237,13 +237,13 @@ let html container =
 
 Usage for the home page looks like this:
 
-```
+```fsharp
     path Path.home >>= html View.home
 ```
 
 Next, containers for each valid route in our application can be defined in `View` module:
 
-```
+```fsharp
 let home = [
     text "Home"
 ]
@@ -265,7 +265,7 @@ Note that both `home` and `store` are constant values, while `browse` and `detai
 
 `html` can be now reused for all 4 views:
 
-```
+```fsharp
 let browse =
     request (fun r ->
         match r.queryParam "genre" with
@@ -286,7 +286,7 @@ let webPart =
 It's time to replace plain text placeholders in containers with meaningful content.
 First, define `h2` in `View` module to output HTML header of level 2:
 
-```
+```fsharp
 let h2 s = tag "h2" [] (text s)
 ```
 
@@ -295,7 +295,7 @@ and replace `text` with new `h2` in each of 4 containers.
 We'd like the "/store" route to output hyperlinks to all genres in our Music Store.
 Let's add a helper function in `Path` module, that will be responsible for formatting HTTP url with a key-value parameter:
 
-```
+```fsharp
 let withParam (key,value) path = sprintf "%s?%s=%s" path key value
 ```
 
@@ -306,20 +306,20 @@ Follow [this link](http://fsharpforfunandprofit.com/posts/tuples/) to learn more
 
 Add also a string key for the url parameter "/store/browse" in `Path.Store` module:
 
-```
+```fsharp
     let browseKey = "genre"
 ```
 
 We'll use it in `App` module:
 
-```
+```fsharp
     match r.queryParam Path.Store.browseKey with
     ...
 ```
 
 Now, add the following for working with unordered list (`ul`) and list item (`li`) elements in HTML:
 
-```
+```fsharp
 let ul xml = tag "ul" [] (flatten xml)
 let li = tag "li" []
 ```
@@ -327,7 +327,7 @@ let li = tag "li" []
 `flatten` takes a list of `Xml` and "flattens" it into a single `Xml` object model.
 The actual container for `store` can now look like following:
 
-```
+```fsharp
 let store genres = [
     h2 "Browse Genres"
     p [
@@ -348,7 +348,7 @@ Things worth commenting in above snippet:
 
 To use `View.store` from `App` module, let's simply pass a hardcoded list for `genres` like following:
 
-```
+```fsharp
     path Path.Store.overview >>= html (View.store ["Rock"; "Disco"; "Pop"])
 ```
 

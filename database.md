@@ -25,7 +25,7 @@ Having installed the SQLProvider, let's add `Db.fs` file to the beginning of our
 
 In the newly created file, open `FSharp.Data.Sql` module:
 
-```
+```fsharp
 module SuaveMusicStore.Db
 
 open FSharp.Data.Sql
@@ -33,7 +33,7 @@ open FSharp.Data.Sql
 
 Next, comes the most interesting part:
 
-```
+```fsharp
 type Sql = 
     SqlDataProvider< 
         "Server=(LocalDb)\\v11.0;Database=SuaveMusicStore;Trusted_Connection=True;MultipleActiveResultSets=true", 
@@ -46,7 +46,7 @@ This might be similar to how Entity Framework generates models for your tables, 
 
 The generated types have a bit cumbersome names, but we can define type aliases to keep things simpler:
 
-```
+```fsharp
 type DbContext = Sql.dataContext
 type Album = DbContext.``[dbo].[Albums]Entity``
 type Genre = DbContext.``[dbo].[Genres]Entity``
@@ -59,7 +59,7 @@ type AlbumDetails = DbContext.``[dbo].[AlbumDetails]Entity``
 
 With the type aliases set up, we can move forward to creating our first queries:
 
-```
+```fsharp
 let firstOrNone s = s |> Seq.tryFind (fun _ -> true)
 
 let getGenres (ctx : DbContext) : Genre list = 
@@ -100,13 +100,13 @@ In case of any result, `firstOrNone` will return `Some x`, otherwise `None`.
 
 For more convenient instantiation of `DbContext`, let's introduce a small helper function in `Db` module:
 
-```
+```fsharp
 let getContext() = Sql.GetDataContext()
 ```
 
 Now we're ready to finally read real data in the `App` module:
 
-```
+```fsharp
 let overview =
     Db.getContext() 
     |> Db.getGenres 
@@ -127,7 +127,7 @@ This is just a single example of how composition in functional programming makes
 
 We also need to wrap the `overview` WebPart in a `warbler`:
 
-```
+```fsharp
 let overview = warbler (fun _ ->
     Db.getContext() 
     |> Db.getGenres 
@@ -147,7 +147,7 @@ How about the rest of WebParts?
 
 Moving to our next WebPart "browse", let's first adjust it in `View` module:
 
-```
+```fsharp
 let browse genre (albums : Db.Album list) = [
     h2 (sprintf "Genre: %s" genre)
     ul [
@@ -164,7 +164,7 @@ For each album we'll display a list item with a direct link to album's details.
 
 Now, we can modify the `browse` WebPart itself:
 
-```
+```fsharp
 let browse =
     request (fun r ->
         match r.queryParam Path.Store.browseKey with
@@ -184,7 +184,7 @@ Again, usage of pipe operator makes it clear what happens in case the `genre` is
 If you navigate to "/store/browse?genre=Latin", you may notice there are some characters displayed incorrectly.
 Let's fix this by setting the "Content-Type" header with correct charset for each HTTP response:
 
-```
+```fsharp
 let html container =
     OK (View.index container)
     >>= Writers.setMimeType "text/html; charset=utf-8"
@@ -193,7 +193,7 @@ let html container =
 It's time to read album's details from the database. 
 Start by adjusting the `details` in `View` module:
 
-```
+```fsharp
 let details (album : Db.AlbumDetails) = [
     h2 album.Title
     p [ imgSrc album.AlbumArtUrl ]
@@ -209,7 +209,7 @@ let details (album : Db.AlbumDetails) = [
 
 Above snippet requires defining a few more helper functions in `View`:
 
-```
+```fsharp
 let imgSrc src = imgAttr [ "src", src ]
 let em s = tag "em" [] (text s)
 
@@ -228,7 +228,7 @@ The `AlbumDetails` database view turns out to be handy now, because we can use a
 
 To read the album's details in `App` module we can do following:
 
-```
+```fsharp
 let details id =
     match Db.getAlbumDetails id (Db.getContext()) with
     | Some album ->
@@ -258,7 +258,7 @@ Don't forget to set "Copy To Output Directory", as well as add new file extensio
 You might have noticed, that when you try to access a missing resource (for example entering album details url with arbitrary album id) then no response is sent.
 In order to fix that, let's add a "Page Not Found" handler to our main `choose` WebPart as a last resort:
 
-```
+```fsharp
 let webPart = 
     choose [
         ...
@@ -269,7 +269,7 @@ let webPart =
 
 the `View.notFound` can then look like:
 
-```
+```fsharp
 let notFound = [
     h2 "Page not found"
     p [

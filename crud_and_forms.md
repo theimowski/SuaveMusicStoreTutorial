@@ -5,7 +5,7 @@ This will be a simple Create, Update, Delete functionality with a grid to displa
 
 Let's start by adding `manage` to our `View` module:
 
-```
+```fsharp
 let manage (albums : Db.AlbumDetails list) = [ 
     h2 "Index"
     table [
@@ -24,7 +24,7 @@ let manage (albums : Db.AlbumDetails list) = [
 
 The view requires a few of new helper functions for table HTML markup:
 
-```
+```fsharp
 let table x = tag "table" [] (flatten x)
 let th x = tag "th" [] (flatten x)
 let tr x = tag "tr" [] (flatten x)
@@ -33,7 +33,7 @@ let td x = tag "td" [] (flatten x)
 
 as well as a `truncate` function that will ensure our cell content doesn't span over a maximum number of characters:
 
-```
+```fsharp
 let truncate k (s : string) =
     if s.Length > k then
         s.Substring(0, k - 3) + "..."
@@ -49,7 +49,7 @@ Remarks:
 We are going to need to fetch the list of all `AlbumDetail`s from the database. 
 For this reason, let's create following query in `Db` module:
 
-```
+```fsharp
 let getAlbumsDetails (ctx : DbContext) : AlbumDetails list = 
     ctx.``[dbo].[AlbumDetails]`` |> Seq.toList
 ```
@@ -57,7 +57,7 @@ let getAlbumsDetails (ctx : DbContext) : AlbumDetails list =
 Now we're ready to define an actual handler to display the list of albums.
 Let's add a new sub-module to `Path`:
 
-```
+```fsharp
 module Admin =
     let manage = "/admin/manage"
 ```
@@ -66,7 +66,7 @@ The `Admin` sub-module will contain all album management paths or routes if you 
 
 `manage` WebPart in `App` module can be implemented in following way:
 
-```
+```fsharp
 let manage = warbler (fun _ ->
     Db.getContext()
     |> Db.getAlbumsDetails
@@ -76,7 +76,7 @@ let manage = warbler (fun _ ->
 
 and used in the main `choose` WebPart:
 
-```
+```fsharp
     path Path.Admin.manage >>= manage
 ```
 
@@ -86,7 +86,7 @@ If you navigate to the "/admin/manage" url in the application now, you should be
 We can't make any operation on an album yet.
 To fix this, let's first add the delete functionality:
 
-```
+```fsharp
 let deleteAlbum albumTitle = [
     h2 "Delete Confirmation"
     p [ 
@@ -108,7 +108,7 @@ let deleteAlbum albumTitle = [
 
 `deleteAlbum` is to be placed in the `View` module. It requires new markup functions:
 
-```
+```fsharp
 let strong s = tag "strong" [] (text s)
 
 let form x = tag "form" ["method", "POST"] (flatten x)
@@ -121,7 +121,7 @@ let submitInput value = inputAttr ["type", "submit"; "value", value]
 
 A couple of snippets to handle `deleteAlbum` are still needed, starting with `Db`:
 
-```
+```fsharp
 let getAlbum id (ctx : DbContext) : Album option = 
     query { 
         for album in ctx.``[dbo].[Albums]`` do
@@ -133,7 +133,7 @@ let getAlbum id (ctx : DbContext) : Album option =
 for getting `Album option` (not `AlbumDetails`). 
 New route in `Path`:
 
-```
+```fsharp
 module Admin =
     let manage = "/admin/manage"
     let deleteAlbum : IntPath = "/admin/delete/%d"
@@ -141,7 +141,7 @@ module Admin =
 
 Finally we can put following in the `App` module:
 
-```
+```fsharp
 let deleteAlbum id =
     match Db.getAlbum id (Db.getContext()) with
     | Some album ->
@@ -150,7 +150,7 @@ let deleteAlbum id =
         never
 ```
 
-```
+```fsharp
     pathScan Path.Admin.deleteAlbum deleteAlbum
 ```
 
@@ -160,7 +160,7 @@ For the moment both GET and POST requests will do the same, which is return HTML
 
 In order to implement the deletion, add `deleteAlbum` to `Db` module:
 
-```
+```fsharp
 let deleteAlbum (album : Album) (ctx : DbContext) = 
     album.Delete()
     ctx.SubmitUpdates()
@@ -170,7 +170,7 @@ The snippet takes an `Album` as a parameter - instance of this type comes from d
 
 Now, in `App` module we can distinguish between GET and POST requests:
 
-```
+```fsharp
 let deleteAlbum id =
     let ctx = Db.getContext()
     match Db.getAlbum id ctx with
@@ -194,7 +194,7 @@ let deleteAlbum id =
 
 The grid can now contain a column with link to delete the album in question:
 
-```
+```fsharp
 table [
         yield tr [
             for t in ["Artist";"Title";"Genre";"Price";""] -> th [ text t ]
@@ -228,7 +228,7 @@ As with the rest of modules, don't forget to follow our modules naming conventio
 
 Now declare the first `Album` form:
 
-```
+```fsharp
 module SuaveMusicStore.Form
 
 open Suave.Form
@@ -275,7 +275,7 @@ For server side we will use an utility WebPart that will parse the form field va
 
 To see how we can use the form in `View` module, add `open Suave.Form` to the beginning:
 
-```
+```fsharp
 module SuaveMusicStore.View
 
 open System
@@ -286,7 +286,7 @@ open Suave.Form
 
 Next, add a couple of helper functions:
 
-```
+```fsharp
 let divClass c = divAttr ["class", c]
 
 ...
@@ -297,7 +297,7 @@ let legend txt = tag "legend" [] (text txt)
 
 And finally this block of code:
 
-```
+```fsharp
 type Field<'a> = {
     Label : string
     Xml : Form<'a> -> Suave.Html.Xml
@@ -365,7 +365,7 @@ The `Field` type has:
 
 `renderForm` ca be invoked like this:
 
-```
+```fsharp
 let createAlbum genres artists = [ 
     h2 "Create"
         
@@ -403,7 +403,7 @@ As third argument, `selectInput` takes an optional selected value - in case of `
 Now that we have the `createAlbum` view, we can write the appropriate WebPart handler.
 Start by adding `getArtists` to `Db`:
 
-```
+```fsharp
 type Artist = DbContext.``[dbo].[Artists]Entity``
 
 ...
@@ -414,13 +414,13 @@ let getArtists (ctx : DbContext) : Artist list =
 
 Then proper entry in `Path` module:
 
-```
+```fsharp
     let createAlbum = "/admin/create"
 ```
 
 and WebPart in `App` module:
 
-```
+```fsharp
 let createAlbum =
     let ctx = Db.getContext()
     choose [
@@ -442,7 +442,7 @@ let createAlbum =
 Once again, `warbler` will prevent from eager evaluation of the WebPart - it's vital here.
 To our `View.manage` we can add a link to `createAlbum`:
 
-```
+```fsharp
 let manage (albums : Db.AlbumDetails list) = [ 
     h2 "Index"
     p [
@@ -455,7 +455,7 @@ This allows us to navigate to "/admin/create", however we're still lacking the a
 
 Before we define the handler, let's add another helper function to `App` module:
 
-```
+```fsharp
 let bindToForm form handler =
     bindReq (bindForm form) handler BAD_REQUEST
 ```
@@ -477,7 +477,7 @@ There are just 2 more things before we're good to go with creating album functio
 
 We need `createAlbum` for the `Db` module (the created album is piped to `ignore` function, because we don't need it afterwards):
 
-```
+```fsharp
 let createAlbum (artistId, genreId, price, title) (ctx : DbContext) =
     ctx.``[dbo].[Albums]``.Create(artistId, genreId, price, title) |> ignore
     ctx.SubmitUpdates()
@@ -485,7 +485,7 @@ let createAlbum (artistId, genreId, price, title) (ctx : DbContext) =
 
 as well as POST handler inside the `createAlbum` WebPart:
 
-```
+```fsharp
 choose [
         GET >>= ...
 
@@ -500,7 +500,7 @@ This one will be fairly easy, as it's gonna be very similar to create (we can re
 
 `editAlbum` in `View`:
 
-```
+```fsharp
 let editAlbum (album : Db.Album) genres artists = [ 
     h2 "Edit"
         
@@ -529,13 +529,13 @@ let editAlbum (album : Db.Album) genres artists = [
 
 Path:
 
-```
+```fsharp
     let editAlbum : IntPath = "/admin/edit/%d"    
 ```
 
 Link in `manage` in `View`:
 
-```
+```fsharp
 for album in albums -> 
         tr [
             ...
@@ -550,7 +550,7 @@ for album in albums ->
 
 `updateAlbum` in `Db` module:
 
-```
+```fsharp
 let updateAlbum (album : Album) (artistId, genreId, price, title) (ctx : DbContext) =
     album.ArtistId <- artistId
     album.GenreId <- genreId
@@ -561,7 +561,7 @@ let updateAlbum (album : Album) (artistId, genreId, price, title) (ctx : DbConte
 
 `editAlbum` WebPart in `App` module:
 
-```
+```fsharp
 let editAlbum id =
     let ctx = Db.getContext()
     match Db.getAlbum id ctx with
@@ -585,7 +585,7 @@ let editAlbum id =
 
 and finally `pathScan` in main `choose` WebPart:
 
-```
+```fsharp
     pathScan Path.Admin.editAlbum editAlbum
 ```
 
@@ -601,7 +601,7 @@ Comments to above snippets:
 
 As the icing on the cake, let's also add link to details for each of the albums in `View.manage`:
 
-```
+```fsharp
 aHref (sprintf Path.Admin.editAlbum album.AlbumId) (text "Edit")
 text " | "
 aHref (sprintf Path.Store.details album.AlbumId) (text "Details")

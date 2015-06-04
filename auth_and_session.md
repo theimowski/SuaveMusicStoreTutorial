@@ -9,7 +9,7 @@ That's exactly what we'll do right now.
 As a warm-up, let's add navigation menu at the very top of the view.
 We'll call it `partNav` and keep in separate function:
 
-```
+```fsharp
 let partNav = 
     ulAttr ["id", "navlist"] [ 
         li (aHref Path.home (text "Home"))
@@ -20,14 +20,14 @@ let partNav =
 
 `partNav` consists of 3 main tabs: "Home", "Store" and "Admin". `ulAttr` can be defined like following:
 
-```
+```fsharp
 let ulAttr attr xml = tag "ul" attr (flatten xml)
 ```
 
 We want to specify the `id` attribute here so that our CSS can make the menu nice and shiny.
 Add the `partNav` to main index view, in the "header" `div`:
 
-```
+```fsharp
 divId "header" [
     h1 (aHref Path.home (text "F# Suave Music Store"))
     partNav
@@ -41,7 +41,7 @@ Just as in every other e-commerce website, if a user is logged in, he'll be show
 Otherwise, we'll just display a "Log on" link.
 First, open up the `Path` module and define routes for `logon` and `logoff` in `Account` submodule:
 
-```
+```fsharp
 module Account =
     let logon = "/account/logon"
     let logoff = "/account/logoff"
@@ -49,7 +49,7 @@ module Account =
 
 Next, define `partUser` in the `View` module:
 
-```
+```fsharp
 let partUser (user : string option) = 
     divId "part-user" [
         match user with
@@ -65,7 +65,7 @@ let partUser (user : string option) =
 
 and include it in "header" `div` as well"
 
-```
+```fsharp
 divId "header" [
     h1 (aHref Path.home (text "F# Suave Music Store"))
     partNav
@@ -79,7 +79,7 @@ For now, we assume no user is logged on, thus we hardcode the `None` in call to 
 There's no handler for the `logon` route yet, so we need to create one.
 Logon view will be rather straightforward - just a simple form with username and password.
 
-```
+```fsharp
 type Logon = {
     Username : string
     Password : Password
@@ -91,7 +91,7 @@ let logon : Form<Logon> = Form ([],[])
 Above snippet shows how the `logon` form can be defined in our `Form` module.
 `Password` is a type from Suave library and helps to determine the input type for HTML markup (we don't want anyone to see our secret pass as we type it).
 
-```
+```fsharp
 let logon = [
     h2 "Log On"
     p [
@@ -116,20 +116,20 @@ We've already seen how the `renderForm` works, so the above snippet is just anot
 
 The GET handler for `logon` is also very simple:
 
-```
+```fsharp
 let logon =
     View.logon
     |> html
 ```
 
-```
+```fsharp
 path Path.Account.logon >>= logon
 ```
 
 Things get more complicated with regards to the POST handler.
 As a gentle introduction, we'll add logic to verify passed credentials - by querying the database (`Db` module):
 
-```
+```fsharp
 let validateUser (username, password) (ctx : DbContext) : User option =
     query {
         for user in ctx.``[dbo].[Users]`` do
@@ -140,13 +140,13 @@ let validateUser (username, password) (ctx : DbContext) : User option =
 
 The snippet makes use of `User` type alias:
 
-```
+```fsharp
 type User = DbContext.``[dbo].[Users]Entity``
 ```
 
 Now, in the `App` module add two more `open` statements:
 
-```
+```fsharp
 open System
 ...
 open Suave.State.CookieStateStore
@@ -154,7 +154,7 @@ open Suave.State.CookieStateStore
 
 and add a couple of helper functions:
 
-```
+```fsharp
 let passHash (pass: string) =
     use sha = Security.Cryptography.SHA256.Create()
     Text.Encoding.UTF8.GetBytes(pass)
@@ -187,7 +187,7 @@ Comments:
 
 Now turn for the `logon` POST handler monster:
 
-```
+```fsharp
 let logon =
     choose [
         GET >>= (View.logon |> html)
@@ -224,7 +224,7 @@ That's because we temporarily assigned `never` to the latter match.
 Ideally, we'd like to see some kind of a validation message next to the form.
 To achieve that, let's add `msg` parameter to `View.logon`:
 
-```
+```fsharp
 let logon msg = [
     h2 "Log On"
     p [
@@ -239,7 +239,7 @@ let logon msg = [
 
 Now we can invoke it in two ways:
 
-```
+```fsharp
 GET >>= (View.logon "" |> html)
 
 ...
@@ -254,7 +254,7 @@ This is however not very useful, as there are no handlers that would demand user
 
 To change that, let's define custom types to represent user state:
 
-```
+```fsharp
 type UserLoggedOnSession = {
     Username : string
     Role : string
@@ -285,7 +285,7 @@ With these two types, we'll be able to distinguish from when a user is logged on
 
 As stated before, we'll now add a parameter to the `session` function:
 
-```
+```fsharp
 let session f = 
     statefulForSession
     >>= context (fun x -> 
@@ -305,7 +305,7 @@ In order to confirm that a user is logged on, session state store must contain b
 
 The only usage of `session` for now is in the `logon` POST handler - let's adjust it to new version:
 
-```
+```fsharp
 ...
 Auth.authenticated Cookie.CookieLife.Session false 
 >>= session (fun _ -> succeed)
@@ -319,7 +319,7 @@ For the moment usage of `session` in `logon` doesn't require any custom action, 
 There are a few more helper functions needed before we can set up proper authorization for "/admin" handlers.
 Add following to `App` module:
 
-```
+```fsharp
 open Suave.Cookie
 
 ...
@@ -370,7 +370,7 @@ Remarks:
 
 That was quite long, but worth it. Finally we're able to guard the "/admin" actions:
 
-```
+```fsharp
 path Path.Admin.manage >>= admin manage
 path Path.Admin.createAlbum >>= admin createAlbum
 pathScan Path.Admin.editAlbum (fun id -> admin (editAlbum id))
@@ -382,7 +382,7 @@ Go and have a look what happens when you try to navigate to "/admin/manage" rout
 We still need to update the `partUser`, when a user is logged on (remember we hardcoded `None` for username).
 To do this, we can pass `partUser` as parameter to `View.index`:
 
-```
+```fsharp
 let index partUser container = 
 
 ...
@@ -396,7 +396,7 @@ let index partUser container =
 
 and determine whether a user is logged on in the `html` WebPart in `App` module:
 
-```
+```fsharp
 let html container =
     let result user =
         OK (View.index (View.partUser user) container)
@@ -413,7 +413,7 @@ Effectively, we invoke the `result` function always but with `user` argument bas
 
 The last thing we need to support is `logoff`. In the main `choose` WebPart add:
 
-```
+```fsharp
 path Path.Account.logoff >>= reset
 ```
 

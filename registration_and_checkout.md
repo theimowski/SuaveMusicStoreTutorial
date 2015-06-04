@@ -6,11 +6,11 @@ It would be a pity if no one can register, because only registered users can buy
 
 Register feature will be based on a standard form, so let's add one to the `Form` module:
 
-```
+```fsharp
 open System.Net.Mail
 ```
 
-```
+```fsharp
 type Register = {
     Username : string
     Email : MailAddress
@@ -53,7 +53,7 @@ We won't create client-side validation to check if the passwords match in the tu
 
 With the form definition in place, let's proceed to `View`:
 
-```
+```fsharp
 let register msg = [
     h2 "Create a New Account"
     p [
@@ -86,26 +86,26 @@ The rest of the snippet is rather self-explanatory.
 
 We're now left with proper `Path.Account` entry:
 
-```
+```fsharp
 let register = "/account/register"
 ```
 
 GET handler for registration in `App`:
 
-```
+```fsharp
 let register =
     choose [
         GET >>= (View.register "" |> html)
     ]
 ```
 
-```
+```fsharp
 path Path.Account.register >>= register
 ```
 
 and a direct link from the `View.logon` :
 
-```
+```fsharp
 let logon msg = [
     h2 "Log On"
     p [
@@ -120,7 +120,7 @@ let logon msg = [
 This allows us to navigate to the registration form.
 Moving on to implementing the actual POST handler, let's first create necessary functions in `Db` module:
 
-```
+```fsharp
 let getUser username (ctx : DbContext) : User option = 
     query {
         for user in ctx.``[dbo].[Users]`` do
@@ -129,7 +129,7 @@ let getUser username (ctx : DbContext) : User option =
     } |> firstOrNone
 ```
 
-```
+```fsharp
 let newUser (username, password, email) (ctx : DbContext) =
     let user = ctx.``[dbo].[Users]``.Create(email, password, "user", username)
     ctx.SubmitUpdates()
@@ -145,7 +145,7 @@ After a successful registration, we'd like to authenticate user at once - in oth
 In a real application, you'd probably use a confirmation mail mechanism, but for the sake of simplicity we'll skip that.
 In order to reuse the logic from logon POST handler, extract a separate function:
 
-```
+```fsharp
 let authenticateUser (user : Db.User) =
     Auth.authenticated Cookie.CookieLife.Session false 
     >>= session (function
@@ -162,7 +162,7 @@ let authenticateUser (user : Db.User) =
 
 after extraction, `logon` POST handler looks like this:
 
-```
+```fsharp
 match Db.validateUser(form.Username, passHash password) ctx with
 | Some user ->
     authenticateUser user
@@ -172,7 +172,7 @@ match Db.validateUser(form.Username, passHash password) ctx with
 
 Finally, the full register handler can be implemented following:
 
-```
+```fsharp
 let register =
     choose [
         GET >>= (View.register "" |> html)
@@ -205,7 +205,7 @@ So let's take a deep breath and roll to the last significant feature in our appl
 
 Again, checkout will be based on a form:
 
-```
+```fsharp
 type Checkout = {
     FirstName : string
     LastName : string
@@ -220,7 +220,7 @@ Note that, while first three fields are mandatory, the last one "PromoCode" is o
 
 Following is the view for the checkout form:
 
-```
+```fsharp
 let checkout = [
     h2 "Address And Payment"
     renderForm
@@ -249,13 +249,13 @@ Thanks to multiple fieldsets we can group fields that have something in common.
 
 Now let's add a route for checkout (`Path.Cart`):
 
-```
+```fsharp
 let checkout = "/cart/checkout"
 ```
 
 a navigation button in `View.nonEmptyCart` :
 
-```
+```fsharp
 let nonEmptyCart (carts : Db.CartDetails list) = [
     h2 "Review your cart:"
     pAttr ["class", "button"] [
@@ -267,7 +267,7 @@ let nonEmptyCart (carts : Db.CartDetails list) = [
 
 and GET handler for checkout in `App` module:
 
-```
+```fsharp
 let checkout =
     session (function
     | NoSession | CartIdOnly _ -> never
@@ -277,7 +277,7 @@ let checkout =
         ])
 ```
 
-```
+```fsharp
 path Path.Cart.checkout >>= loggedOn checkout
 ```
 
@@ -288,7 +288,7 @@ Remarks:
 
 Now it's time to implement `placeOrder` function in the `Db` module:
 
-```
+```fsharp
 let placeOrder (username : string) (ctx : DbContext) =
     let carts = getCartsDetails username ctx
     let total = carts |> List.sumBy (fun c -> (decimal) c.Count * c.Price)
@@ -315,7 +315,7 @@ Explanation of the above snippet:
 
 When user checks out the cart, we want to show him a following confirmation (`View` module):
 
-```
+```fsharp
 let checkoutComplete = [
     h2 "Checkout Complete"
     p [
@@ -331,7 +331,7 @@ let checkoutComplete = [
 
 With that in place, we can now implement the POST checkout handler:
 
-```
+```fsharp
 POST >>= warbler (fun _ ->
     let ctx = Db.getContext()
     Db.placeOrder username ctx

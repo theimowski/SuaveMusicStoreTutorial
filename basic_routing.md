@@ -21,7 +21,7 @@ The `>>=` operator comes also from Suave library. It composes two WebParts into 
 Let's move on to configuring a few routes in our application. 
 To achieve that, we can use the `choose` function, which takes a list of WebParts, and chooses the first one that applies (returns `Some`), or if none WebPart applies, then choose will also return `None`:
 
-```
+```fsharp
 let webPart = 
     choose [
         path "/" >>= (OK "Home")
@@ -58,7 +58,7 @@ Apart from passing arguments in the route itself, we can use the query part of u
 `localhost:8083/store/browse?genre=Disco`
 To do this, let's create a separate WebPart:
 
-```
+```fsharp
 let browse =
     request (fun r ->
         match r.queryParam "genre" with

@@ -4,7 +4,7 @@ What's a shop without cart feature?
 We would like to let the user add albums to a cart while shopping at our Store.
 To fill in the gap, let's start by declaring new routes in `Path` module:
 
-```
+```fsharp
 module Cart =
     let overview = "/cart"
     let addAlbum : IntPath = "/cart/add/%d"
@@ -14,7 +14,7 @@ module Cart =
 Before we move to the `View`, add new type annotation for yet another database view `CartDetails`.
 `CartDetails` is a view that joins `Cart` with its corresponding `Album` in order to contain album's title and its price.
 
-```
+```fsharp
 type CartDetails = DbContext.``[dbo].[CartDetails]Entity``
 ```
 
@@ -22,7 +22,7 @@ type CartDetails = DbContext.``[dbo].[CartDetails]Entity``
 With such a serious business requirement, we'd better distinguish case when user has anything in his cart from case when the cart is empty.
 To do that, add separate `emptyCart` in `View` module: 
 
-```
+```fsharp
 let emptyCart = [
     h2 "Your cart is empty"
     text "Find some great music in our "
@@ -33,7 +33,7 @@ let emptyCart = [
 
 In the latter case, we're going to display a table with all albums in the cart:
 
-```
+```fsharp
 let aHrefAttr href attr = tag "a" (("href", href) :: attr)
 
 ...
@@ -70,7 +70,7 @@ let nonEmptyCart (carts : Db.CartDetails list) = [
 
 With these two separate views we can declare a more general one, for when we're not sure whether the cart is empty or not:
 
-```
+```fsharp
 let cart = function
     | [] -> emptyCart
     | list -> nonEmptyCart list
@@ -91,7 +91,7 @@ A few remarks regarding the `nonEmptyCart` function:
 We can't really test the view for now, as we haven't yet implemented fetching cart items from database. 
 We can however see how the `emptyCart` view looks like if we add proper handler in `App` module:
 
-```
+```fsharp
 let cart = View.cart [] |> html
 
 ...
@@ -101,7 +101,7 @@ path Path.Cart.overview >>= cart
 
 A navigation menu item can also appear handy (`View.partNav`):
 
-```
+```fsharp
 li (aHref Path.Cart.overview (text "Cart"))
 ```
 
@@ -111,7 +111,7 @@ That seems reasonable, as we don't want to stop him from his shopping spree with
 For this purpose we'll add another case `CartIdOnly` to the `Session` type.
 This state will be valid for users who are not yet logged on to the store, but have already some albums in their cart:
 
-```
+```fsharp
 type Session = 
     | NoSession
     | CartIdOnly of string
@@ -122,7 +122,7 @@ type Session =
 
 Switching back to `Db` module, let's create a type alias for `Carts` table:
 
-```
+```fsharp
 type Cart = DbContext.``[dbo].[Carts]Entity``
 ```
 
@@ -134,7 +134,7 @@ type Cart = DbContext.``[dbo].[Carts]Entity``
 
 To implement `App` handler, we need the following `Db` module functions:
 
-```
+```fsharp
 let getCart cartId albumId (ctx : DbContext) : Cart option =
     query {
         for cart in ctx.``[dbo].[Carts]`` do
@@ -143,7 +143,7 @@ let getCart cartId albumId (ctx : DbContext) : Cart option =
     } |> firstOrNone
 ```
 
-```
+```fsharp
 let addToCart cartId albumId (ctx : DbContext)  =
     match getCart cartId albumId ctx with
     | Some cart ->
@@ -159,7 +159,7 @@ To check if a cart entry exists in database, we use `getCart` - it does a standa
 
 Now open up the `View` module and find the `details` function to append a new button "Add to cart", at the very bottom of "album-details" div:
 
-```
+```fsharp
 yield pAttr ["class", "button"] [
     aHref (sprintf Path.Cart.addAlbum album.AlbumId) (text "Add to cart")
 ]
@@ -167,7 +167,7 @@ yield pAttr ["class", "button"] [
 
 With above in place, we're ready to define the handler in `App` module:
 
-```
+```fsharp
 let addToCart albumId =
     let ctx = Db.getContext()
     session (function
@@ -182,7 +182,7 @@ let addToCart albumId =
         >>= Redirection.FOUND Path.Cart.overview
 ```
 
-```
+```fsharp
 pathScan Path.Cart.addAlbum addToCart
 ```
 
@@ -193,7 +193,7 @@ pathScan Path.Cart.addAlbum addToCart
 
 We still have to recognize the `CartIdOnly` case - coming back to the `session` function, the pattern matching handling `CartIdOnly` looks like this:
 
-```
+```fsharp
 match state.get "cartid", state.get "username", state.get "role" with
 | Some cartId, None, None -> f (CartIdOnly cartId)
 | _, Some username, Some role -> f (UserLoggedOn {Username = username; Role = role})
@@ -204,7 +204,7 @@ This means that if the session store contains `cartid` key, but no `username` or
 
 To fetch the actual `CartDetails` for a given `cartId`, let's define appropriate function in `Db` module:
 
-```
+```fsharp
 let getCartsDetails cartId (ctx : DbContext) : CartDetails list =
     query {
         for cart in ctx.``[dbo].[CartDetails]`` do
@@ -215,7 +215,7 @@ let getCartsDetails cartId (ctx : DbContext) : CartDetails list =
 
 This allows us to implement `cart` handler correctly:
 
-```
+```fsharp
 let cart = 
     session (function
     | NoSession -> View.emptyCart |> html
@@ -230,7 +230,7 @@ Remember our navigation menu with `Cart` tab?
 Why don't we add a number of total albums in our cart there?
 To do that, let's parametrize the `partNav` view:
 
-```
+```fsharp
 let partNav cartItems = 
     ulAttr ["id", "navlist"] [ 
         li (aHref Path.home (text "Home"))
@@ -242,14 +242,14 @@ let partNav cartItems =
 
 as well as add the `partNav` parameter to the main `index` view:
 
-```
+```fsharp
 let index partNav partUser container = 
 ```
 
 In order to create the navigation menu, we now need to pass `cartItems` parameter.
 It has to be resolved in the `html` function from `App` module, which can now look like following:
 
-```
+```fsharp
 let html container =
     let ctx = Db.getContext()
     let result cartItems user =
@@ -280,7 +280,7 @@ Don't forget to set the "Copy to Output Directory" property.
 
 Now add new JS file to the project `script.js`, and fill in its contents:
 
-```
+```fsharp
 $('.removeFromCart').click(function () {
     var albumId = $(this).attr("data-id");
     var albumTitle = $(this).closest('tr').find('td:first-child > a').html();
@@ -310,28 +310,28 @@ We won't go into much details about the code itself, however it's important to k
 
 The `update-message` div should be added to the `nonEmptyCart` view, before the table:
 
-```
+```fsharp
     divId "update-message" [text " "]
 ```
 
 We explicitly have to pass in non-empty text, because we cannot have an empty div element in HTML markup.
 With jQuery and our `script.cs` files, we can now attach them to the end of `nonEmptyCart` view, just after the table:
 
-```
+```fsharp
 scriptAttr [ "type", "text/javascript"; " src", "/jquery-1.11.3.min.js" ] [ text "" ]
 scriptAttr [ "type", "text/javascript"; " src", "/script.js" ] [ text "" ]
 ```
 
 We also need to allow browsing for files with "js" extension in our handler:
 
-```
+```fsharp
 pathRegex "(.*)\.(css|png|gif|js)" >>= Files.browseHome
 ```
 
 The script tries to reach route that is not mapped to any handler yet.
 Let's change that by first adding `removeFromCart` to `Db` module:
 
-```
+```fsharp
 let removeFromCart (cart : Cart) albumId (ctx : DbContext) = 
     cart.Count <- cart.Count - 1
     if cart.Count = 0 then cart.Delete()
@@ -340,7 +340,7 @@ let removeFromCart (cart : Cart) albumId (ctx : DbContext) =
 
 then adding the `removeFromCart` handler in `App` module:
 
-```
+```fsharp
 let removeFromCart albumId =
     session (function
     | NoSession -> never
@@ -356,7 +356,7 @@ let removeFromCart albumId =
 
 and finally mapping the route to the handler in main `choose` WebPart:
 
-```
+```fsharp
 pathScan Path.Cart.removeAlbum removeFromCart
 ```
 
@@ -373,7 +373,7 @@ What should happen if user first adds some albums to his cart and later decides 
 If user logs on, we have his user name - so we can "upgrade" all his carts from GUID to the actual user's name.
 Add necessary functions to the `Db` module:
 
-```
+```fsharp
 let getCarts cartId (ctx : DbContext) : Cart list =
     query {
         for cart in ctx.``[dbo].[Carts]`` do
@@ -382,7 +382,7 @@ let getCarts cartId (ctx : DbContext) : Cart list =
     } |> Seq.toList
 ```
 
-```
+```fsharp
 let upgradeCarts (cartId : string, username :string) (ctx : DbContext) =
     for cart in getCarts cartId ctx do
         match getCart username cart.AlbumId ctx with
@@ -396,7 +396,7 @@ let upgradeCarts (cartId : string, username :string) (ctx : DbContext) =
 
 and update the `logon` handler in `App` module:
 
-```
+```fsharp
 Auth.authenticated Cookie.CookieLife.Session false 
 >>= session (function
     | CartIdOnly cartId ->
