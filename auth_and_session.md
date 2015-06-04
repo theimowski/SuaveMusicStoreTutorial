@@ -13,35 +13,7 @@ That's exactly what we'll do right now.
 
 
 
-You might have noticed, that the above code will results in "Not found" page in case `Db.validateUser` returns None.
-That's because we temporarily assigned `never` to the latter match.
-Ideally, we'd like to see some kind of a validation message next to the form.
-To achieve that, let's add `msg` parameter to `View.logon`:
 
-```fsharp
-let logon msg = [
-    h2 "Log On"
-    p [
-        text "Please enter your user name and password."
-    ]
-
-    divId "logon-message" [
-        text msg
-    ]
-...
-```
-
-Now we can invoke it in two ways:
-
-```fsharp
-GET >>= (View.logon "" |> html)
-
-...
-
-View.logon "Username or password is invalid." |> html
-```
-
-The first one being GET `logon` handler, and the other one being returned if provided credentials are incorrect.
 
 Up to this point, we should be able to authenticate with "admin" -> "admin" credentials to our application.
 This is however not very useful, as there are no handlers that would demand user to be authenticated yet.
