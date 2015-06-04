@@ -34,7 +34,9 @@ let webPart =
 In addition to that static string path, we can specify route arguments.
 Suave comes with a cool feature called "typed routes", which gives you statically typed control over arguments for your route. As an example, let's see how we can add `id` of an album to the details route:
 
-`pathScan "/store/details/%d" (fun id -> OK (sprintf "Details: %d" id))`
+```fsharp
+pathScan "/store/details/%d" (fun id -> OK (sprintf "Details: %d" id))
+```
 
 This might look familiar to print formatting from C++, but it's more powerful.
 What happens here is that the compiler checks the type for the `%d` argument and complains if you pass it a value which is not an integer.
@@ -48,7 +50,9 @@ In the above example, there are a few important aspects:
 
 To clear things up, here is another example of how one could use typed routes in Suave:
 
-`pathScan "/store/details/%s/%d" (fun a id -> OK (sprintf "Artist: %s; Id: %d" a id))`
+```fsharp
+pathScan "/store/details/%s/%d" (fun a id -> OK (sprintf "Artist: %s; Id: %d" a id))
+```
 
 for request `http://localhost:8083/store/details/abba/1`
 
@@ -83,6 +87,8 @@ If there is a "genre" parameter in the url query, return 200 OK with the value o
 
 Now we can compose the `browse` WebPart with routing WebPart like this:
 
-`path "/store/browse" >>= browse`
+```fsharp
+path "/store/browse" >>= browse
+```
 
 Eventually we should end up with something similar to: [Tag - basic_routing](https://github.com/theimowski/SuaveMusicStore/tree/basic_routing)
