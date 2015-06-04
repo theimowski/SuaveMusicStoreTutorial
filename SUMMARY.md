@@ -5,6 +5,7 @@
 * [WebPart](webpart.md)
 * [Basic routing](basic_routing.md)
    * Url parameters
+   * Query parameters
 * [Views](views.md)
 * [Database](database.md)
 * [CRUD and Forms](crud_and_forms.md)
