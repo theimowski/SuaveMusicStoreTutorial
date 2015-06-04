@@ -7,8 +7,7 @@ Now we can add NuGet reference to Suave. To do that, in Package Manager Console 
 Alternatively, you can use the NuGet GUI to find and install the Suave package.
 Rename the `Program.fs` file to `App.fs` to better reflect the purpose of the file, and replace its contents completely with the following code:
 
-
-```
+```fsharp
 open Suave                 // always open suave
 open Suave.Http.Successful // for OK-result
 open Suave.Web             // for config
