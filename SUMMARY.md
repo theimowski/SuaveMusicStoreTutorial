@@ -15,6 +15,7 @@
 * [Database](database.md)
    * [Queries](queries.md)
    * [Genres list](genres_list.md)
+   * Genre
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
