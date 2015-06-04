@@ -8,5 +8,5 @@
 * [Database](database.md)
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
-* More cookies in shopping cart
+* Shopping cart
 
