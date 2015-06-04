@@ -13,7 +13,7 @@
    * [Container](container.md)
    * [HTML markup](html_markup.md)
 * [Database](database.md)
-   * Queries
+   * [Queries](queries.md)
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
