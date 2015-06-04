@@ -27,6 +27,7 @@
    * [User partial](user_partial.md)
    * [Logon form](logon_form.md)
    * [Logon handler](logon_handler.md)
+   * Session type
 * [Shopping cart](shopping_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
 
