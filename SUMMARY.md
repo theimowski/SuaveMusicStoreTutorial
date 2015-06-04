@@ -7,4 +7,5 @@
 * [Views](views.md)
 * [Database](database.md)
 * [CRUD and Forms](crud_and_forms.md)
+* Auth and Session
 
