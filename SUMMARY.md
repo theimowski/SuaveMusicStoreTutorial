@@ -16,6 +16,7 @@
    * [Queries](queries.md)
    * [Genres list](genres_list.md)
    * [Genre](genre.md)
+   * Album details
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
