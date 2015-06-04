@@ -235,10 +235,10 @@ let details id =
         html (View.details album)
     | None ->
         never
+```
 
-...
-
-pathScan Path.Store.details details
+```fsharp
+    pathScan Path.Store.details details
 ```
 
 A few remarks regarding above snippet:
