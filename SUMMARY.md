@@ -20,7 +20,7 @@
 * [CRUD and Forms](crud_and_forms.md)
    * [Manage albums](manage_albums.md)
    * [Delete album](delete_album.md)
-   * [Create Album](create_album.md)
+   * [Create album](create_album.md)
    * [Update album](update_album.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
