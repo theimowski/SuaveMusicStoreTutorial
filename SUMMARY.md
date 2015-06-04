@@ -25,7 +25,7 @@
 * [Auth and Session](auth_and_session.md)
    * [Navigation partial](navigation_partial.md)
    * [User partial](user_partial.md)
-   * Logon form
+   * [Logon form](logon_form.md)
 * [Shopping cart](shopping_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
 
