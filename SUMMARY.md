@@ -7,7 +7,7 @@
    * [Url parameters](url_parameters.md)
    * [Query parameters](query_parameters.md)
 * [Views](views.md)
-   * Index view
+   * [Index view](index_view.md)
 * [Database](database.md)
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
