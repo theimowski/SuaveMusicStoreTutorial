@@ -11,6 +11,7 @@
    * [Path module](path_module.md)
    * [CSS](css.md)
    * [Container](container.md)
+   * HTML markup
 * [Database](database.md)
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
