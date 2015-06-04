@@ -4,7 +4,7 @@
 * [Hello World from Suave](hello_world_from_suave.md)
 * [WebPart](webpart.md)
 * [Basic routing](basic_routing.md)
-   * Url parameters
+   * [Url parameters](url_parameters.md)
    * Query parameters
 * [Views](views.md)
 * [Database](database.md)
