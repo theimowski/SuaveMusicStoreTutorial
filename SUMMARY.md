@@ -9,5 +9,4 @@
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
-   * Registration and checkout
 
