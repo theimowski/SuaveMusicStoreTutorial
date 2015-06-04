@@ -1,4 +1,4 @@
-# Create Album
+# Create album
 
 We can delete an album, so why don't we proceed to add album functionality now.
 It will require a bit more effort, because we actually need some kind of a form with fields to create a new album.
