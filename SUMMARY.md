@@ -21,7 +21,7 @@
    * [Manage albums](manage_albums.md)
    * [Delete album](delete_album.md)
    * [Create Album](create_album.md)
-   * Update album
+   * [Update album](update_album.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
