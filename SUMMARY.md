@@ -18,7 +18,7 @@
    * [Genre](genre.md)
    * [Album details](album_details.md)
 * [CRUD and Forms](crud_and_forms.md)
-   * Manage albums
+   * [Manage albums](manage_albums.md)
 * [Auth and Session](auth_and_session.md)
 * [Shopping cart](shopping_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
