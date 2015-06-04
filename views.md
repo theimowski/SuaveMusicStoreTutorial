@@ -18,7 +18,6 @@ Before we start defining views, let's organize our `App.fs` source file by addin
 module SuaveMusicStore.App
 
 open Suave
-...
 ```
 
 The line means that whatever we define in the file will be placed in `SuaveMusicStore.App` module.
@@ -140,9 +139,9 @@ let webPart =
 as well as in our `View` for `aHref` to `home`:
 
 ```fsharp
-    divId "header" [
-        h1 (aHref Path.home (text "F# Suave Music Store"))
-    ]
+divId "header" [
+    h1 (aHref Path.home (text "F# Suave Music Store"))
+]
 ```
 
 Note, that in `App` module we still benefit from the static typed routes feature that Suave gives us - the `id` parameter is inferred by the compiler to be of integer type.
@@ -164,7 +163,7 @@ let index =
             title "Suave Music Store"
             cssLink "/Site.css"
         ]
-...
+    ...
 ```
 
 This enables us to output the link HTML element with `href` attribute pointing to the CSS stylesheet.
@@ -201,7 +200,7 @@ Start by adding `container` parameter to `index` in `View`:
 ```fsharp
 let index container = 
     html [
-...
+    ...
 ```
 
 and div with id "container" just after the div "header":
@@ -228,11 +227,9 @@ For now it will only contain plain "Home" text.
 Let's also extract a common function for creating WebPart, parametrized with the container itself.
 Add to `App` module, just before the `browse` WebPart the following:
 
-```
-
+```fsharp
 let html container =
     OK (View.index container)
-
 ```
 
 Usage for the home page looks like this:
