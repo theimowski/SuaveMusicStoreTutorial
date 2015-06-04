@@ -8,6 +8,7 @@
    * [Query parameters](query_parameters.md)
 * [Views](views.md)
    * [Index view](index_view.md)
+   * Path module
 * [Database](database.md)
 * [CRUD and Forms](crud_and_forms.md)
 * [Auth and Session](auth_and_session.md)
