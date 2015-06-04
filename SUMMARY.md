@@ -28,7 +28,7 @@
    * [Logon form](logon_form.md)
    * [Logon handler](logon_handler.md)
    * [Session type](session_type.md)
-   * Admin authorization
+   * [Admin authorization](admin_authorization.md)
 * [Shopping cart](shopping_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
 
