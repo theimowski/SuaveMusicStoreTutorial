@@ -30,5 +30,6 @@
    * [Session type](session_type.md)
    * [Admin authorization](admin_authorization.md)
 * [Shopping cart](shopping_cart.md)
+   * [Cart view](cart_view.md)
 * [Registration and checkout](registration_and_checkout.md)
 
