@@ -33,6 +33,6 @@
    * [Cart view](cart_view.md)
    * [Anonymous cart](anonymous_cart.md)
    * [Add to cart](add_to_cart.md)
-   * Albums in cart
+   * [Albums in cart](albums_in_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
 
