@@ -31,5 +31,6 @@
    * [Admin authorization](admin_authorization.md)
 * [Shopping cart](shopping_cart.md)
    * [Cart view](cart_view.md)
+   * Anonymous cart
 * [Registration and checkout](registration_and_checkout.md)
 
