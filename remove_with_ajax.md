@@ -9,7 +9,7 @@ Don't forget to set the "Copy to Output Directory" property.
 
 Now add new JS file to the project `script.js`, and fill in its contents:
 
-```fsharp
+```js
 $('.removeFromCart').click(function () {
     var albumId = $(this).attr("data-id");
     var albumTitle = $(this).closest('tr').find('td:first-child > a').html();
