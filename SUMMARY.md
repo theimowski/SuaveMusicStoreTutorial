@@ -40,5 +40,5 @@
 * [Registration and checkout](registration_and_checkout.md)
    * [Register form](register_form.md)
    * [Register view](register_view.md)
-   * Register implementation
+   * Register handler
 
