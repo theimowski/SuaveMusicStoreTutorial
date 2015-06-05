@@ -38,4 +38,5 @@
    * [Remove with AJAX](remove_with_ajax.md)
    * [Upgrading cart](upgrading_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
+   * Register form
 
