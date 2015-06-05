@@ -32,6 +32,6 @@
 * [Shopping cart](shopping_cart.md)
    * [Cart view](cart_view.md)
    * [Anonymous cart](anonymous_cart.md)
-   * Add to cart
+   * [Add to cart](add_to_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
 
