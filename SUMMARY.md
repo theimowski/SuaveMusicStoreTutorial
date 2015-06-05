@@ -41,5 +41,5 @@
    * [Register form](register_form.md)
    * [Register view](register_view.md)
    * [Register handler](register_handler.md)
-   * Checkout form
+   * [Checkout form](checkout_form.md)
 
