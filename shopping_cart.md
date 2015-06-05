@@ -17,15 +17,3 @@ Before we move to the `View`, add new type annotation for yet another database v
 ```fsharp
 type CartDetails = DbContext.``[dbo].[CartDetails]Entity``
 ```
-
-
-
-
-
-
-
-
-
-
-
-
