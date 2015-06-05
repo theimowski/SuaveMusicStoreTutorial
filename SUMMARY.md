@@ -36,6 +36,6 @@
    * [Albums in cart](albums_in_cart.md)
    * [Cart navigation menu](cart_navigation_menu.md)
    * [Remove with AJAX](remove_with_ajax.md)
-   * Upgrading cart
+   * [Upgrading cart](upgrading_cart.md)
 * [Registration and checkout](registration_and_checkout.md)
 
