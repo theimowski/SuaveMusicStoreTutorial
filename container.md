@@ -9,14 +9,14 @@ let index container =
     ...
 ```
 
-and div with id "container" just after the div "header":
+and div with id "main" just after the div "header":
 
 ```fsharp
     divId "header" [
         h1 (aHref Path.home (text "F# Suave Music Store"))
     ]
 
-    divId "container" container
+    divId "main" container
 ```
 
 `index` previously was a constant value, but now became a function taking `container` as parameter.
