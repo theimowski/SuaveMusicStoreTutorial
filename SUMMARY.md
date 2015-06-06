@@ -43,5 +43,5 @@
    * [Checkout form](checkout_form.md)
    * [Checkout handler](checkout_handler.md)
 * [Improvements](improvements.md)
-   * View amends
+   * [View amends](view_amends.md)
 
