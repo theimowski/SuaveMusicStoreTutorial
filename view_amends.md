@@ -63,3 +63,16 @@ let browse genre (albums : Db.Album list) = [
 ```
 
 The above view will remain a plain unordered list, but in addition to the title we'll also display the album's art as an image.
+
+You've probably noticed that our home page is not very sophisticated. In fact it doesn't display anything other than a plain "Home" caption. Why don't we add an image banner as well as a list of best-seller albums to the home page?
+
+First, let's fetch the best-sellers from `Db`: 
+
+```fsharp
+type BestSeller = DbContext.``[dbo].[BestSellers]Entity``
+```
+
+```fsharp
+let getBestSellers (ctx : DbContext) : BestSeller list  =
+    ctx.``[dbo].[BestSellers]`` |> Seq.toList
+```
