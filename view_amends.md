@@ -43,3 +43,23 @@ let result cartItems user =
                 container)
         >>= Writers.setMimeType "text/html; charset=utf-8"
 ```
+
+How about we make the album list in `View.browse` look better?
+
+```fsharp
+let browse genre (albums : Db.Album list) = [
+    divClass "genre" [ 
+        h2 (sprintf "Genre: %s" genre)
+    
+        ulAttr ["id", "album-list"] [
+            for album in albums ->
+                li (aHref 
+                        (sprintf Path.Store.details album.AlbumId) 
+                        (flatten [ imgSrc album.AlbumArtUrl
+                                   span (text album.Title)]))
+        ]
+    ]
+]
+```
+
+The above view will remain a plain unordered list, but in addition to the title we'll also display the album's art as an image.
