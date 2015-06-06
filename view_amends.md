@@ -109,5 +109,8 @@ let home =
 The "home-showcase.png" asset can be downloaded from [here](https://raw.githubusercontent.com/theimowski/SuaveMusicStore/master/home-showcase.png). Don't forget about the "Copy To Output Directory" property!
 
 
-That's all for now. Most current version of the code can be looked up [here](https://github.com/theimowski/SuaveMusicStore).
-If you have any questions or comments please feel free to post an issue on GitHub in that repository.
+That's all for now. Hope you liked the tutorial.
+If you have any questions or comments please feel free to post an issue on GitHub in [this repository](https://github.com/theimowski/SuaveMusicStore).
+That's also the place where the most current code for the application can be looked up.
+
+Take care!
