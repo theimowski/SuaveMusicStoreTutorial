@@ -76,3 +76,38 @@ type BestSeller = DbContext.``[dbo].[BestSellers]Entity``
 let getBestSellers (ctx : DbContext) : BestSeller list  =
     ctx.``[dbo].[BestSellers]`` |> Seq.toList
 ```
+
+Now we can alter the `View.home`:
+
+```fsharp
+let home (bestSellers : Db.BestSeller list) = [
+    imgSrc "/home-showcase.png"
+    h2 "Fresh off the grill"
+    ulAttr ["id", "album-list"] [
+            for album in bestSellers ->
+                li (aHref 
+                        (sprintf Path.Store.details album.AlbumId) 
+                        (flatten [ imgSrc album.AlbumArtUrl
+                                   span (text album.Title)]))
+        ]
+]
+```
+
+and the `home` handler in `App` module:
+
+```fsharp
+let home =
+    let ctx = Db.getContext()
+    let bestsellers = Db.getBestSellers ctx
+    View.home bestsellers |> html
+```
+
+```fsharp
+    path Path.home >>= home
+```
+
+The "home-showcase.png" asset can be downloaded from [here](https://raw.githubusercontent.com/theimowski/SuaveMusicStore/master/home-showcase.png). Don't forget about the "Copy To Output Directory" property!
+
+
+That's all for now. Most current version of the code can be looked up [here](https://github.com/theimowski/SuaveMusicStore).
+If you have any questions or comments please feel free to post an issue on GitHub in that repository.
