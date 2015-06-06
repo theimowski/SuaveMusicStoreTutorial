@@ -42,4 +42,5 @@
    * [Register handler](register_handler.md)
    * [Checkout form](checkout_form.md)
    * [Checkout handler](checkout_handler.md)
+* Improvements
 
