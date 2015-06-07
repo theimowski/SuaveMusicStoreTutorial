@@ -19,9 +19,9 @@ and div with id "main" just after the div "header":
     divId "main" container
 ```
 
-`index` previously was a constant value, but now became a function taking `container` as parameter.
+`index` previously was a constant value, but it has now become a function taking `container` as parameter.
 
-We can now define actual container for the "home" page:
+We can now define the actual container for the "home" page:
 
 ```fsharp
 let home = [
@@ -30,7 +30,7 @@ let home = [
 ```
 
 For now it will only contain plain "Home" text.
-Let's also extract a common function for creating WebPart, parametrized with the container itself.
+Let's also extract a common function for creating the WebPart, parametrized with the container itself.
 Add to `App` module, just before the `browse` WebPart the following:
 
 ```fsharp

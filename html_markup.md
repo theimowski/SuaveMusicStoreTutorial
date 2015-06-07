@@ -7,18 +7,18 @@ First, define `h2` in `View` module to output HTML header of level 2:
 let h2 s = tag "h2" [] (text s)
 ```
 
-and replace `text` with new `h2` in each of 4 containers.
+and replace `text` with a new `h2` in each of the 4 containers.
 
 We'd like the "/store" route to output hyperlinks to all genres in our Music Store.
-Let's add a helper function in `Path` module, that will be responsible for formatting HTTP url with a key-value parameter:
+Let's add a helper function in `Path` module, that will be responsible for formatting HTTP urls with a key-value parameter:
 
 ```fsharp
 let withParam (key,value) path = sprintf "%s?%s=%s" path key value
 ```
 
-The `withParam` function takes a tuple `(key,value)` as its first argument, `path` as the second and returns properly formatted url.
+The `withParam` function takes a tuple `(key,value)` as its first argument, `path` as the second and returns a properly formatted url.
 A tuple (or a pair) is a widely used structure in F#. It allows us to group two values into one in an easy manner. 
-Syntax for creating a tuple is following: `(item1, item2)` - this might look like a standard parameter passing in many other languages including C#.
+Syntax for creating a tuple is as follows: `(item1, item2)` - this might look like a standard parameter passing in many other languages including C#.
 Follow [this link](http://fsharpforfunandprofit.com/posts/tuples/) to learn more about tuples.
 
 Add also a string key for the url parameter "/store/browse" in `Path.Store` module:
@@ -34,7 +34,7 @@ We'll use it in `App` module:
     ...
 ```
 
-Now, add the following for working with unordered list (`ul`) and list item (`li`) elements in HTML:
+Now, add the following for working with the unordered list (`ul`) and list item (`li`) elements in HTML:
 
 ```fsharp
 let ul xml = tag "ul" [] (flatten xml)
@@ -42,7 +42,7 @@ let li = tag "li" []
 ```
 
 `flatten` takes a list of `Xml` and "flattens" it into a single `Xml` object model.
-The actual container for `store` can now look like following:
+The actual container for `store` can now look like the following:
 
 ```fsharp
 let store genres = [
@@ -57,7 +57,7 @@ let store genres = [
 ]
 ```
 
-Things worth commenting in above snippet:
+Things worth commenting in the above snippet:
 
 - `store` now takes a list of genres (again the type is inferred by the compiler)
 - the `[ for g in genres -> ... ]` syntax is known as "list comprehension". Here we map every genre string from `genres` to a list item

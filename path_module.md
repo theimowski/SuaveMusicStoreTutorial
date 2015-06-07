@@ -20,7 +20,7 @@ We'll keep them here in one place, in order to be able to reuse both in `App` an
 Thanks to that, we will minimize the risk of a typo in our `View` module.
 We defined a submodule called `Store` in order to group routes related to one functionality - later in the tutorial we'll have a few more submodules, each of them reflecting a specific set of functionality of the application.
 
-The `IntPath` type alias that we declared will let use our routes in conjunction with static-typed Suave routes (`pathScan` in `App` module). 
+The `IntPath` type alias that we declared will let us use our routes in conjunction with static-typed Suave routes (`pathScan` in `App` module). 
 We don't need to fully understand the signature of this type, for now we can think of it as a route parametrized with integer value.
 And indeed, we annotated the `details` route with this type, so that the compiler treats this value *specially*. 
 We'll see in a moment how we can use `details` in `App` and `View` modules, with the advantage of static typing.
