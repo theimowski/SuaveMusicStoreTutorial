@@ -39,7 +39,7 @@ If that's the case, the `Files.browseHome` WebPart will be applied.
 The CSS depends on `logo.png` asset, which can be downloaded from [here](https://raw.githubusercontent.com/theimowski/SuaveMusicStore/master/logo.png).
 
 Add `logo.png` to the project, and again don't forget to select `Copy If Newer` for `Copy To Output Directory` property for the asset.
-Again, when browser wants to render an image asset, it needs to GET it from the server, so we need to extend our regular expression to allow browsing of `.png` files as well:
+Again, when the browser wants to render an image asset, it needs to GET it from the server, so we need to extend our regular expression to allow browsing of `.png` files as well:
 
 ```fsharp
     pathRegex "(.*)\.(css|png)" >>= Files.browseHome
