@@ -40,7 +40,7 @@ type Sql =
         DatabaseVendor=Common.DatabaseProviderTypes.MSSQLSERVER >
 ```
 
-You'll need to adjust the above connection string, so that it can access the `SuaveMusicStore` database.
+You'll need to adjust the above connection string, so that it can access the `SuaveMusicStore` database. At least you need to make sure that the server instance part is correct. If you're not sure how to configure it, [here](https://www.connectionstrings.com/sql-server/) is a great resource on dealing with connection strings in SQL Server.
 After the SQLProvider can access the database, it will generate a set of types in background - each for single database table, as well as each for single database view.
 This might be similar to how Entity Framework generates models for your tables, except there's no explicit code generation involved - all of the types reside under the `Sql` type defined.
 
