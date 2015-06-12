@@ -110,7 +110,8 @@ The "home-showcase.png" asset can be downloaded from [here](https://raw.githubus
 
 
 That's all for now. Hope you liked the tutorial.
-If you have any questions or comments please feel free to post an issue on GitHub in [this repository](https://github.com/theimowski/SuaveMusicStore).
-That's also the place where the most current code for the application can be looked up.
+If you have any questions or comments please feel free to post an issue on GitHub.
+The code for the application can be found 
+[here](https://github.com/theimowski/SuaveMusicStore), and the contents of this book are available [here](https://github.com/theimowski/SuaveMusicStoreTutorial).
 
 Take care!
