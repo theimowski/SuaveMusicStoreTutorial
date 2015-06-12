@@ -14,4 +14,6 @@ This allows you to follow along the process of creating the app, and get back on
 
 Visual Studio 2013 is used throughout the tutorial, but of course you can use IDE of your choice.
 
-You're more than welcome to create issues or pull requests for this tutorial [here](https://github.com/theimowski/SuaveMusicStore).
+You're more than welcome to create issues or pull requests for this tutorial.
+The code for the application can be found 
+[here](https://github.com/theimowski/SuaveMusicStore), and the contents of this book are available [here](https://github.com/theimowski/SuaveMusicStoreTutorial).
