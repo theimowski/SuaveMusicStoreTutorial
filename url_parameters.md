@@ -20,7 +20,7 @@ In the above example, there are a few important aspects:
 To clear things up, here is another example of how one could use typed routes in Suave:
 
 ```fsharp
-pathScan "/store/details/%s/%d" (fun a id -> OK (sprintf "Artist: %s; Id: %d" a id))
+pathScan "/store/details/%s/%d" (fun (a, id) -> OK (sprintf "Artist: %s; Id: %d" a id))
 ```
 
 for request `http://localhost:8083/store/details/abba/1`
