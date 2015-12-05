@@ -44,5 +44,4 @@
    * [購入フォーム用ハンドラー](checkout_handler.md)
 * [改善](improvements.md)
    * [ビューの修正](view_amends.md)
-* [Test](test.md)
 
