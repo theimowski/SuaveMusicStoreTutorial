@@ -16,6 +16,6 @@ Visual Studio 2013 is used throughout the tutorial, but of course you can use ID
 
 You're more than welcome to create issues or pull requests for this tutorial.
 The code for the application can be found 
-[here](https://github.com/theimowski/SuaveMusicStore), and the contents of this book are available [here](https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/SUMMARY.md).
+[here](https://github.com/theimowski/SuaveMusicStore), and the contents of this book are available [here](https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/en/SUMMARY.md).
 
 Big thans to [@yukitos](https://github.com/yukitos) for [japanese translation](https://theimowski.gitbooks.io/suave-music-store/content/ja/index.html)!
