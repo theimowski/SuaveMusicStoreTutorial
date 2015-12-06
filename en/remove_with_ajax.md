@@ -17,7 +17,7 @@ $('.removeFromCart').click(function () {
     var count = parseInt($cartNav.html().match(/\d+/));
 
     $.post("/cart/remove/" + albumId, function (data) {
-        $('#container').html(data);
+        $('#main').html(data);
         $('#update-message').html(albumTitle + ' has been removed from your shopping cart.');
         $cartNav.html('Cart (' + (count - 1) + ')');
     });
@@ -44,7 +44,7 @@ The `update-message` div should be added to the `nonEmptyCart` view, before the 
 ```
 
 We explicitly have to pass in non-empty text, because we cannot have an empty div element in HTML markup.
-With jQuery and our `script.cs` files, we can now attach them to the end of `nonEmptyCart` view, just after the table:
+With jQuery and our `script.js` files, we can now attach them to the end of `nonEmptyCart` view, just after the table:
 
 ```fsharp
 scriptAttr [ "type", "text/javascript"; " src", "/jquery-1.11.3.min.js" ] [ text "" ]
@@ -94,7 +94,7 @@ A few comments to the `removeFromCart` WebPart:
 - this handler should not be invoked with `NoSession`, `never` prevents from unwanted requests
 - the same happens, when someone tries to invoke `removeFromCart` for `albumId` not present in his cart (Db.getCart returns `None`)
 - if proper cart has been found, `Db.removeFromCart` is invoked, and
-- an inline portion of HTML is returned. Note that we don't go through our `html` helper function here like before, but instead return just the a part that `script.js` will inject into the "container" div on our page with AJAX.
+- an inline portion of HTML is returned. Note that we don't go through our `html` helper function here like before, but instead return just the a part that `script.js` will inject into the "main" div on our page with AJAX.
 
 This almost concludes the cart feature.
 One more thing before we finish this section: 
