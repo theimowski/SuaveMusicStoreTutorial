@@ -5,7 +5,12 @@ In this section we'll see how we can deal with returning good looking HTML marku
 Templating HTML views is quite a big topic itself, that we don't want to go into much details about.
 Keep in mind that the concept can be approached in many different ways, and the way presented here is not the only proper way of rendering HTML views.
 Having said that, I hope you'll still find the following implementation concise and easy to understand.
-In this application we'll use server-side HTML templating with the help of a Suave package called `Suave.Html`.
+In this application we'll use server-side HTML templating with the help of a separate Suave package called `Suave.Experimental`.
+
+> Note: As of the time of writing, `Suave.Experimental` is a separate package. It's likely that next releases of the package will include breaking changes. It's also possible that the modules we're going to use from within the package will be extracted to the core Suave package.
+
+To use the package, we need to take a dependency on the following NuGet:
+```install-package Suave.Experimental```
 
 Before we start defining views, let's organize our `App.fs` source file by adding following line at the beginning of the file:
 
@@ -21,8 +26,6 @@ Now let's add a new file `View.fs` to the project just before the `App.fs` file 
 
 ```fsharp
 module SuaveMusicStore.View
-
-open Suve.Html
 ```
 
 We'll follow this convention throughout the tutorial to have a clear understanding of the project structure.
