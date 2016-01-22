@@ -30,9 +30,9 @@ Let's use the routes from `Path` module in our `App`:
 ```fsharp
 let webPart = 
     choose [
-        path Path.home >>= (OK View.index)
-        path Path.Store.overview >>= (OK "Store")
-        path Path.Store.browse >>= browse
+        path Path.home >=> (OK View.index)
+        path Path.Store.overview >=> (OK "Store")
+        path Path.Store.browse >=> browse
         pathScan Path.Store.details (fun id -> OK (sprintf "Details %d" id))
     ]
 ```
