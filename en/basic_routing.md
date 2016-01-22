@@ -10,7 +10,7 @@ In C#, one would call it "assign webPart to a variable", but in functional world
 Value, once bound, can't be mutated during runtime.
 Now, let's restrict our WebPart, so that the "Hello World" response is sent only at the root path of our application (`localhost:8083/` but not `localhost:8083/anything`):
 `let webPart = path "/" >>= OK "Hello World"`
-`path` function is defined in `Suave.Http.Applicatives` module, thus we need to open it at the beggining of `App.fs`. `Suave.Http` and `Suave.Types` modules will also be crucial - let's open them as well.
+`path` function is defined in `Suave.Filters` module, thus we need to open it at the beggining of `App.fs`. `Suave.Operators` and `Suave.Successful` modules will also be crucial - let's open them as well.
 
 `path` is a function of type:
 `string -> WebPart`
@@ -24,9 +24,9 @@ To achieve that, we can use the `choose` function, which takes a list of WebPart
 ```fsharp
 let webPart = 
     choose [
-        path "/" >>= (OK "Home")
-        path "/store" >>= (OK "Store")
-        path "/store/browse" >>= (OK "Store")
-        path "/store/details" >>= (OK "Details")
+        path "/" >=> (OK "Home")
+        path "/store" >=> (OK "Store")
+        path "/store/browse" >=> (OK "Store")
+        path "/store/details" >=> (OK "Details")
     ]
 ```
