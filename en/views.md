@@ -10,7 +10,7 @@ In this application we'll use server-side HTML templating with the help of a sep
 > Note: As of the time of writing, `Suave.Experimental` is a separate package. It's likely that next releases of the package will include breaking changes. It's also possible that the modules we're going to use from within the package will be extracted to the core Suave package.
 
 To use the package, we need to take a dependency on the following NuGet:
-```install-package Suave.Experimental -version 0.28.1```
+```install-package Suave.Experimental```
 
 Before we start defining views, let's organize our `App.fs` source file by adding following line at the beginning of the file:
 
