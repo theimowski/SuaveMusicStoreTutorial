@@ -28,16 +28,16 @@ and update the `logon` handler in `App` module:
 
 ```fsharp
 Auth.authenticated Cookie.CookieLife.Session false 
->>= session (function
+>=> session (function
     | CartIdOnly cartId ->
         let ctx = Db.getContext()
         Db.upgradeCarts (cartId, user.UserName) ctx
         sessionStore (fun store -> store.set "cartid" "")
     | _ -> succeed)
->>= sessionStore (fun store ->
+>=> sessionStore (fun store ->
     store.set "username" user.UserName
-    >>= store.set "role" user.Role)
->>= returnPathOrHome
+    >=> store.set "role" user.Role)
+>=> returnPathOrHome
 ```
 
 Remarks:
@@ -50,3 +50,4 @@ Remarks:
 
 Whoa, we now have the cart functionality in our Music Store! 
 See the following link to browse the code: [Tag - cart](https://github.com/theimowski/SuaveMusicStore/tree/cart)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

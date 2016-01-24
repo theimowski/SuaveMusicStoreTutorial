@@ -10,8 +10,8 @@ open Suave.Cookie
 
 let reset =
     unsetPair Auth.SessionAuthCookie
-    >>= unsetPair StateCookie
-    >>= Redirection.FOUND Path.home
+    >=> unsetPair StateCookie
+    >=> Redirection.FOUND Path.home
 
 let redirectWithReturnPath redirection =
     request (fun x ->
@@ -55,8 +55,8 @@ Remarks:
 That was quite long, but worth it. Finally we're able to guard the "/admin" actions:
 
 ```fsharp
-path Path.Admin.manage >>= admin manage
-path Path.Admin.createAlbum >>= admin createAlbum
+path Path.Admin.manage >=> admin manage
+path Path.Admin.createAlbum >=> admin createAlbum
 pathScan Path.Admin.editAlbum (fun id -> admin (editAlbum id))
 pathScan Path.Admin.deleteAlbum (fun id -> admin (deleteAlbum id))
 ```
@@ -84,7 +84,7 @@ and determine whether a user is logged on in the `html` WebPart in `App` module:
 let html container =
     let result user =
         OK (View.index (View.partUser user) container)
-        >>= Writers.setMimeType "text/html; charset=utf-8"
+        >=> Writers.setMimeType "text/html; charset=utf-8"
 
     session (function
     | UserLoggedOn { Username = username } -> result (Some username)
@@ -98,7 +98,7 @@ Effectively, we invoke the `result` function always but with `user` argument bas
 The last thing we need to support is `logoff`. In the main `choose` WebPart add:
 
 ```fsharp
-path Path.Account.logoff >>= reset
+path Path.Account.logoff >=> reset
 ```
 
 `logoff` doesn't require separate WebPart, `reset` can be reused instead.
@@ -106,3 +106,4 @@ path Path.Account.logoff >>= reset
 That concludes our journey to Auth and Session features in `Suave` library. 
 We'll revisit the concepts in next section, but much of the implementation can be reused.
 Code up to this point can be browsed here: [Tag - auth_and_session](https://github.com/theimowski/SuaveMusicStore/tree/auth_and_session)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

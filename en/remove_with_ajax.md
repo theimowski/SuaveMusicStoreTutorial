@@ -54,7 +54,7 @@ scriptAttr [ "type", "text/javascript"; " src", "/script.js" ] [ text "" ]
 We also need to allow browsing for files with "js" extension in our handler:
 
 ```fsharp
-pathRegex "(.*)\.(css|png|gif|js)" >>= Files.browseHome
+pathRegex "(.*)\.(css|png|gif|js)" >=> Files.browseHome
 ```
 
 The script tries to reach route that is not mapped to any handler yet.

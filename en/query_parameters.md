@@ -23,14 +23,15 @@ Pattern matching is yet another really powerful feature, implemented in variety 
 For now we can think of it as a switch statement with binding value to an identifier in one go.
 In addition to that, F# compiler will issue an warning in case we don't provide all possible cases (`Choice1Of2 x` and `Choice2Of2 x` here).
 There's actually much more for pattern matching than that, as we'll discover later.
-`BAD_REQUEST` is a function from Suave library (you may need to open `Suave.Http.RequestErrors`), and it returns WebPart with 400 Bad Request status code response with given message in its body.
+`BAD_REQUEST` is a function from Suave library (you may need to open `Suave.RequestErrors`), and it returns WebPart with 400 Bad Request status code response with given message in its body.
 We can summarize the `browse` WebPart as following:
 If there is a "genre" parameter in the url query, return 200 OK with the value of the "genre", otherwise return 400 Bad Request with error message.
 
 Now we can compose the `browse` WebPart with routing WebPart like this:
 
 ```fsharp
-path "/store/browse" >>= browse
+path "/store/browse" >=> browse
 ```
 
 Eventually we should end up with something similar to: [Tag - basic_routing](https://github.com/theimowski/SuaveMusicStore/tree/basic_routing)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

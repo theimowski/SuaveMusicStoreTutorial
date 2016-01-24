@@ -28,7 +28,7 @@ If we have a look at our main `WebPart` we'll notice that there's really no hand
 That's why we need to add another alternative to our `choose` `WebPart`:
 
 ```fsharp
-    pathRegex "(.*)\.css" >>= Files.browseHome
+    pathRegex "(.*)\.css" >=> Files.browseHome
 ```
 
 The `pathRegex` `WebPart` returns `Some` if an incoming request concerns path that matches the regular expression pattern. 
@@ -42,7 +42,7 @@ Add `logo.png` to the project, and again don't forget to select `Copy If Newer` 
 Again, when the browser wants to render an image asset, it needs to GET it from the server, so we need to extend our regular expression to allow browsing of `.png` files as well:
 
 ```fsharp
-    pathRegex "(.*)\.(css|png)" >>= Files.browseHome
+    pathRegex "(.*)\.(css|png)" >=> Files.browseHome
 ```
 
 Now you should be able to see the styles applied to our HTML markup.

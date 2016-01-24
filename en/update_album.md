@@ -72,7 +72,7 @@ let editAlbum id =
     match Db.getAlbum id ctx with
     | Some album ->
         choose [
-            GET >>= warbler (fun _ ->
+            GET >=> warbler (fun _ ->
                 let genres = 
                     Db.getGenres ctx 
                     |> List.map (fun g -> decimal g.GenreId, g.Name)
@@ -80,7 +80,7 @@ let editAlbum id =
                     Db.getArtists ctx
                     |> List.map (fun g -> decimal g.ArtistId, g.Name)
                 html (View.editAlbum album genres artists))
-            POST >>= bindToForm Form.album (fun form ->
+            POST >=> bindToForm Form.album (fun form ->
                 Db.updateAlbum album (int form.ArtistId, int form.GenreId, form.Price, form.Title) ctx
                 Redirection.FOUND Path.Admin.manage)
         ]
@@ -116,3 +116,4 @@ aHref (sprintf Path.Admin.deleteAlbum album.AlbumId) (text "Delete")
 
 Pheeew, this section was long, but also very productive. Looks like we can already do some serious interaction with the application!
 Results can be seen here: [Tag - crud_and_forms](https://github.com/theimowski/SuaveMusicStore/tree/crud_and_forms)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

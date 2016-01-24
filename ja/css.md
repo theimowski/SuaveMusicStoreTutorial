@@ -33,7 +33,7 @@ CSSファイルをページに追加しようとすると、ブラウザは特�
 そのため、`WebPart`の`choose`として、以下のルートを追加する必要があります：
 
 ````fsharp
-pathRegex "(.*)\.css" >>= Files.browseHome
+pathRegex "(.*)\.css" >=> Files.browseHome
 ````
 
 `pathRegex` の `WebPart` は、受信したリクエストが特定のパターンと一致した場合に
@@ -52,7 +52,7 @@ GETリクエストを送信するため、上の正規表現ルートを変更�
 返せるようにします：
 
 ````fsharp
-pathRegex "(.*)\.(css|png)" >>= Files.browseHome
+pathRegex "(.*)\.(css|png)" >=> Files.browseHome
 ````
 
 以上でHTMLにスタイルシートを適用出来るようになりました。

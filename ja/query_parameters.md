@@ -43,9 +43,10 @@ let browse =
 この`browse` WebPartは次のようにして既存のWebPartへ組み込む事ができます：
 
 ````fsharp
-path "/store/browse" >>= browse
+path "/store/browse" >=> browse
 ````
 
 これまでの変更をまとめると [Tag - basic_routing][tag_basicrouting] のようになります。
 
 [tag_basicrouting]: https://github.com/theimowski/SuaveMusicStore/tree/basic_routing
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

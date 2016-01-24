@@ -44,7 +44,7 @@ let html container =
 この関数は以下のようにして呼び出せます：
 
 ````fsharp
-    path Path.home >>= html View.home
+    path Path.home >=> html View.home
 ````
 
 `View`モジュール内に他のルート用のコンテナも追加しましょう：
@@ -81,11 +81,11 @@ let browse =
 
 let webPart =
     choose [
-        path Path.home >>= html View.home
-        path "/store" >>= html View.store
-        path "/store/browse" >>= browse
+        path Path.home >=> html View.home
+        path "/store" >=> html View.store
+        path "/store/browse" >=> browse
         pathScan Path.Store.details (fun id -> html (View.details id))
         
-        pathRegex "(.*)\.(css|png)" >>= Files.browseHome
+        pathRegex "(.*)\.(css|png)" >=> Files.browseHome
     ]
 ````

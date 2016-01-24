@@ -23,7 +23,7 @@ HTMLビューをテンプレート化する方法はそれだけでも1つのト
 依存パッケージをインストールする必要があります：
 
 ````
-install-package Suave.Experimental -version 0.28.1
+install-package Suave.Experimental -version 1.0
 ````
 
 ビューを定義する前に、 `App.fs` の1行目に以下を追加してコードを整頓しましょう：
@@ -44,6 +44,8 @@ F#コードの構造ならびに構成方法については
 
 ````fsharp
 module SuaveMusicStore.View
+
+open Suave.HTML
 ````
 
 プロジェクトの構成が分かりやすくなるよう、

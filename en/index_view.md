@@ -62,7 +62,7 @@ In this very case it simply means: invoke the `xmlToString` function on the HTML
 
 Let's test the `index` view in our `App.fs`:
 ```fsharp
-    path "/" >>= (OK View.index)
+    path "/" >=> (OK View.index)
 ```
 
 If you navigate to the root url of the application, you should see that proper HTML has been returned.

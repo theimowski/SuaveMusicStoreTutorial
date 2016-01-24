@@ -10,8 +10,8 @@ open Suave.Cookie
 
 let reset =
     unsetPair Auth.SessionAuthCookie
-    >>= unsetPair StateCookie
-    >>= Redirection.FOUND Path.home
+    >=> unsetPair StateCookie
+    >=> Redirection.FOUND Path.home
 
 let redirectWithReturnPath redirection =
     request (fun x ->
@@ -55,8 +55,8 @@ let admin f_success =
 結構な量でしたが、学ぶべきことも多くありました。そしてようやく「/admin」アクションを保護できます：
 
 ```fsharp
-path Path.Admin.manage >>= admin manage
-path Path.Admin.createAlbum >>= admin createAlbum
+path Path.Admin.manage >=> admin manage
+path Path.Admin.createAlbum >=> admin createAlbum
 pathScan Path.Admin.editAlbum (fun id -> admin (editAlbum id))
 pathScan Path.Admin.deleteAlbum (fun id -> admin (deleteAlbum id))
 ```
@@ -84,7 +84,7 @@ let index partUser container =
 let html container =
     let result user =
         OK (View.index (View.partUser user) container)
-        >>= Writers.setMimeType "text/html; charset=utf-8"
+        >=> Writers.setMimeType "text/html; charset=utf-8"
 
     session (function
     | UserLoggedOn { Username = username } -> result (Some username)
@@ -98,7 +98,7 @@ let html container =
 最後の変更箇所は`logoff`です。メインの`choose`WebPartに追加しましょう：
 
 ```fsharp
-path Path.Account.logoff >>= reset
+path Path.Account.logoff >=> reset
 ```
 
 `logoff` には個別のWebPartを用意する必要がありません。`reset`を再利用できます。
@@ -106,3 +106,4 @@ path Path.Account.logoff >>= reset
 `Suave`ライブラリに用意された認証およびセッション機能を巡る旅はここで終了です。
 次の章でもこれらのコンセプトを振り返りますが、ほとんどの実装が再利用可能です。
 これまでの変更をまとめると [Tag - auth_and_session](https://github.com/theimowski/SuaveMusicStore/tree/auth_and_session) のようになります。
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

@@ -9,8 +9,7 @@ Rename the `Program.fs` file to `App.fs` to better reflect the purpose of the fi
 
 ```fsharp
 open Suave                 // always open suave
-open Suave.Http.Successful // for OK-result
-open Suave.Web             // for config
+open Suave.Successful      // for OK-result
 
 startWebServer defaultConfig (OK "Hello World!")
 ```
@@ -22,3 +21,4 @@ The `open` statements at the top of the file are the same as `using` statements 
 Note there is no `Main` method defined in `App.fs` - what happens here is that the `startWebServer` function is invoked immediately after the program is run and Suave starts listening for incoming request till the process is killed.
 
 [Tag - hello_world](https://github.com/theimowski/SuaveMusicStore/tree/hello_world)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

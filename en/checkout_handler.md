@@ -26,12 +26,12 @@ let checkout =
     | NoSession | CartIdOnly _ -> never
     | UserLoggedOn {Username = username } ->
         choose [
-            GET >>= (View.checkout |> html)
+            GET >=> (View.checkout |> html)
         ])
 ```
 
 ```fsharp
-path Path.Cart.checkout >>= loggedOn checkout
+path Path.Cart.checkout >=> loggedOn checkout
 ```
 
 Remarks:
@@ -85,7 +85,7 @@ let checkoutComplete = [
 With that in place, we can now implement the POST checkout handler:
 
 ```fsharp
-POST >>= warbler (fun _ ->
+POST >=> warbler (fun _ ->
     let ctx = Db.getContext()
     Db.placeOrder username ctx
     View.checkoutComplete |> html)
@@ -96,3 +96,4 @@ We need to invoke the `Db.placeOrder` in a warbler, to ensure that it's not call
 Phew, I think we're done for now!
 
 Browse the code here: [Tag - registration_and_checkout](https://github.com/theimowski/SuaveMusicStore/tree/registration_and_checkout)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

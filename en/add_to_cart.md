@@ -47,7 +47,7 @@ let addToCart albumId =
             | UserLoggedOn { Username = cartId } | CartIdOnly cartId ->
                 Db.addToCart cartId albumId ctx
                 succeed)
-        >>= Redirection.FOUND Path.Cart.overview
+        >=> Redirection.FOUND Path.Cart.overview
 ```
 
 ```fsharp

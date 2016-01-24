@@ -45,5 +45,5 @@ let browse =
 ```fsharp
 let html container =
     OK (View.index container)
-    >>= Writers.setMimeType "text/html; charset=utf-8"
+    >=> Writers.setMimeType "text/html; charset=utf-8"
 ```

@@ -39,7 +39,7 @@ type Session =
 ```fsharp
 let session f = 
     statefulForSession
-    >>= context (fun x -> 
+    >=> context (fun x -> 
         match x |> HttpContext.state with
         | None -> f NoSession
         | Some state ->
@@ -59,8 +59,8 @@ let session f =
 ```fsharp
 ...
 Auth.authenticated Cookie.CookieLife.Session false 
->>= session (fun _ -> succeed)
->>= sessionStore (fun store ->
+>=> session (fun _ -> succeed)
+>=> sessionStore (fun store ->
 ...
 ```
 

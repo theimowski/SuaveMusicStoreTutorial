@@ -33,3 +33,4 @@ startWebServer defaultConfig (OK "Hello world!")
 プロセスが終了するまでリクエストを受け付けられるよう、Suaveがポートを監視し始めます。
 
 [タグ - hello_world](https://github.com/theimowski/SuaveMusicStore/tree/hello_world)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

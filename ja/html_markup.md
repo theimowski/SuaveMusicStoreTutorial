@@ -79,10 +79,11 @@ let store genres = [
 以下のようなハードコードされた`genres`リストを指定しておくことにします：
 
 ````fsharp
-path Path.Store.overview >>= html (View.store [ "ロック"; "ダンス"; "ポップ"])
+path Path.Store.overview >=> html (View.store [ "ロック"; "ダンス"; "ポップ"])
 ````
 
 これまでの変更をまとめると [Tag - Viwe][tag_view] のようになります。
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)
 
 [tuple]: http://fsharpforfunandprofit.com/posts/tuples/
 [tag_view]: https://github.com/theimowski/SuaveMusicStore/tree/view

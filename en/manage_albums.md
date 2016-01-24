@@ -74,7 +74,7 @@ let manage = warbler (fun _ ->
 and used in the main `choose` WebPart:
 
 ```fsharp
-    path Path.Admin.manage >>= manage
+    path Path.Admin.manage >=> manage
 ```
 
 Don't forget about the `warbler` for `manage` WebPart - we don't use an parameters for this WebPart, so we need to prevent it's eager evaluation.

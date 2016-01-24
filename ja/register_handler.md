@@ -11,12 +11,12 @@ let register = "/account/register"
 ```fsharp
 let register =
     choose [
-        GET >>= (View.register "" |> html)
+        GET >=> (View.register "" |> html)
     ]
 ```
 
 ```fsharp
-path Path.Account.register >>= register
+path Path.Account.register >=> register
 ```
 
 そして`View.logon`にリンクを追加します：
@@ -66,16 +66,16 @@ let newUser (username, password, email) (ctx : DbContext) =
 ```fsharp
 let authenticateUser (user : Db.User) =
     Auth.authenticated Cookie.CookieLife.Session false 
-    >>= session (function
+    >=> session (function
         | CartIdOnly cartId ->
             let ctx = Db.getContext()
             Db.upgradeCarts (cartId, user.UserName) ctx
             sessionStore (fun store -> store.set "cartid" "")
         | _ -> succeed)
-    >>= sessionStore (fun store ->
+    >=> sessionStore (fun store ->
         store.set "username" user.UserName
-        >>= store.set "role" user.Role)
-    >>= returnPathOrHome
+        >=> store.set "role" user.Role)
+    >=> returnPathOrHome
 ```
 
 分離後の`logon`のPOSTハンドラーは以下のようになります：
@@ -93,8 +93,8 @@ match Db.validateUser(form.Username, passHash password) ctx with
 ```fsharp
 let register =
     choose [
-        GET >>= (View.register "" |> html)
-        POST >>= bindToForm Form.register (fun form ->
+        GET >=> (View.register "" |> html)
+        POST >=> bindToForm Form.register (fun form ->
             let ctx = Db.getContext()
             match Db.getUser form.Username ctx with
             | Some existing -> 

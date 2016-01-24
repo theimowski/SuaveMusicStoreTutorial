@@ -41,7 +41,7 @@ let result cartItems user =
                 (View.partUser user) 
                 (View.partGenres (Db.getGenres ctx))
                 container)
-        >>= Writers.setMimeType "text/html; charset=utf-8"
+        >=> Writers.setMimeType "text/html; charset=utf-8"
 ```
 
 How about we make the album list in `View.browse` look better?
@@ -103,7 +103,7 @@ let home =
 ```
 
 ```fsharp
-    path Path.home >>= home
+    path Path.home >=> home
 ```
 
 The "home-showcase.png" asset can be downloaded from [here](https://raw.githubusercontent.com/theimowski/SuaveMusicStore/master/home-showcase.png). Don't forget about the "Copy To Output Directory" property!
