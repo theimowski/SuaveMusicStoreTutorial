@@ -54,7 +54,7 @@ scriptAttr [ "type", "text/javascript"; " src", "/script.js" ] [ text "" ]
 また、「js」ファイルを参照出来るようにハンドラーを変更する必要もあります：
 
 ```fsharp
-pathRegex "(.*)\.(css|png|gif|js)" >>= Files.browseHome
+pathRegex "(.*)\.(css|png|gif|js)" >=> Files.browseHome
 ```
 
 追加したスクリプトはまだハンドラーがないルートへアクセスしようとします。

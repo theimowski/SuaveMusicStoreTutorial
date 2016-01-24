@@ -79,7 +79,7 @@ let cart = View.cart [] |> html
 
 ...
 
-path Path.Cart.overview >>= cart
+path Path.Cart.overview >=> cart
 ```
 
 ナビゲーション用のメニューも(`View.partNav`に)簡単に追加できます：

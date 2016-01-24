@@ -93,9 +93,9 @@ let deleteAlbum id =
     match Db.getAlbum id ctx with
     | Some album ->
         choose [ 
-            GET >>= warbler (fun _ -> 
+            GET >=> warbler (fun _ -> 
                 html (View.deleteAlbum album.Title))
-            POST >>= warbler (fun _ -> 
+            POST >=> warbler (fun _ -> 
                 Db.deleteAlbum album ctx; 
                 Redirection.FOUND Path.Admin.manage)
         ]

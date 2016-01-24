@@ -43,7 +43,7 @@ let browse =
 この`browse` WebPartは次のようにして既存のWebPartへ組み込む事ができます：
 
 ````fsharp
-path "/store/browse" >>= browse
+path "/store/browse" >=> browse
 ````
 
 これまでの変更をまとめると [Tag - basic_routing][tag_basicrouting] のようになります。

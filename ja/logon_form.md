@@ -48,5 +48,5 @@ let logon =
 ```
 
 ```fsharp
-path Path.Account.logon >>= logon
+path Path.Account.logon >=> logon
 ```

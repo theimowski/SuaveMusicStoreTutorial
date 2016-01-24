@@ -26,12 +26,12 @@ let checkout =
     | NoSession | CartIdOnly _ -> never
     | UserLoggedOn {Username = username } ->
         choose [
-            GET >>= (View.checkout |> html)
+            GET >=> (View.checkout |> html)
         ])
 ```
 
 ```fsharp
-path Path.Cart.checkout >>= loggedOn checkout
+path Path.Cart.checkout >=> loggedOn checkout
 ```
 
 補足です：
@@ -84,7 +84,7 @@ let checkoutComplete = [
 さてこれで購入用のPOSTハンドラーを実装する準備が整いました：
 
 ```fsharp
-POST >>= warbler (fun _ ->
+POST >=> warbler (fun _ ->
     let ctx = Db.getContext()
     Db.placeOrder username ctx
     View.checkoutComplete |> html)

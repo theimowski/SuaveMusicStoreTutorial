@@ -9,7 +9,7 @@ and using the `webPart` identifier in our call to function `startWebServer`:
 In C#, one would call it "assign webPart to a variable", but in functional world there's really no concept of a variable. Instead, we can "bind" a value to an identifier, which we can reuse later.
 Value, once bound, can't be mutated during runtime.
 Now, let's restrict our WebPart, so that the "Hello World" response is sent only at the root path of our application (`localhost:8083/` but not `localhost:8083/anything`):
-`let webPart = path "/" >>= OK "Hello World"`
+`let webPart = path "/" >=> OK "Hello World"`
 `path` function is defined in `Suave.Filters` module, thus we need to open it at the beggining of `App.fs`. `Suave.Operators` and `Suave.Successful` modules will also be crucial - let's open them as well.
 
 `path` is a function of type:

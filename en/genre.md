@@ -42,5 +42,5 @@ Let's fix this by setting the "Content-Type" header with correct charset for eac
 ```fsharp
 let html container =
     OK (View.index container)
-    >>= Writers.setMimeType "text/html; charset=utf-8"
+    >=> Writers.setMimeType "text/html; charset=utf-8"
 ```

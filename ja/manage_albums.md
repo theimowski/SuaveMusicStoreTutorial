@@ -74,7 +74,7 @@ let manage = warbler (fun _ ->
 そしてメインの`choose`WebPartで次のように呼び出します：
 
 ```fsharp
-    path Path.Admin.manage >>= manage
+    path Path.Admin.manage >=> manage
 ```
 
 `manage`WebPartには`warbler`を指定することを忘れないようにしてください。

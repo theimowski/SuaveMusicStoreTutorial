@@ -41,7 +41,7 @@ let html container =
 Usage for the home page looks like this:
 
 ```fsharp
-    path Path.home >>= html View.home
+    path Path.home >=> html View.home
 ```
 
 Next, containers for each valid route in our application can be defined in `View` module:
@@ -77,11 +77,11 @@ let browse =
 
 let webPart = 
     choose [
-        path Path.home >>= html View.home
-        path Path.Store.overview >>= html View.store
-        path Path.Store.browse >>= browse
+        path Path.home >=> html View.home
+        path Path.Store.overview >=> html View.store
+        path Path.Store.browse >=> browse
         pathScan Path.Store.details (fun id -> html (View.details id))
 
-        pathRegex "(.*)\.(css|png)" >>= Files.browseHome
+        pathRegex "(.*)\.(css|png)" >=> Files.browseHome
     ]
 ```

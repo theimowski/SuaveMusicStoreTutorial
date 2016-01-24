@@ -79,7 +79,7 @@ let store genres = [
 以下のようなハードコードされた`genres`リストを指定しておくことにします：
 
 ````fsharp
-path Path.Store.overview >>= html (View.store [ "ロック"; "ダンス"; "ポップ"])
+path Path.Store.overview >=> html (View.store [ "ロック"; "ダンス"; "ポップ"])
 ````
 
 これまでの変更をまとめると [Tag - Viwe][tag_view] のようになります。
