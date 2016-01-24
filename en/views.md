@@ -26,6 +26,8 @@ Now let's add a new file `View.fs` to the project just before the `App.fs` file 
 
 ```fsharp
 module SuaveMusicStore.View
+
+open Suave.Html
 ```
 
 We'll follow this convention throughout the tutorial to have a clear understanding of the project structure.
