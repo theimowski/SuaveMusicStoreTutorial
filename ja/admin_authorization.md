@@ -106,3 +106,4 @@ path Path.Account.logoff >=> reset
 `Suave`ライブラリに用意された認証およびセッション機能を巡る旅はここで終了です。
 次の章でもこれらのコンセプトを振り返りますが、ほとんどの実装が再利用可能です。
 これまでの変更をまとめると [Tag - auth_and_session](https://github.com/theimowski/SuaveMusicStore/tree/auth_and_session) のようになります。
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)

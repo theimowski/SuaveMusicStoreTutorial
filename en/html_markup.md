@@ -70,3 +70,4 @@ To use `View.store` from `App` module, let's simply pass a hardcoded list for `g
 ```
 
 Here is what the solution looks like up to this point: [Tag - View](https://github.com/theimowski/SuaveMusicStore/tree/view)
+[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)
