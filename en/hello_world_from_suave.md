@@ -9,8 +9,7 @@ Rename the `Program.fs` file to `App.fs` to better reflect the purpose of the fi
 
 ```fsharp
 open Suave                 // always open suave
-open Suave.Http.Successful // for OK-result
-open Suave.Web             // for config
+open Suave.Successful      // for OK-result
 
 startWebServer defaultConfig (OK "Hello World!")
 ```

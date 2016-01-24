@@ -64,18 +64,18 @@ Now turn for the `logon` POST handler monster:
 ```fsharp
 let logon =
     choose [
-        GET >>= (View.logon |> html)
-        POST >>= bindToForm Form.logon (fun form ->
+        GET >=> (View.logon |> html)
+        POST >=> bindToForm Form.logon (fun form ->
             let ctx = Db.getContext()
             let (Password password) = form.Password
             match Db.validateUser(form.Username, passHash password) ctx with
             | Some user ->
                     Auth.authenticated Cookie.CookieLife.Session false 
-                    >>= session
-                    >>= sessionStore (fun store ->
+                    >=> session
+                    >=> sessionStore (fun store ->
                         store.set "username" user.UserName
-                        >>= store.set "role" user.Role)
-                    >>= returnPathOrHome
+                        >=> store.set "role" user.Role)
+                    >=> returnPathOrHome
             | _ ->
                 never
         )
@@ -114,7 +114,7 @@ let logon msg = [
 Now we can invoke it in two ways:
 
 ```fsharp
-GET >>= (View.logon "" |> html)
+GET >=> (View.logon "" |> html)
 
 ...
 

@@ -64,18 +64,18 @@ let returnPathOrHome =
 ```fsharp
 let logon =
     choose [
-        GET >>= (View.logon |> html)
-        POST >>= bindToForm Form.logon (fun form ->
+        GET >=> (View.logon |> html)
+        POST >=> bindToForm Form.logon (fun form ->
             let ctx = Db.getContext()
             let (Password password) = form.Password
             match Db.validateUser(form.Username, passHash password) ctx with
             | Some user ->
                     Auth.authenticated Cookie.CookieLife.Session false 
-                    >>= session
-                    >>= sessionStore (fun store ->
+                    >=> session
+                    >=> sessionStore (fun store ->
                         store.set "username" user.UserName
-                        >>= store.set "role" user.Role)
-                    >>= returnPathOrHome
+                        >=> store.set "role" user.Role)
+                    >=> returnPathOrHome
             | _ ->
                 never
         )
@@ -117,7 +117,7 @@ let logon msg = [
 そうすると以下のように、2通りの方法で呼び出せるようになります：
 
 ```fsharp
-GET >>= (View.logon "" |> html)
+GET >=> (View.logon "" |> html)
 
 ...
 

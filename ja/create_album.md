@@ -212,7 +212,7 @@ let getArtists (ctx : DbContext) : Artist list =
 let createAlbum =
     let ctx = Db.getContext()
     choose [
-        GET >>= warbler (fun _ -> 
+        GET >=> warbler (fun _ -> 
             let genres = 
                 Db.getGenres ctx 
                 |> List.map (fun g -> decimal g.GenreId, g.Name)
@@ -224,7 +224,7 @@ let createAlbum =
 
 ...
 
-    path Path.Admin.createAlbum >>= createAlbum
+    path Path.Admin.createAlbum >=> createAlbum
 ```
 
 今回も`warbler`が必須です。`warbler`を指定することでWebPartが先行評価されないようにしています。
@@ -275,9 +275,9 @@ let createAlbum (artistId, genreId, price, title) (ctx : DbContext) =
 
 ```fsharp
 choose [
-        GET >>= ...
+        GET >=> ...
 
-        POST >>= bindToForm Form.album (fun form ->
+        POST >=> bindToForm Form.album (fun form ->
             Db.createAlbum (int form.ArtistId, int form.GenreId, form.Price, form.Title) ctx
             Redirection.FOUND Path.Admin.manage)
     ]

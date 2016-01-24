@@ -40,9 +40,9 @@ module Store =
 ````fsharp
 let webPart =
     choose [
-        path "/" >>= (OK View.index)
-        path "/store" >>= (OK "Store")
-        path "/store/browse" >>= browse
+        path "/" >=> (OK View.index)
+        path "/store" >=> (OK "Store")
+        path "/store/browse" >=> browse
         pathScan Path.Store.details (fun id -> OK (sprintf "詳細 %d" id))
     ]
 ````

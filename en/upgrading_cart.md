@@ -28,16 +28,16 @@ and update the `logon` handler in `App` module:
 
 ```fsharp
 Auth.authenticated Cookie.CookieLife.Session false 
->>= session (function
+>=> session (function
     | CartIdOnly cartId ->
         let ctx = Db.getContext()
         Db.upgradeCarts (cartId, user.UserName) ctx
         sessionStore (fun store -> store.set "cartid" "")
     | _ -> succeed)
->>= sessionStore (fun store ->
+>=> sessionStore (fun store ->
     store.set "username" user.UserName
-    >>= store.set "role" user.Role)
->>= returnPathOrHome
+    >=> store.set "role" user.Role)
+>=> returnPathOrHome
 ```
 
 Remarks:

@@ -39,7 +39,7 @@ As stated before, we'll now add a parameter to the `session` function:
 ```fsharp
 let session f = 
     statefulForSession
-    >>= context (fun x -> 
+    >=> context (fun x -> 
         match x |> HttpContext.state with
         | None -> f NoSession
         | Some state ->
@@ -59,8 +59,8 @@ The only usage of `session` for now is in the `logon` POST handler - let's adjus
 ```fsharp
 ...
 Auth.authenticated Cookie.CookieLife.Session false 
->>= session (fun _ -> succeed)
->>= sessionStore (fun store ->
+>=> session (fun _ -> succeed)
+>=> sessionStore (fun store ->
 ...
 ```
 

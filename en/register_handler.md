@@ -11,12 +11,12 @@ GET handler for registration in `App`:
 ```fsharp
 let register =
     choose [
-        GET >>= (View.register "" |> html)
+        GET >=> (View.register "" |> html)
     ]
 ```
 
 ```fsharp
-path Path.Account.register >>= register
+path Path.Account.register >=> register
 ```
 
 and a direct link from the `View.logon` :
@@ -64,16 +64,16 @@ In order to reuse the logic from logon POST handler, extract a separate function
 ```fsharp
 let authenticateUser (user : Db.User) =
     Auth.authenticated Cookie.CookieLife.Session false 
-    >>= session (function
+    >=> session (function
         | CartIdOnly cartId ->
             let ctx = Db.getContext()
             Db.upgradeCarts (cartId, user.UserName) ctx
             sessionStore (fun store -> store.set "cartid" "")
         | _ -> succeed)
-    >>= sessionStore (fun store ->
+    >=> sessionStore (fun store ->
         store.set "username" user.UserName
-        >>= store.set "role" user.Role)
-    >>= returnPathOrHome
+        >=> store.set "role" user.Role)
+    >=> returnPathOrHome
 ```
 
 after extraction, `logon` POST handler looks like this:
@@ -91,8 +91,8 @@ Finally, the full register handler can be implemented following:
 ```fsharp
 let register =
     choose [
-        GET >>= (View.register "" |> html)
-        POST >>= bindToForm Form.register (fun form ->
+        GET >=> (View.register "" |> html)
+        POST >=> bindToForm Form.register (fun form ->
             let ctx = Db.getContext()
             match Db.getUser form.Username ctx with
             | Some existing -> 

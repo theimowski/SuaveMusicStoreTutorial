@@ -78,7 +78,7 @@ let cart = View.cart [] |> html
 
 ...
 
-path Path.Cart.overview >>= cart
+path Path.Cart.overview >=> cart
 ```
 
 A navigation menu item can also appear handy (`View.partNav`):

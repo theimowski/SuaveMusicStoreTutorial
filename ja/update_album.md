@@ -72,7 +72,7 @@ let editAlbum id =
     match Db.getAlbum id ctx with
     | Some album ->
         choose [
-            GET >>= warbler (fun _ ->
+            GET >=> warbler (fun _ ->
                 let genres = 
                     Db.getGenres ctx 
                     |> List.map (fun g -> decimal g.GenreId, g.Name)
@@ -80,7 +80,7 @@ let editAlbum id =
                     Db.getArtists ctx
                     |> List.map (fun g -> decimal g.ArtistId, g.Name)
                 html (View.editAlbum album genres artists))
-            POST >>= bindToForm Form.album (fun form ->
+            POST >=> bindToForm Form.album (fun form ->
                 Db.updateAlbum album (int form.ArtistId, int form.GenreId, form.Price, form.Title) ctx
                 Redirection.FOUND Path.Admin.manage)
         ]

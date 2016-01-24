@@ -66,7 +66,7 @@ Things worth commenting in the above snippet:
 To use `View.store` from `App` module, let's simply pass a hardcoded list for `genres` like following:
 
 ```fsharp
-    path Path.Store.overview >>= html (View.store ["Rock"; "Disco"; "Pop"])
+    path Path.Store.overview >=> html (View.store ["Rock"; "Disco"; "Pop"])
 ```
 
 Here is what the solution looks like up to this point: [Tag - View](https://github.com/theimowski/SuaveMusicStore/tree/view)

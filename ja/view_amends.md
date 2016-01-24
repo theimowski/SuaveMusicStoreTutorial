@@ -41,7 +41,7 @@ let result cartItems user =
                 (View.partUser user) 
                 (View.partGenres (Db.getGenres ctx))
                 container)
-        >>= Writers.setMimeType "text/html; charset=utf-8"
+        >=> Writers.setMimeType "text/html; charset=utf-8"
 ```
 
 `View.browse`でのアルバム一覧の見た目も改善しましょうか。
@@ -103,7 +103,7 @@ let home =
 ```
 
 ```fsharp
-    path Path.home >>= home
+    path Path.home >=> home
 ```
 
 アセット「home-showcase.png」は [こちら](https://raw.githubusercontent.com/theimowski/SuaveMusicStore/master/home-showcase.png) からダウンロードできます。「出力ディレクトリにコピー」のプロパティを設定し忘れないように！

@@ -28,7 +28,7 @@ let html container =
     let ctx = Db.getContext()
     let result cartItems user =
         OK (View.index (View.partNav cartItems) (View.partUser user) container)
-        >>= Writers.setMimeType "text/html; charset=utf-8"
+        >=> Writers.setMimeType "text/html; charset=utf-8"
 
     session (function
     | UserLoggedOn { Username = username } -> 

@@ -18,7 +18,7 @@ let overview =
 
 ...
 
-    path Path.Store.overview >>= overview
+    path Path.Store.overview >=> overview
 ```
 
 `overview` is a WebPart that... 

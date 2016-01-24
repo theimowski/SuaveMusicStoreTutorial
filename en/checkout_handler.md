@@ -26,12 +26,12 @@ let checkout =
     | NoSession | CartIdOnly _ -> never
     | UserLoggedOn {Username = username } ->
         choose [
-            GET >>= (View.checkout |> html)
+            GET >=> (View.checkout |> html)
         ])
 ```
 
 ```fsharp
-path Path.Cart.checkout >>= loggedOn checkout
+path Path.Cart.checkout >=> loggedOn checkout
 ```
 
 Remarks:
@@ -85,7 +85,7 @@ let checkoutComplete = [
 With that in place, we can now implement the POST checkout handler:
 
 ```fsharp
-POST >>= warbler (fun _ ->
+POST >=> warbler (fun _ ->
     let ctx = Db.getContext()
     Db.placeOrder username ctx
     View.checkoutComplete |> html)
