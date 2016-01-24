@@ -96,4 +96,4 @@ We need to invoke the `Db.placeOrder` in a warbler, to ensure that it's not call
 Phew, I think we're done for now!
 
 Browse the code here: [Tag - registration_and_checkout](https://github.com/theimowski/SuaveMusicStore/tree/registration_and_checkout)
-[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)
+([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))

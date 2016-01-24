@@ -95,4 +95,4 @@ POST >=> warbler (fun _ ->
 ふう。ようやく完成しました！
 コードは [Tag - registration_and_checkout](https://github.com/theimowski/SuaveMusicStore/tree/registration_and_checkout) から参照できます。
  のようになります。
-[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)
+([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))

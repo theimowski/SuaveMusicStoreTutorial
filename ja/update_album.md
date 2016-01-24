@@ -116,4 +116,4 @@ aHref (sprintf Path.Admin.deleteAlbum album.AlbumId) (text "削除")
 
 やれやれ。この章はかなりのボリュームでしたが、学ぶところもたくさんありました。アプリケーションの重要な機能が動作するようになったはずです！
 これまでの変更をまとめると [Tag - crud_and_forms](https://github.com/theimowski/SuaveMusicStore/tree/crud_and_forms) のようになります。
-[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)
+([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))

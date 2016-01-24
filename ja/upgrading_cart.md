@@ -51,4 +51,4 @@ Auth.authenticated Cookie.CookieLife.Session false
 
 いやはや、これでミュージックストアにカートの機能が追加されました！
 これまでの変更をまとめると [Tag - cart](https://github.com/theimowski/SuaveMusicStore/tree/cart) のようになります。
-[Tag - Suave0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1)
+([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))
