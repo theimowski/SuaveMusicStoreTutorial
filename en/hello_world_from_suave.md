@@ -3,7 +3,7 @@
 Suave application can be hosted as a standalone Console Application. 
 Let's start by creating a Console Application Project named `SuaveMusicStore` (to keep all the files in single folder, uncheck the option to create folder for solution).
 Now we can add NuGet reference to Suave. To do that, in Package Manager Console type: 
-```install-package Suave -version 0.28.1```. 
+```install-package Suave -version 1.0```. 
 Alternatively, you can use the NuGet GUI to find and install the Suave package.
 Rename the `Program.fs` file to `App.fs` to better reflect the purpose of the file, and replace its contents completely with the following code:
 

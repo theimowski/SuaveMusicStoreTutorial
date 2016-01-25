@@ -8,7 +8,7 @@ Suaveアプリケーションはスタンドアロンのコンソールプロジ
 ソリューションのディレクトリを作成のチェックは外しておきます。)
 次にSuaveのNuGetパッケージを参照に追加します。
 パッケージ マネージャー コンソール内で
- `install-package Suave -version 0.28.1`
+ `install-package Suave -version 1.0`
 と入力します。
 あるいはNuGetのGUIを使用してSuaveのパッケージをインストールしても構いません。
 ファイル `Program.fs` を `App.fs` に変更して、
