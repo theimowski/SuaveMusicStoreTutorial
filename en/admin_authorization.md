@@ -106,4 +106,4 @@ path Path.Account.logoff >=> reset
 That concludes our journey to Auth and Session features in `Suave` library. 
 We'll revisit the concepts in next section, but much of the implementation can be reused.
 Code up to this point can be browsed here: [Tag - auth_and_session](https://github.com/theimowski/SuaveMusicStore/tree/auth_and_session)
-([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))
+

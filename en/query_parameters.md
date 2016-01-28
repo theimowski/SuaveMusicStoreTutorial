@@ -34,4 +34,4 @@ path "/store/browse" >=> browse
 ```
 
 Eventually we should end up with something similar to: [Tag - basic_routing](https://github.com/theimowski/SuaveMusicStore/tree/basic_routing)
-([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))
+

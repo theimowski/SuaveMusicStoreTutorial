@@ -116,4 +116,4 @@ aHref (sprintf Path.Admin.deleteAlbum album.AlbumId) (text "Delete")
 
 Pheeew, this section was long, but also very productive. Looks like we can already do some serious interaction with the application!
 Results can be seen here: [Tag - crud_and_forms](https://github.com/theimowski/SuaveMusicStore/tree/crud_and_forms)
-([Suave 0.28.1](https://github.com/SuaveIO/suave/tree/v0.28.1))
+
