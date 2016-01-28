@@ -18,11 +18,12 @@ The snippet makes use of `User` type alias:
 type User = DbContext.``[dbo].[Users]Entity``
 ```
 
-Now, in the `App` module add two more `open` statements:
+Now, in the `App` module add more `open` statements:
 
 ```fsharp
 open System
 ...
+open Suave.Authentication
 open Suave.State.CookieStateStore
 ```
 
@@ -70,7 +71,7 @@ let logon =
             let (Password password) = form.Password
             match Db.validateUser(form.Username, passHash password) ctx with
             | Some user ->
-                    Auth.authenticated Cookie.CookieLife.Session false 
+                    authenticated Cookie.CookieLife.Session false 
                     >=> session
                     >=> sessionStore (fun store ->
                         store.set "username" user.UserName
@@ -88,7 +89,7 @@ This means that in case the request is malformed, `bindToForm` takes care of ret
 If someone however decides to be polite and fill in the logon form correctly, then we reach the database and ask whether such user with such password exists.
 Note, that we have to pattern match the password string in form result (`let (Password password) = form.Password`).
 If `Db.validateUser` returns `Some user` then we compose 4 WebParts together in order to correctly set up the user state and redirect user to his destination.
-First, `Auth.authenticated` sets proper cookies which live till the session ends. The second (`false`) argument specifies the cookie isn't "HttpsOnly".
+First, `authenticated` sets proper cookies which live till the session ends. The second (`false`) argument specifies the cookie isn't "HttpsOnly".
 Then we bind the result to `session`, which as described earlier, sets up the user session state.
 Next, we write two values to the session store: "username" and "role".
 Finally, we bind to `returnPathOrHome` - we'll shortly see how this one can be useful.

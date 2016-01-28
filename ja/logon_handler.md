@@ -23,6 +23,7 @@ type User = DbContext.``[dbo].[Users]Entity``
 ```fsharp
 open System
 ...
+open Suave.Authentication
 open Suave.State.CookieStateStore
 ```
 
@@ -70,7 +71,7 @@ let logon =
             let (Password password) = form.Password
             match Db.validateUser(form.Username, passHash password) ctx with
             | Some user ->
-                    Auth.authenticated Cookie.CookieLife.Session false 
+                    authenticated Cookie.CookieLife.Session false 
                     >=> session
                     >=> sessionStore (fun store ->
                         store.set "username" user.UserName
@@ -88,7 +89,7 @@ let logon =
 一方、誰かがおとなしくログインフォームに正しい値を入力した場合には、データベースに問い合わせて、特定のパスワードを持った特定のユーザーが居るかどうかをチェックします。
 なおフォームの結果からパスワード文字列を取得する際に、パターンマッチ(`let (Password password) = form.Password`)を使用している点に注意してください。
 `Db.validateUser`が`Some user`を返した場合、ユーザーの状態を反映しつつ、適切な場所へ遷移させるために4つのWebPartを組み合わせています。
-まず`Auth.authenticated`はセッションが終わるまで有効な特定のクッキーを設定します。
+まず`authenticated`はセッションが終わるまで有効な特定のクッキーを設定します。
 2番目の引数(`false`)はCookieが「HTTPS専用(HttpsOnly)」ではないことを指定しています。
 そしてその結果を`session`にバインドしています。
 これは既に説明した通り、ユーザーのセッション状態をセットアップするためのものです。

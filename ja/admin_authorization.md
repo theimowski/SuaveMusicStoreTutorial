@@ -9,7 +9,7 @@ open Suave.Cookie
 ...
 
 let reset =
-    unsetPair Auth.SessionAuthCookie
+    unsetPair SessionAuthCookie
     >=> unsetPair StateCookie
     >=> Redirection.FOUND Path.home
 
@@ -22,7 +22,7 @@ let redirectWithReturnPath redirection =
 ...
 
 let loggedOn f_success =
-    Auth.authenticate
+    authenticate
         Cookie.CookieLife.Session
         false
         (fun () -> Choice2Of2(redirectWithReturnPath Path.Account.logon))
@@ -41,7 +41,7 @@ let admin f_success =
 
 - `reset` は認証およびユーザー状態を表すクッキー値をクリーンアップした後、ホームページへリダイレクトさせるWebPartです。ユーザーがログアウトした際に使用することになります。
 - `redirectWithReturnPath` はクエリ引数「returnPath」が追加された特定のURLへユーザーをリダイレクトします。認証が必要な特定のアクションを行う際に、ユーザーをログインページへリダイレクトさせる際に使用します。
-- `loggedOn` はユーザーが認証されていた場合に実行される関数 `f_success` を引数に取るWebPartです。この関数ではSuaveライブラリの関数`Auth.authenticate`を呼び出していて、この関数の最後の引数に `f_success` が渡されています。その他の引数はそれぞれ以下の通りです：
+- `loggedOn` はユーザーが認証されていた場合に実行される関数 `f_success` を引数に取るWebPartです。この関数ではSuaveライブラリの関数`authenticate`を呼び出していて、この関数の最後の引数に `f_success` が渡されています。その他の引数はそれぞれ以下の通りです：
     - `CookieLife`には今回は`Session`を指定します
     - `httpsOnly`にはこのチュートリアルではHTTPSを使用しないためfalseを指定します(ただしSuaveはHTTPSをサポートしています)
     - 第3引数はcookieが見つからなかった場合に実行される関数です。この時に、「returnPath」をしつつユーザーをログインページへリダイレクトするようにします。

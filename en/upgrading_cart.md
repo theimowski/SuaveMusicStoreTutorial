@@ -27,7 +27,7 @@ let upgradeCarts (cartId : string, username :string) (ctx : DbContext) =
 and update the `logon` handler in `App` module:
 
 ```fsharp
-Auth.authenticated Cookie.CookieLife.Session false 
+authenticated Cookie.CookieLife.Session false 
 >=> session (function
     | CartIdOnly cartId ->
         let ctx = Db.getContext()

@@ -58,7 +58,7 @@ let session f =
 
 ```fsharp
 ...
-Auth.authenticated Cookie.CookieLife.Session false 
+authenticated Cookie.CookieLife.Session false 
 >=> session (fun _ -> succeed)
 >=> sessionStore (fun store ->
 ...

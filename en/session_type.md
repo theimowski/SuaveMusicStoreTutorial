@@ -58,7 +58,7 @@ The only usage of `session` for now is in the `logon` POST handler - let's adjus
 
 ```fsharp
 ...
-Auth.authenticated Cookie.CookieLife.Session false 
+authenticated Cookie.CookieLife.Session false 
 >=> session (fun _ -> succeed)
 >=> sessionStore (fun store ->
 ...

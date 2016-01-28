@@ -9,7 +9,7 @@ open Suave.Cookie
 ...
 
 let reset =
-    unsetPair Auth.SessionAuthCookie
+    unsetPair SessionAuthCookie
     >=> unsetPair StateCookie
     >=> Redirection.FOUND Path.home
 
@@ -22,7 +22,7 @@ let redirectWithReturnPath redirection =
 ...
 
 let loggedOn f_success =
-    Auth.authenticate
+    authenticate
         Cookie.CookieLife.Session
         false
         (fun () -> Choice2Of2(redirectWithReturnPath Path.Account.logon))
@@ -41,7 +41,7 @@ Remarks:
 
 - `reset` is a WebPart to clean up auth and state cookie values, and redirect to home page afterwards. We'll use it for logging user off.
 - `redirectWithReturnPath` aims to point user to some url, with the "returnPath" query parameter baked into the url. We'll use it for redirecting user to logon page if specific action requires authentication.
-- `loggedOn` takes `f_success` WebPart as argument, which will be applied if user is authenticated. Here we use the library function `Auth.authenticate`, to which `f_success` comes as last parameter. The rest of parameters, starting with first are are respectively:
+- `loggedOn` takes `f_success` WebPart as argument, which will be applied if user is authenticated. Here we use the library function `authenticate`, to which `f_success` comes as last parameter. The rest of parameters, starting with first are are respectively:
     - `CookieLife` - `Session` in our case
     - `httpsOnly` - we pass false as we won't cover HTTPS bindings in the tutorial (however Suave does support it).
     - 3rd parameter is a function applied if auth cookie is missing - that's where we want to redirect user to the logon page with a "returnPath"

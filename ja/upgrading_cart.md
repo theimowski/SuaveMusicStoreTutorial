@@ -28,7 +28,7 @@ let upgradeCarts (cartId : string, username :string) (ctx : DbContext) =
 そして`App`モジュールの`logon`ハンドラーを変更します：
 
 ```fsharp
-Auth.authenticated Cookie.CookieLife.Session false 
+authenticated Cookie.CookieLife.Session false 
 >=> session (function
     | CartIdOnly cartId ->
         let ctx = Db.getContext()

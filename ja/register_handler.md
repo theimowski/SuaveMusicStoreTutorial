@@ -65,7 +65,7 @@ let newUser (username, password, email) (ctx : DbContext) =
 
 ```fsharp
 let authenticateUser (user : Db.User) =
-    Auth.authenticated Cookie.CookieLife.Session false 
+    authenticated Cookie.CookieLife.Session false 
     >=> session (function
         | CartIdOnly cartId ->
             let ctx = Db.getContext()
