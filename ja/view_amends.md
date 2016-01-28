@@ -110,6 +110,6 @@ let home =
 
 これですべて終了です。このチュートリアルが皆さんのお気に召しますように。
 質問やコメントがあればGitHubでIssueを投稿してください。
-作成したアプリケーションのソースコードは[こちら](https://github.com/theimowski/SuaveMusicStore)、本書のコンテンツについては[こちら](https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/SUMMARY.md)にあります。
+作成したアプリケーションのソースコードは[こちら](https://github.com/theimowski/SuaveMusicStore/tree/v1.0)、本書のコンテンツについては[こちら](https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/SUMMARY.md)にあります。
 
 それではお元気で！
