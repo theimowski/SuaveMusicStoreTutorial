@@ -44,4 +44,4 @@
    * [Checkout handler](checkout_handler.md)
 * [Improvements](improvements.md)
    * [View amends](view_amends.md)
-
+   * [Moving to Paket](moving_to_paket.md)
