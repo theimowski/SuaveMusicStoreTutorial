@@ -17,6 +17,19 @@ After completing steps described in the above wizard, we can use built-in [`conv
 $ mono .paket/paket.exe convert-from-nuget --no-install --no-auto-restore
 ```
 
+It's likely that you'll need to remove `framework` constraint from the `paket.dependencies` file, so that it looks more less like following:
+
+```bash
+source https://www.nuget.org/api/v2
+
+nuget FSharp.Core 3.1.2.5
+nuget SQLProvider 0.0.9-alpha
+nuget Suave 1.0.0
+nuget Suave.Experimental 1.0.0
+```
+
+We can remove the direct dependency on `FSharp.Core` as well, because it's a transient dependency of `Suave` - Paket will resolve it anyway. 
+
 Next, we can ask Paket to resolve dependencies and [install](http://fsprojects.github.io/Paket/paket-install.html) them into our `SuaveMusicStore.fsproj` project:
 
 ```bash
