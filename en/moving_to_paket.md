@@ -1,11 +1,13 @@
 # Moving to Paket
 
-The application is in quite a good shape, however the dependency on Microsoft SQL Server makes it run on Windows only (however recently there has appeared an announcement of [SQL Server for Linux](https://blogs.microsoft.com/blog/2016/03/07/announcing-sql-server-on-linux/)).
+The application is in quite a good shape, however the dependency on Microsoft SQL Server ties it to run on Windows only (however recently there has appeared an announcement of [SQL Server for Linux](https://blogs.microsoft.com/blog/2016/03/07/announcing-sql-server-on-linux/)).
 Because the F# community pushes the language towards **cross-platform** direction, and indeed most of F# OSS projects are built with "X-Plat" in mind, we'll give it a try to port the Suave Music Store to run on [Mono](http://www.mono-project.com/).
 
 In this and next sections I'll be using Ubuntu.
 
-First step will be moving away from NuGet client, which has a [number of issues](https://github.com/NuGet/Home/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+mono) running on Mono to a much more cross-platform friendly [Paket](fsprojects.github.io/Paket/).
+> Disclaimer: I'm certainly not an unix OS expert - please bear that in mind if you catch me on writing something silly about Linux configuration.
+
+First step will be moving away from NuGet client, which has a [number of issues](https://github.com/NuGet/Home/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+mono) running on Mono, to a much more cross-platform friendly [Paket](fsprojects.github.io/Paket/).
 
 ## Installing Paket
 
