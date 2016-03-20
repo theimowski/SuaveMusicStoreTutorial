@@ -38,6 +38,9 @@ $ \i .../postgres/postgres_create.sql
 
 ## Changes in F# sources
 
+I've divided this subsection into three parts, each concerning a separate module (Db, View, App).
+If you want to save time on applying the changes by yourself - you can just scroll down to end of each part where I included a link to module implementation after changes and copy relevant bits.
+
 ### Db module
 
 First, we need to connect to the new database using proper SQLProvider configuration:
@@ -81,7 +84,7 @@ let getGenres (ctx : DbContext) : Genre list =
     ctx.Public.Genres |> Seq.toList
 ```
 
-Finally, change all column references from PascalCase to Pascalonlyfirstlettercase, e.g. from:
+Next, change all column and table name references from PascalCase to Firstcapitalcase, e.g. from:
 
 ```fsharp
     on (album.GenreId = genre.GenreId)
@@ -105,15 +108,30 @@ let createAlbum (artistId, genreId, price, title) (ctx : DbContext) =
     ctx.SubmitUpdates()
 ```
 
-as there occured some issue with the previous `Create` signature version taking all 4 values inline.
+The the previously used `Create` signature version taking all 4 values inline happened to be faulty for some reason.
 
 [Db module after changes](https://github.com/theimowski/SuaveMusicStore/blob/postgres/Db.fs)
 
 ### View module
 
+In view module, the only necessary changes regard column name case.
+Similar to Db module, rename all column name references to PascalCase to Firstcapitalcase, e.g. :
+
+```fsharp
+(sprintf Path.Store.details album.AlbumId) 
+```
+
+goes to:
+
+```fsharp
+(sprintf Path.Store.details album.Albumid) 
+``` 
+
 [View module after changes](https://github.com/theimowski/SuaveMusicStore/blob/postgres/View.fs)
 
 ### App module
+
+The same applies for App as for View module - replace each non-first uppercase letter with its lowercase equivalent.
 
 [App module after changes](https://github.com/theimowski/SuaveMusicStore/blob/postgres/App.fs)
 
@@ -128,7 +146,9 @@ mono .paket/paket.exe restore
 xbuild
 ```
 
-Run the `build.sh` script and then fire up the application:
+Run the `build.sh` script.
+If there are any compile time errors, it's probably due to name conflicts - follow compile errors to troubleshoot.
+Now fire up the application:
 
 ```bash
 $ mono bin/Debug/SuaveMusicStore.exe
@@ -136,6 +156,15 @@ $ mono bin/Debug/SuaveMusicStore.exe
 
 Navigate to 8083 port of your localhost to verify that the app is up and running.
 
+## JavaScript bug
 
----
-js bug
+During preparation for this section, I discovered a nasty bug in this very complicated `script.js` sitting in the code base.
+Here's a fix:
+
+```js
+$.post("/cart/remove/" + albumId, function (data) {
+        $('#main').html(data); // the previous selector id ("container") was incorrect
+        $('#update-message').html(albumTitle + ' has been removed from your shopping cart.');
+        $cartNav.html('Cart (' + (count - 1) + ')');
+    });
+``` 
