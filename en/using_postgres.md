@@ -17,6 +17,14 @@ nuget Suave.Experimental 1.0.0
 ```
 
 The `Npgsql` binaries will be necessary for the `SQLProvider` to work with Postgres database.
+To include them in the target `bin` directory, add a proper entry to `paket.references` file:
+
+```bash
+SQLProvider
+Npgsql
+Suave
+Suave.Experimental
+```
 
 Next, run `paket update`:
 
@@ -50,11 +58,8 @@ type Sql =
     SqlDataProvider< 
         ConnectionString      = "Server=127.0.0.1;Database=suavemusicstore;User Id=suave;Password=1234;",
         DatabaseVendor        = Common.DatabaseProviderTypes.POSTGRESQL,
-        ResolutionPath        = "packages/Npgsql/lib/net40",
         CaseSensitivityChange = Common.CaseSensitivityChange.ORIGINAL >
 ```
-
-`ResolutionPath` directs to `Npgsql` binaries for use of `SQLProovider`.
 
 Next, we have to amend aliases for our data types:
 
