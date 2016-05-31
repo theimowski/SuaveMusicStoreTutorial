@@ -11,7 +11,7 @@ Let's just briefly go through the overall architecture of Suave Music Store runn
   * Second image for the actual F# app,
 * The db image will be build on top of the [official postgres image](https://hub.docker.com/_/postgres/),
 * The db image, upon build initialization, will create our `suavemusicstore` database from script,
-* The app image will extend the [official mono image](https://hub.docker.com/_/mono/),
+* The app image will extend the [official fsharp image](https://hub.docker.com/r/fsharp/fsharp/),
 * The app image will copy **compiled** binaries to the image (more on that in later course),
 * The app image will depend on the db container, that's why we'll provide a link between those.
 
@@ -85,10 +85,10 @@ The `COPY` instruction will place the script in a special directory inside the c
 
 ## Server image
 
-The second image on the other hand will make use of the official mono image:
+The second image on the other hand will make use of the official fsharp image:
 
 ```bash
-FROM mono:4.2.3.4
+FROM fsharp/fsharp:latest
 
 COPY ./bin/Debug /app
 
