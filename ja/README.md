@@ -38,4 +38,4 @@ F#言語の基本的な概念についてはチュートリアル内で説明し
 [aspnetmusicstore]: http://www.asp.net/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-1
 [fsharpforfunandprofitcom]: http://fsharpforfunandprofit.com/
 [sourceofsuavemusicstore]: https://github.com/theimowski/SuaveMusicStore/tree/v1.0
-[bookofsuavemusicstore]: https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/SUMMARY.md
+[bookofsuavemusicstore]: https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/ja/SUMMARY.md
