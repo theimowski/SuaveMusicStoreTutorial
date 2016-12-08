@@ -34,3 +34,7 @@ We'll follow this convention throughout the tutorial to have a clear understandi
 
 > Note: It's very important that the `View.fs` file comes before `App.fs`. F# compiler requires the referenced items to be defined before their usage. At first glance, that might seem like a big drawback, however after a while you start realizing that you can have much better control of your dependencies. Read the [following](http://fsharpforfunandprofit.com/posts/cyclic-dependencies/) for further benefits of lack of cyclic dependencies in F# project.
 
+
+---
+
+GitHub commit: [3e1055756b2cfb652382261561a53035e78aee8e](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/3e1055756b2cfb652382261561a53035e78aee8e)

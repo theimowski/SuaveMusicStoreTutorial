@@ -46,3 +46,7 @@ Again, when the browser wants to render an image asset, it needs to GET it from 
 
 Now you should be able to see the styles applied to our HTML markup.
 
+
+---
+
+GitHub commit: [d40731ce9a0b0d7328de480815aa90fdf2d77a88](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/d40731ce9a0b0d7328de480815aa90fdf2d77a88)

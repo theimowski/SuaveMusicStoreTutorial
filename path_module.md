@@ -48,3 +48,7 @@ as well as in our `View` for `aHref` to `home`:
 Note, that in `App` module we still benefit from the static typed routes feature that Suave gives us - the `id` parameter is inferred by the compiler to be of integer type.
 If you're not familiar with type inference mechanism, you can follow up [this link](http://fsharpforfunandprofit.com/posts/type-inference/).
 
+
+---
+
+GitHub commit: [f2131c0ba81031ea8e47f3cf67ecf8f89c84c466](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/f2131c0ba81031ea8e47f3cf67ecf8f89c84c466)

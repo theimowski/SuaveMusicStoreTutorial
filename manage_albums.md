@@ -81,3 +81,7 @@ Don't forget about the `warbler` for `manage` WebPart - we don't use an paramete
 
 If you navigate to the "/admin/manage" url in the application now, you should be presented the grid with every album in the store.
 
+
+---
+
+GitHub commit: [3c1325de71a6e671f4a9121b1efadbab931d5cae](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/3c1325de71a6e671f4a9121b1efadbab931d5cae)

@@ -57,3 +57,7 @@ type AlbumDetails = DbContext.``[dbo].[AlbumDetails]Entity``
 `Album` and `Genre` reflect database tables.
 `AlbumDetails` reflects database view - it will prove useful when we'll need to display names for the album's genre and artist.
 
+
+---
+
+GitHub commit: [88f4e18a1e4f2a590605ebad3284dc9a102cc83d](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/88f4e18a1e4f2a590605ebad3284dc9a102cc83d)

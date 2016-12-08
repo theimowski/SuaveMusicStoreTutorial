@@ -136,3 +136,7 @@ let manage (albums : Db.AlbumDetails list) = [
 - in the last column of each album row comes a cell with link to delete the album
 - note, we had to use the `yield` keyword again
 
+
+---
+
+GitHub commit: [d545de17a544bdde37d3a61065493c03c19d3ff3](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/d545de17a544bdde37d3a61065493c03c19d3ff3)

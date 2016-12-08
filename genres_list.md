@@ -37,3 +37,7 @@ How about the rest of WebParts?
 - `details` is parametrized with the id - the same as above applies.
 - `home` is just fine - for the moment it's completely static and doesn't need to touch the database.
 
+
+---
+
+GitHub commit: [ddad611ccc2555d13a9f22d4340ed1fac8a0aacc](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/ddad611ccc2555d13a9f22d4340ed1fac8a0aacc)

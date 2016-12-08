@@ -97,5 +97,7 @@ let notFound = [
 ]
 ```
 
-Results of the section can be seen here: [Tag - Database](https://github.com/theimowski/SuaveMusicStore/tree/database)
 
+---
+
+GitHub commit: [b9039a2f8faad3dd9ddceb458c64abed86b07e05](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/b9039a2f8faad3dd9ddceb458c64abed86b07e05)

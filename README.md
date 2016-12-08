@@ -18,3 +18,7 @@ You're more than welcome to create issues or pull requests for this tutorial.
 The code for the application can be found
 [here](https://github.com/theimowski/SuaveMusicStore), and the contents of this book are available [here](https://github.com/theimowski/SuaveMusicStoreTutorial/blob/master/en/SUMMARY.md).
 
+
+---
+
+GitHub commit: [a95129a350926c2e1c36d6445488e2a6c30c2fd1](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/a95129a350926c2e1c36d6445488e2a6c30c2fd1)

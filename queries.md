@@ -41,3 +41,7 @@ Here, the result of the query is piped to the `firstOrNone` function, which take
 `firstOrNone` verifies if a query returned any result.
 In case of any result, `firstOrNone` will return `Some x`, otherwise `None`.
 
+
+---
+
+GitHub commit: [65b87efad69a8a92a622ba2fa3ac182e1e131cb7](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/65b87efad69a8a92a622ba2fa3ac182e1e131cb7)

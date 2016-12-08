@@ -20,3 +20,7 @@ If you browse that url, you should be greeted with the classic `Hello World!`.
 The `open` statements at the top of the file are the same as `using` statements in C#.
 Note there is no `Main` method defined in `App.fs` - what happens here is that the `startWebServer` function is invoked immediately after the program is run and Suave starts listening for incoming request till the process is killed.
 
+
+---
+
+GitHub commit: [c5d42dd6e7a4391f718d752f78567b573b32f281](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/c5d42dd6e7a4391f718d752f78567b573b32f281)

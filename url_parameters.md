@@ -27,3 +27,7 @@ for request `http://localhost:8083/store/details/abba/1`
 
 For more information on working with strings in a statically typed way, visit [this site](http://fsharpforfunandprofit.com/posts/printf/)
 
+
+---
+
+GitHub commit: [0b15ed76a8922d54934d3a75cbcaaa2b4749752a](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/0b15ed76a8922d54934d3a75cbcaaa2b4749752a)

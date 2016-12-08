@@ -27,3 +27,7 @@ To some extent you could think of the `WebPart` as a `Filter` in ASP.NET MVC app
 
 If the above explanation of `WebPart` doesn't yet make much sense to you, or you don't understand why it has such type signature, bear with me - in next sections we'll try to prove that this type turns out to be really handy when it comes to one of the greatest powers of functional programming paradigm: **composition**.
 
+
+---
+
+GitHub commit: [537ce73ce96351b62555907a1e5783d72a6149f2](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/537ce73ce96351b62555907a1e5783d72a6149f2)

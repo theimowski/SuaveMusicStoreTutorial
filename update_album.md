@@ -108,5 +108,8 @@ Comments to above snippets:
 > Note: SQLProvider allows to change `Album` properties after the object has been instantiated - that's generally against the immutability concept that's propagated in the functional programming paradigm. We need to remember however, that F# is not pure functional programming language, but rather "functional first". This means that while it encourages to write in functional style, it still allows to use Object Oriented constructs. This often turns out to be useful, for example when we need to improve performance.
 
 Pheeew, this section was long, but also very productive. Looks like we can already do some serious interaction with the application!
-Results can be seen here: [Tag - crud_and_forms](https://github.com/theimowski/SuaveMusicStore/tree/crud_and_forms)
 
+
+---
+
+GitHub commit: [38976b29c4228799714d9cc1e1704e1fa3cf3b0e](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/38976b29c4228799714d9cc1e1704e1fa3cf3b0e)

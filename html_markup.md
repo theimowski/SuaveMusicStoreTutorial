@@ -72,5 +72,7 @@ To use `View.store` from `App` module, let's simply pass a hardcoded list for `g
         path Path.Store.overview >=> html (View.store ["Rock"; "Disco"; "Pop"])
 ```
 
-Here is what the solution looks like up to this point: [Tag - View](https://github.com/theimowski/SuaveMusicStore/tree/view)
 
+---
+
+GitHub commit: [4116ee213ae519ad745f5882ba9eb62e1d4fea4f](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/4116ee213ae519ad745f5882ba9eb62e1d4fea4f)
