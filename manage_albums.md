@@ -85,3 +85,10 @@ If you navigate to the "/admin/manage" url in the application now, you should be
 ---
 
 GitHub commit: [3c1325de71a6e671f4a9121b1efadbab931d5cae](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/3c1325de71a6e671f4a9121b1efadbab931d5cae)
+
+Files changed:
+
+* M	App.fs
+* M	Db.fs
+* M	Path.fs
+* M	View.fs

@@ -72,3 +72,8 @@ If you navigate to the root url of the application, you should see that proper H
 ---
 
 GitHub commit: [750cac6586d20a790c0b672d0ec0eac0e8ebaba8](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/750cac6586d20a790c0b672d0ec0eac0e8ebaba8)
+
+Files changed:
+
+* M	App.fs
+* M	View.fs

@@ -38,3 +38,10 @@ We'll follow this convention throughout the tutorial to have a clear understandi
 ---
 
 GitHub commit: [3e1055756b2cfb652382261561a53035e78aee8e](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/3e1055756b2cfb652382261561a53035e78aee8e)
+
+Files changed:
+
+* M	App.fs
+* M	SuaveMusicStore.fsproj
+* A	View.fs
+* M	packages.config

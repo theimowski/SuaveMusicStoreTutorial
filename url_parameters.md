@@ -31,3 +31,7 @@ For more information on working with strings in a statically typed way, visit [t
 ---
 
 GitHub commit: [0b15ed76a8922d54934d3a75cbcaaa2b4749752a](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/0b15ed76a8922d54934d3a75cbcaaa2b4749752a)
+
+Files changed:
+
+* M	App.fs

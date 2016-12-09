@@ -76,3 +76,9 @@ To use `View.store` from `App` module, let's simply pass a hardcoded list for `g
 ---
 
 GitHub commit: [4116ee213ae519ad745f5882ba9eb62e1d4fea4f](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/4116ee213ae519ad745f5882ba9eb62e1d4fea4f)
+
+Files changed:
+
+* M	App.fs
+* M	Path.fs
+* M	View.fs

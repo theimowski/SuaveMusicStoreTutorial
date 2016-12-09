@@ -24,3 +24,13 @@ Note there is no `Main` method defined in `App.fs` - what happens here is that t
 ---
 
 GitHub commit: [c5d42dd6e7a4391f718d752f78567b573b32f281](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/c5d42dd6e7a4391f718d752f78567b573b32f281)
+
+Files changed:
+
+* A	.gitignore
+* A	App.config
+* A	App.fs
+* A	AssemblyInfo.fs
+* A	SuaveMusicStore.fsproj
+* A	SuaveMusicStore.sln
+* A	packages.config

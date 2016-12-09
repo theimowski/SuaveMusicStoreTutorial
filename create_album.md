@@ -289,3 +289,12 @@ let createAlbum =
 ---
 
 GitHub commit: [79c56f6521df52b449bbd2ece994e13e342a9b0c](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/79c56f6521df52b449bbd2ece994e13e342a9b0c)
+
+Files changed:
+
+* M	App.fs
+* M	Db.fs
+* A	Form.fs
+* M	Path.fs
+* M	SuaveMusicStore.fsproj
+* M	View.fs

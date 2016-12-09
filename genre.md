@@ -49,3 +49,8 @@ let html container =
 ---
 
 GitHub commit: [603d1dc26bac864f73294aff864bec52a2b7b5d4](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/603d1dc26bac864f73294aff864bec52a2b7b5d4)
+
+Files changed:
+
+* M	App.fs
+* M	View.fs

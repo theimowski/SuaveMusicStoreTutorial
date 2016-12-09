@@ -113,3 +113,10 @@ Pheeew, this section was long, but also very productive. Looks like we can alrea
 ---
 
 GitHub commit: [38976b29c4228799714d9cc1e1704e1fa3cf3b0e](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/38976b29c4228799714d9cc1e1704e1fa3cf3b0e)
+
+Files changed:
+
+* M	App.fs
+* M	Db.fs
+* M	Path.fs
+* M	View.fs

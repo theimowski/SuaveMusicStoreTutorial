@@ -61,3 +61,10 @@ type AlbumDetails = DbContext.``[dbo].[AlbumDetails]Entity``
 ---
 
 GitHub commit: [88f4e18a1e4f2a590605ebad3284dc9a102cc83d](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/88f4e18a1e4f2a590605ebad3284dc9a102cc83d)
+
+Files changed:
+
+* A	Db.fs
+* M	SuaveMusicStore.fsproj
+* A	create.sql
+* M	packages.config

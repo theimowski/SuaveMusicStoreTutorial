@@ -101,3 +101,10 @@ let notFound = [
 ---
 
 GitHub commit: [b9039a2f8faad3dd9ddceb458c64abed86b07e05](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/b9039a2f8faad3dd9ddceb458c64abed86b07e05)
+
+Files changed:
+
+* M	App.fs
+* M	SuaveMusicStore.fsproj
+* M	View.fs
+* A	placeholder.gif

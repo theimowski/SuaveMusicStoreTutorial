@@ -43,3 +43,7 @@ let webPart =
 ---
 
 GitHub commit: [9b393b0a961c888ebc310b9fbf706ac666224f23](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/9b393b0a961c888ebc310b9fbf706ac666224f23)
+
+Files changed:
+
+* M	App.fs

@@ -41,3 +41,8 @@ How about the rest of WebParts?
 ---
 
 GitHub commit: [ddad611ccc2555d13a9f22d4340ed1fac8a0aacc](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/ddad611ccc2555d13a9f22d4340ed1fac8a0aacc)
+
+Files changed:
+
+* M	App.fs
+* M	Db.fs

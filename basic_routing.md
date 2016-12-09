@@ -44,3 +44,7 @@ startWebServer defaultConfig webPart
 ---
 
 GitHub commit: [4105c21e3f1e1aa432de98e0388f71f89b693234](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/4105c21e3f1e1aa432de98e0388f71f89b693234)
+
+Files changed:
+
+* M	App.fs

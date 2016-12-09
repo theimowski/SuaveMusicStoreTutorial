@@ -140,3 +140,10 @@ let manage (albums : Db.AlbumDetails list) = [
 ---
 
 GitHub commit: [d545de17a544bdde37d3a61065493c03c19d3ff3](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/d545de17a544bdde37d3a61065493c03c19d3ff3)
+
+Files changed:
+
+* M	App.fs
+* M	Db.fs
+* M	Path.fs
+* M	View.fs
