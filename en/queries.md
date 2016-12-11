@@ -6,12 +6,12 @@ With the type aliases set up, we can move forward to creating our first queries:
 let firstOrNone s = s |> Seq.tryFind (fun _ -> true)
 
 let getGenres (ctx : DbContext) : Genre list = 
-    ctx.``[dbo].[Genres]`` |> Seq.toList
+    ctx.Dbo.Genres |> Seq.toList
 
 let getAlbumsForGenre genreName (ctx : DbContext) : Album list = 
     query { 
-        for album in ctx.``[dbo].[Albums]`` do
-            join genre in ctx.``[dbo].[Genres]`` on (album.GenreId = genre.GenreId)
+        for album in ctx.Dbo.Albums do
+            join genre in ctx.Dbo.Genres on (album.GenreId = genre.GenreId)
             where (genre.Name = genreName)
             select album
     }
@@ -19,7 +19,7 @@ let getAlbumsForGenre genreName (ctx : DbContext) : Album list =
 
 let getAlbumDetails id (ctx : DbContext) : AlbumDetails option = 
     query { 
-        for album in ctx.``[dbo].[AlbumDetails]`` do
+        for album in ctx.Dbo.AlbumDetails do
             where (album.AlbumId = id)
             select album
     } |> firstOrNone
@@ -28,7 +28,7 @@ let getAlbumDetails id (ctx : DbContext) : AlbumDetails option =
 `getGenres` is a function for finding all genres. 
 The function, as well as all functions we'll define in `Db` module, takes the `DbContext` as a parameter.
 The `: Genre list` part is a type annotation, which makes sure the function returns a list of `Genre`s.
-Implementation is straight forward:  ```ctx.``[dbo].[Genres]`` ``` queries all genres, so we just need to pipe it to the `Seq.toList`.
+Implementation is straight forward:  ```ctx.Dbo.Genres ``` queries all genres, so we just need to pipe it to the `Seq.toList`.
 
 `getAlbumsForGenre` takes `genreName` as argument (inferred to be of type string) and returns a list of `Album`s.
 It makes use of "query expression" (`query { }`) which is very similar to C# Linq query.
