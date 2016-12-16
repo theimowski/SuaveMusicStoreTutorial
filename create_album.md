@@ -12,26 +12,7 @@ As with the rest of modules, don't forget to follow our modules naming conventio
 
 Now declare the first `Album` form:
 
-```fsharp
-﻿module SuaveMusicStore.Form
-
-open Suave.Form
-
-type Album = {
-    ArtistId : decimal
-    GenreId : decimal
-    Title : string
-    Price : decimal
-    ArtUrl : string
-}
-
-let album : Form<Album> = 
-    Form ([ TextProp ((fun f -> <@ f.Title @>), [ maxLength 100 ])
-            TextProp ((fun f -> <@ f.ArtUrl @>), [ maxLength 100 ])
-            DecimalProp ((fun f -> <@ f.Price @>), [ min 0.01M; max 100.0M; step 0.01M ])
-            ],
-          [])
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Form</span>&#10;&#10;<span class="k">type</span> <span class="i">Album</span> <span class="o">=</span> {&#10;    <span class="i">ArtistId</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'Form.fs_fs1', 1)" onmouseover="showTip(event, 'Form.fs_fs1', 1)" class="i">decimal</span>&#10;    <span class="i">GenreId</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'Form.fs_fs1', 2)" onmouseover="showTip(event, 'Form.fs_fs1', 2)" class="i">decimal</span>&#10;    <span class="i">Title</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'Form.fs_fs2', 3)" onmouseover="showTip(event, 'Form.fs_fs2', 3)" class="i">string</span>&#10;    <span class="i">Price</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'Form.fs_fs1', 4)" onmouseover="showTip(event, 'Form.fs_fs1', 4)" class="i">decimal</span>&#10;    <span class="i">ArtUrl</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'Form.fs_fs2', 5)" onmouseover="showTip(event, 'Form.fs_fs2', 5)" class="i">string</span>&#10;}&#10;&#10;<span class="k">let</span> <span class="i">album</span> <span class="o">:</span> <span class="i">Form</span><span class="o">&lt;</span><span class="i">Album</span><span class="o">&gt;</span> <span class="o">=</span> &#10;    <span class="i">Form</span> ([ <span class="i">TextProp</span> ((<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">Title</span> @&gt;), [ <span class="i">maxLength</span> <span class="n">100</span> ])&#10;            <span class="i">TextProp</span> ((<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">ArtUrl</span> @&gt;), [ <span class="i">maxLength</span> <span class="n">100</span> ])&#10;            <span class="i">DecimalProp</span> ((<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">Price</span> @&gt;), [ <span onmouseout="hideTip(event, 'Form.fs_fs3', 6)" onmouseover="showTip(event, 'Form.fs_fs3', 6)" class="i">min</span> <span class="n">0.01M</span>; <span onmouseout="hideTip(event, 'Form.fs_fs4', 7)" onmouseover="showTip(event, 'Form.fs_fs4', 7)" class="i">max</span> <span class="n">100.0M</span>; <span class="i">step</span> <span class="n">0.01M</span> ])&#10;            ],&#10;          [])&#10;</div></pre>&#10;<div class="tip" id="Form.fs_fs1">Multiple items<br />val decimal : value:&#39;T -&gt; decimal (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.decimal<br /><br />--------------------<br />type decimal = System.Decimal<br /><br />Full name: Microsoft.FSharp.Core.decimal<br /><br />--------------------<br />type decimal&lt;&#39;Measure&gt; = decimal<br /><br />Full name: Microsoft.FSharp.Core.decimal&lt;_&gt;</div>&#10;<div class="tip" id="Form.fs_fs2">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>&#10;<div class="tip" id="Form.fs_fs3">val min : e1:&#39;T -&gt; e2:&#39;T -&gt; &#39;T (requires comparison)<br /><br />Full name: Microsoft.FSharp.Core.Operators.min</div>&#10;<div class="tip" id="Form.fs_fs4">val max : e1:&#39;T -&gt; e2:&#39;T -&gt; &#39;T (requires comparison)<br /><br />Full name: Microsoft.FSharp.Core.Operators.max</div>&#10;&#10;
 
 `Album` type contains all fields needed for the form.
 For the moment, `Suave.Form` supports following types of fields:
@@ -59,64 +40,17 @@ For server side we will use an utility WebPart that will parse the form field va
 
 To see how we can use the form in `View` module, add `open Suave.Form` to the beginning:
 
-```fsharp
-﻿module SuaveMusicStore.View
-
-open System
-
-open Suave.Html
-open Suave.Form
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span onmouseout="hideTip(event, 'View.fs:1-6_fs1', 1)" onmouseover="showTip(event, 'View.fs:1-6_fs1', 1)" class="i">System</span>&#10;&#10;<span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Html</span>&#10;<span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Form</span>&#10;</div></pre>&#10;<div class="tip" id="View.fs:1-6_fs1">namespace System</div>&#10;&#10;
 
 Next, add a couple of helper functions:
 
-```fsharp
-let divClass c = divAttr ["class", c]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:9-9_fs1', 1)" onmouseover="showTip(event, 'View.fs:9-9_fs1', 1)" class="f">divClass</span> <span onmouseout="hideTip(event, 'View.fs:9-9_fs2', 2)" onmouseover="showTip(event, 'View.fs:9-9_fs2', 2)" class="i">c</span> <span class="o">=</span> <span class="i">divAttr</span> [<span class="s">&quot;class&quot;</span>, <span onmouseout="hideTip(event, 'View.fs:9-9_fs2', 3)" onmouseover="showTip(event, 'View.fs:9-9_fs2', 3)" class="i">c</span>]&#10;</div></pre>&#10;<div class="tip" id="View.fs:9-9_fs1">val divClass : c:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.divClass</div>&#10;<div class="tip" id="View.fs:9-9_fs2">val c : &#39;a</div>&#10;&#10;
 
-```fsharp
-let fieldset x = tag "fieldset" [] (flatten x)
-let legend txt = tag "legend" [] (text txt)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:21-22_fs1', 1)" onmouseover="showTip(event, 'View.fs:21-22_fs1', 1)" class="f">fieldset</span> <span onmouseout="hideTip(event, 'View.fs:21-22_fs2', 2)" onmouseover="showTip(event, 'View.fs:21-22_fs2', 2)" class="i">x</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;fieldset&quot;</span> [] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:21-22_fs2', 3)" onmouseover="showTip(event, 'View.fs:21-22_fs2', 3)" class="i">x</span>)&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:21-22_fs3', 4)" onmouseover="showTip(event, 'View.fs:21-22_fs3', 4)" class="f">legend</span> <span onmouseout="hideTip(event, 'View.fs:21-22_fs4', 5)" onmouseover="showTip(event, 'View.fs:21-22_fs4', 5)" class="i">txt</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;legend&quot;</span> [] (<span class="i">text</span> <span onmouseout="hideTip(event, 'View.fs:21-22_fs4', 6)" onmouseover="showTip(event, 'View.fs:21-22_fs4', 6)" class="i">txt</span>)&#10;</div></pre>&#10;<div class="tip" id="View.fs:21-22_fs1">val fieldset : x:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.fieldset</div>&#10;<div class="tip" id="View.fs:21-22_fs2">val x : &#39;a</div>&#10;<div class="tip" id="View.fs:21-22_fs3">val legend : txt:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.legend</div>&#10;<div class="tip" id="View.fs:21-22_fs4">val txt : &#39;a</div>&#10;&#10;
 
 And finally this block of code:
 
-```fsharp
-type Field<'a> = {
-    Label : string
-    Xml : Form<'a> -> Suave.Html.Xml
-}
-
-type Fieldset<'a> = {
-    Legend : string
-    Fields : Field<'a> list
-}
-
-type FormLayout<'a> = {
-    Fieldsets : Fieldset<'a> list
-    SubmitText : string
-    Form : Form<'a>
-}
-
-let renderForm (layout : FormLayout<_>) =    
-    
-    form [
-        for set in layout.Fieldsets -> 
-            fieldset [
-                yield legend set.Legend
-
-                for field in set.Fields do
-                    yield divClass "editor-label" [
-                        text field.Label
-                    ]
-                    yield divClass "editor-field" [
-                        field.Xml layout.Form
-                    ]
-            ]
-
-        yield submitInput layout.SubmitText
-    ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs1', 1)" onmouseover="showTip(event, 'View.fs:37-70_fs1', 1)" class="t">Field</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span> <span class="o">=</span> {&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs2', 2)" onmouseover="showTip(event, 'View.fs:37-70_fs2', 2)" class="i">Label</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs3', 3)" onmouseover="showTip(event, 'View.fs:37-70_fs3', 3)" class="t">string</span>&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs4', 4)" onmouseover="showTip(event, 'View.fs:37-70_fs4', 4)" class="i">Xml</span> <span class="o">:</span> <span class="i">Form</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span> <span class="k">-&gt;</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Html</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:37-70_fs4', 5)" onmouseover="showTip(event, 'View.fs:37-70_fs4', 5)" class="i">Xml</span>&#10;}&#10;&#10;<span class="k">type</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs5', 6)" onmouseover="showTip(event, 'View.fs:37-70_fs5', 6)" class="t">Fieldset</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span> <span class="o">=</span> {&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs6', 7)" onmouseover="showTip(event, 'View.fs:37-70_fs6', 7)" class="i">Legend</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs3', 8)" onmouseover="showTip(event, 'View.fs:37-70_fs3', 8)" class="t">string</span>&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs7', 9)" onmouseover="showTip(event, 'View.fs:37-70_fs7', 9)" class="i">Fields</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs1', 10)" onmouseover="showTip(event, 'View.fs:37-70_fs1', 10)" class="t">Field</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs8', 11)" onmouseover="showTip(event, 'View.fs:37-70_fs8', 11)" class="t">list</span>&#10;}&#10;&#10;<span class="k">type</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs9', 12)" onmouseover="showTip(event, 'View.fs:37-70_fs9', 12)" class="t">FormLayout</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span> <span class="o">=</span> {&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs10', 13)" onmouseover="showTip(event, 'View.fs:37-70_fs10', 13)" class="i">Fieldsets</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs5', 14)" onmouseover="showTip(event, 'View.fs:37-70_fs5', 14)" class="t">Fieldset</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs8', 15)" onmouseover="showTip(event, 'View.fs:37-70_fs8', 15)" class="t">list</span>&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs11', 16)" onmouseover="showTip(event, 'View.fs:37-70_fs11', 16)" class="i">SubmitText</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs3', 17)" onmouseover="showTip(event, 'View.fs:37-70_fs3', 17)" class="t">string</span>&#10;    <span onmouseout="hideTip(event, 'View.fs:37-70_fs12', 18)" onmouseover="showTip(event, 'View.fs:37-70_fs12', 18)" class="i">Form</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs12', 19)" onmouseover="showTip(event, 'View.fs:37-70_fs12', 19)" class="i">Form</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">a</span><span class="o">&gt;</span>&#10;}&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs13', 20)" onmouseover="showTip(event, 'View.fs:37-70_fs13', 20)" class="f">renderForm</span> (<span onmouseout="hideTip(event, 'View.fs:37-70_fs14', 21)" onmouseover="showTip(event, 'View.fs:37-70_fs14', 21)" class="i">layout</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs9', 22)" onmouseover="showTip(event, 'View.fs:37-70_fs9', 22)" class="t">FormLayout</span><span class="o">&lt;</span>_<span class="o">&gt;</span>) <span class="o">=</span>    &#10;    &#10;    <span class="i">form</span> [&#10;        <span class="k">for</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs15', 23)" onmouseover="showTip(event, 'View.fs:37-70_fs15', 23)" class="i">set</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs14', 24)" onmouseover="showTip(event, 'View.fs:37-70_fs14', 24)" class="i">layout</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:37-70_fs10', 25)" onmouseover="showTip(event, 'View.fs:37-70_fs10', 25)" class="i">Fieldsets</span> <span class="k">-&gt;</span> &#10;            <span class="i">fieldset</span> [&#10;                <span class="k">yield</span> <span class="i">legend</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs15', 26)" onmouseover="showTip(event, 'View.fs:37-70_fs15', 26)" class="i">set</span><span class="o">.</span><span class="i">Legend</span>&#10;&#10;                <span class="k">for</span> <span class="i">field</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs15', 27)" onmouseover="showTip(event, 'View.fs:37-70_fs15', 27)" class="i">set</span><span class="o">.</span><span class="i">Fields</span> <span class="k">do</span>&#10;                    <span class="k">yield</span> <span class="i">divClass</span> <span class="s">&quot;editor-label&quot;</span> [&#10;                        <span class="i">text</span> <span class="i">field</span><span class="o">.</span><span class="i">Label</span>&#10;                    ]&#10;                    <span class="k">yield</span> <span class="i">divClass</span> <span class="s">&quot;editor-field&quot;</span> [&#10;                        <span class="i">field</span><span class="o">.</span><span class="i">Xml</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs14', 28)" onmouseover="showTip(event, 'View.fs:37-70_fs14', 28)" class="i">layout</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:37-70_fs12', 29)" onmouseover="showTip(event, 'View.fs:37-70_fs12', 29)" class="i">Form</span>&#10;                    ]&#10;            ]&#10;&#10;        <span class="k">yield</span> <span class="i">submitInput</span> <span onmouseout="hideTip(event, 'View.fs:37-70_fs14', 30)" onmouseover="showTip(event, 'View.fs:37-70_fs14', 30)" class="i">layout</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:37-70_fs11', 31)" onmouseover="showTip(event, 'View.fs:37-70_fs11', 31)" class="i">SubmitText</span>&#10;    ]&#10;</div></pre>&#10;<div class="tip" id="View.fs:37-70_fs1">type Field&lt;&#39;a&gt; =<br />&#160;&#160;{Label: string;<br />&#160;&#160;&#160;Xml: obj -&gt; obj;}<br /><br />Full name: CDocument.Field&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:37-70_fs2">Field.Label: string</div>&#10;<div class="tip" id="View.fs:37-70_fs3">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>&#10;<div class="tip" id="View.fs:37-70_fs4">Field.Xml: obj -&gt; obj</div>&#10;<div class="tip" id="View.fs:37-70_fs5">type Fieldset&lt;&#39;a&gt; =<br />&#160;&#160;{Legend: string;<br />&#160;&#160;&#160;Fields: Field&lt;&#39;a&gt; list;}<br /><br />Full name: CDocument.Fieldset&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:37-70_fs6">Fieldset.Legend: string</div>&#10;<div class="tip" id="View.fs:37-70_fs7">Fieldset.Fields: Field&lt;&#39;a&gt; list</div>&#10;<div class="tip" id="View.fs:37-70_fs8">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:37-70_fs9">type FormLayout&lt;&#39;a&gt; =<br />&#160;&#160;{Fieldsets: Fieldset&lt;&#39;a&gt; list;<br />&#160;&#160;&#160;SubmitText: string;<br />&#160;&#160;&#160;Form: obj;}<br /><br />Full name: CDocument.FormLayout&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:37-70_fs10">FormLayout.Fieldsets: Fieldset&lt;&#39;a&gt; list</div>&#10;<div class="tip" id="View.fs:37-70_fs11">FormLayout.SubmitText: string</div>&#10;<div class="tip" id="View.fs:37-70_fs12">FormLayout.Form: obj</div>&#10;<div class="tip" id="View.fs:37-70_fs13">val renderForm : layout:FormLayout&lt;&#39;a&gt; -&gt; &#39;b<br /><br />Full name: CDocument.renderForm</div>&#10;<div class="tip" id="View.fs:37-70_fs14">val layout : FormLayout&lt;&#39;a&gt;</div>&#10;<div class="tip" id="View.fs:37-70_fs15">val set : elements:seq&lt;&#39;T&gt; -&gt; Set&lt;&#39;T&gt; (requires comparison)<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.set</div>&#10;&#10;
 
 Above snippet is quite long but, as we'll soon see, we'll be able to reuse it a few times.
 The `FormLayout` types defines a layout for a form and consists of:
@@ -149,32 +83,7 @@ The `Field` type has:
 
 `renderForm` ca be invoked like this:
 
-```fsharp
-let createAlbum genres artists = [ 
-    h2 "Create"
-        
-    renderForm
-        { Form = Form.album
-          Fieldsets = 
-              [ { Legend = "Album"
-                  Fields = 
-                      [ { Label = "Genre"
-                          Xml = selectInput (fun f -> <@ f.GenreId @>) genres None }
-                        { Label = "Artist"
-                          Xml = selectInput (fun f -> <@ f.ArtistId @>) artists None }
-                        { Label = "Title"
-                          Xml = input (fun f -> <@ f.Title @>) [] }
-                        { Label = "Price"
-                          Xml = input (fun f -> <@ f.Price @>) [] }
-                        { Label = "Album Art Url"
-                          Xml = input (fun f -> <@ f.ArtUrl @>) ["value", "/placeholder.gif"] } ] } ]
-          SubmitText = "Create" }
-
-    div [
-        aHref Path.Admin.manage (text "Back to list")
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:149-172_fs1', 1)" onmouseover="showTip(event, 'View.fs:149-172_fs1', 1)" class="f">createAlbum</span> <span onmouseout="hideTip(event, 'View.fs:149-172_fs2', 2)" onmouseover="showTip(event, 'View.fs:149-172_fs2', 2)" class="i">genres</span> <span onmouseout="hideTip(event, 'View.fs:149-172_fs3', 3)" onmouseover="showTip(event, 'View.fs:149-172_fs3', 3)" class="i">artists</span> <span class="o">=</span> [ &#10;    <span class="i">h2</span> <span class="s">&quot;Create&quot;</span>&#10;        &#10;    <span class="i">renderForm</span>&#10;        { <span class="i">Form</span> <span class="o">=</span> <span class="i">Form</span><span class="o">.</span><span class="i">album</span>&#10;          <span class="i">Fieldsets</span> <span class="o">=</span> &#10;              [ { <span class="i">Legend</span> <span class="o">=</span> <span class="s">&quot;Album&quot;</span>&#10;                  <span class="i">Fields</span> <span class="o">=</span> &#10;                      [ { <span class="i">Label</span> <span class="o">=</span> <span class="s">&quot;Genre&quot;</span>&#10;                          <span class="i">Xml</span> <span class="o">=</span> <span class="i">selectInput</span> (<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">GenreId</span> @&gt;) <span onmouseout="hideTip(event, 'View.fs:149-172_fs2', 4)" onmouseover="showTip(event, 'View.fs:149-172_fs2', 4)" class="i">genres</span> <span onmouseout="hideTip(event, 'View.fs:149-172_fs4', 5)" onmouseover="showTip(event, 'View.fs:149-172_fs4', 5)" class="i">None</span> }&#10;                        { <span class="i">Label</span> <span class="o">=</span> <span class="s">&quot;Artist&quot;</span>&#10;                          <span class="i">Xml</span> <span class="o">=</span> <span class="i">selectInput</span> (<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">ArtistId</span> @&gt;) <span onmouseout="hideTip(event, 'View.fs:149-172_fs3', 6)" onmouseover="showTip(event, 'View.fs:149-172_fs3', 6)" class="i">artists</span> <span onmouseout="hideTip(event, 'View.fs:149-172_fs4', 7)" onmouseover="showTip(event, 'View.fs:149-172_fs4', 7)" class="i">None</span> }&#10;                        { <span class="i">Label</span> <span class="o">=</span> <span class="s">&quot;Title&quot;</span>&#10;                          <span class="i">Xml</span> <span class="o">=</span> <span class="i">input</span> (<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">Title</span> @&gt;) [] }&#10;                        { <span class="i">Label</span> <span class="o">=</span> <span class="s">&quot;Price&quot;</span>&#10;                          <span class="i">Xml</span> <span class="o">=</span> <span class="i">input</span> (<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">Price</span> @&gt;) [] }&#10;                        { <span class="i">Label</span> <span class="o">=</span> <span class="s">&quot;Album Art Url&quot;</span>&#10;                          <span class="i">Xml</span> <span class="o">=</span> <span class="i">input</span> (<span class="k">fun</span> <span class="i">f</span> <span class="k">-&gt;</span> &lt;@ <span class="i">f</span><span class="o">.</span><span class="i">ArtUrl</span> @&gt;) [<span class="s">&quot;value&quot;</span>, <span class="s">&quot;/placeholder.gif&quot;</span>] } ] } ]&#10;          <span class="i">SubmitText</span> <span class="o">=</span> <span class="s">&quot;Create&quot;</span> }&#10;&#10;    <span class="i">div</span> [&#10;        <span class="i">aHref</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">manage</span> (<span class="i">text</span> <span class="s">&quot;Back to list&quot;</span>)&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:149-172_fs1">val createAlbum : genres:&#39;a -&gt; artists:&#39;b -&gt; &#39;c list<br /><br />Full name: CDocument.createAlbum</div>&#10;<div class="tip" id="View.fs:149-172_fs2">val genres : &#39;a</div>&#10;<div class="tip" id="View.fs:149-172_fs3">val artists : &#39;b</div>&#10;<div class="tip" id="View.fs:149-172_fs4">union case Option.None: Option&lt;&#39;T&gt;</div>&#10;&#10;
 
 We can see that for the `Xml` values we can invoke `selectInput` or `input` functions.
 Both of them take as first argument function which directs to field for which the input should be generated.
@@ -187,60 +96,30 @@ As third argument, `selectInput` takes an optional selected value - in case of `
 Now that we have the `createAlbum` view, we can write the appropriate WebPart handler.
 Start by adding `getArtists` to `Db`:
 
-```fsharp
-type Artist = DbContext.``[dbo].[Artists]Entity``
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'Db.fs:12-12_fs1', 1)" onmouseover="showTip(event, 'Db.fs:12-12_fs1', 1)" class="t">Artist</span> <span class="o">=</span> <span class="i">DbContext</span><span class="o">.</span><span class="i">``[dbo].[Artists]Entity``</span>&#10;</div></pre>&#10;<div class="tip" id="Db.fs:12-12_fs1">type Artist = obj<br /><br />Full name: CDocument.Artist</div>&#10;&#10;
 
-```fsharp
-let getArtists (ctx : DbContext) : Artist list = 
-    ctx.``[dbo].[Artists]`` |> Seq.toList
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'Db.fs:23-24_fs1', 1)" onmouseover="showTip(event, 'Db.fs:23-24_fs1', 1)" class="f">getArtists</span> (<span onmouseout="hideTip(event, 'Db.fs:23-24_fs2', 2)" onmouseover="showTip(event, 'Db.fs:23-24_fs2', 2)" class="i">ctx</span> <span class="o">:</span> <span class="i">DbContext</span>) <span class="o">:</span> <span class="i">Artist</span> <span onmouseout="hideTip(event, 'Db.fs:23-24_fs3', 3)" onmouseover="showTip(event, 'Db.fs:23-24_fs3', 3)" class="t">list</span> <span class="o">=</span> &#10;    <span onmouseout="hideTip(event, 'Db.fs:23-24_fs2', 4)" onmouseover="showTip(event, 'Db.fs:23-24_fs2', 4)" class="i">ctx</span><span class="o">.</span><span class="i">``[dbo].[Artists]``</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'Db.fs:23-24_fs4', 5)" onmouseover="showTip(event, 'Db.fs:23-24_fs4', 5)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'Db.fs:23-24_fs5', 6)" onmouseover="showTip(event, 'Db.fs:23-24_fs5', 6)" class="f">toList</span>&#10;</div></pre>&#10;<div class="tip" id="Db.fs:23-24_fs1">val getArtists : ctx:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.getArtists</div>&#10;<div class="tip" id="Db.fs:23-24_fs2">val ctx : &#39;a</div>&#10;<div class="tip" id="Db.fs:23-24_fs3">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;<div class="tip" id="Db.fs:23-24_fs4">module Seq<br /><br />from Microsoft.FSharp.Collections</div>&#10;<div class="tip" id="Db.fs:23-24_fs5">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>&#10;&#10;
 
 Then proper entry in `Path` module:
 
-```fsharp
-    let createAlbum = "/admin/create"
-```
+<pre class="fssnip highlighted"><div lang="fsharp">    <span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:18-18_fs1', 1)" onmouseover="showTip(event, 'Path.fs:18-18_fs1', 1)" class="i">createAlbum</span> <span class="o">=</span> <span class="s">&quot;/admin/create&quot;</span>&#10;</div></pre>&#10;<div class="tip" id="Path.fs:18-18_fs1">val createAlbum : string<br /><br />Full name: CDocument.createAlbum</div>&#10;&#10;
 
 and WebPart in `App` module:
 
-```fsharp
-let createAlbum =
-    let ctx = Db.getContext()
-    choose [
-        GET >=> warbler (fun _ -> 
-            let genres = 
-                Db.getGenres ctx 
-                |> List.map (fun g -> decimal g.GenreId, g.Name)
-            let artists = 
-                Db.getArtists ctx
-                |> List.map (fun g -> decimal g.ArtistId, g.Name)
-            html (View.createAlbum genres artists))
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs1', 1)" onmouseover="showTip(event, 'App.fs:48-58_fs1', 1)" class="i">createAlbum</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs2', 2)" onmouseover="showTip(event, 'App.fs:48-58_fs2', 2)" class="i">ctx</span> <span class="o">=</span> <span class="i">Db</span><span class="o">.</span><span class="i">getContext</span>()&#10;    <span class="i">choose</span> [&#10;        <span class="i">GET</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">warbler</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> &#10;            <span class="k">let</span> <span class="i">genres</span> <span class="o">=</span> &#10;                <span class="i">Db</span><span class="o">.</span><span class="i">getGenres</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs2', 3)" onmouseover="showTip(event, 'App.fs:48-58_fs2', 3)" class="i">ctx</span> &#10;                <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs3', 4)" onmouseover="showTip(event, 'App.fs:48-58_fs3', 4)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:48-58_fs4', 5)" onmouseover="showTip(event, 'App.fs:48-58_fs4', 5)" class="i">map</span> (<span class="k">fun</span> <span class="i">g</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs5', 6)" onmouseover="showTip(event, 'App.fs:48-58_fs5', 6)" class="i">decimal</span> <span class="i">g</span><span class="o">.</span><span class="i">GenreId</span>, <span class="i">g</span><span class="o">.</span><span class="i">Name</span>)&#10;            <span class="k">let</span> <span class="i">artists</span> <span class="o">=</span> &#10;                <span class="i">Db</span><span class="o">.</span><span class="i">getArtists</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs2', 7)" onmouseover="showTip(event, 'App.fs:48-58_fs2', 7)" class="i">ctx</span>&#10;                <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs3', 8)" onmouseover="showTip(event, 'App.fs:48-58_fs3', 8)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:48-58_fs4', 9)" onmouseover="showTip(event, 'App.fs:48-58_fs4', 9)" class="i">map</span> (<span class="k">fun</span> <span class="i">g</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-58_fs5', 10)" onmouseover="showTip(event, 'App.fs:48-58_fs5', 10)" class="i">decimal</span> <span class="i">g</span><span class="o">.</span><span class="i">ArtistId</span>, <span class="i">g</span><span class="o">.</span><span class="i">Name</span>)&#10;            <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span class="i">createAlbum</span> <span class="i">genres</span> <span class="i">artists</span>))&#10;</div></pre>&#10;<div class="tip" id="App.fs:48-58_fs1">val createAlbum : obj<br /><br />Full name: CDocument.createAlbum</div>&#10;<div class="tip" id="App.fs:48-58_fs2">val ctx : obj</div>&#10;<div class="tip" id="App.fs:48-58_fs3">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>&#10;<div class="tip" id="App.fs:48-58_fs4">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>&#10;<div class="tip" id="App.fs:48-58_fs5">Multiple items<br />val decimal : value:&#39;T -&gt; decimal (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.decimal<br /><br />--------------------<br />type decimal = System.Decimal<br /><br />Full name: Microsoft.FSharp.Core.decimal<br /><br />--------------------<br />type decimal&lt;&#39;Measure&gt; = decimal<br /><br />Full name: Microsoft.FSharp.Core.decimal&lt;_&gt;</div>&#10;&#10;
 
-```fsharp
-        path Path.Admin.createAlbum >=> createAlbum
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">createAlbum</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">createAlbum</span>&#10;</div></pre>&#10;&#10;
 
 Once again, `warbler` will prevent from eager evaluation of the WebPart - it's vital here.
 To our `View.manage` we can add a link to `createAlbum`:
 
-```fsharp
-let manage (albums : Db.AlbumDetails list) = [ 
-    h2 "Index"
-    p [
-        aHref Path.Admin.createAlbum (text "Create New")
-    ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:109-113_fs1', 1)" onmouseover="showTip(event, 'View.fs:109-113_fs1', 1)" class="f">manage</span> (<span onmouseout="hideTip(event, 'View.fs:109-113_fs2', 2)" onmouseover="showTip(event, 'View.fs:109-113_fs2', 2)" class="i">albums</span> <span class="o">:</span> <span class="i">Db</span><span class="o">.</span><span class="i">AlbumDetails</span> <span onmouseout="hideTip(event, 'View.fs:109-113_fs3', 3)" onmouseover="showTip(event, 'View.fs:109-113_fs3', 3)" class="t">list</span>) <span class="o">=</span> [ &#10;    <span class="i">h2</span> <span class="s">&quot;Index&quot;</span>&#10;    <span class="i">p</span> [&#10;        <span class="i">aHref</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">createAlbum</span> (<span class="i">text</span> <span class="s">&quot;Create New&quot;</span>)&#10;    ]&#10;</div></pre>&#10;<div class="tip" id="View.fs:109-113_fs1">val manage : albums:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.manage</div>&#10;<div class="tip" id="View.fs:109-113_fs2">val albums : &#39;a</div>&#10;<div class="tip" id="View.fs:109-113_fs3">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;&#10;
 
 This allows us to navigate to "/admin/create", however we're still lacking the actual POST handler.
 
 Before we define the handler, let's add another helper function to `App` module:
 
-```fsharp
-let bindToForm form handler =
-    bindReq (bindForm form) handler BAD_REQUEST
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:45-46_fs1', 1)" onmouseover="showTip(event, 'App.fs:45-46_fs1', 1)" class="f">bindToForm</span> <span onmouseout="hideTip(event, 'App.fs:45-46_fs2', 2)" onmouseover="showTip(event, 'App.fs:45-46_fs2', 2)" class="i">form</span> <span onmouseout="hideTip(event, 'App.fs:45-46_fs3', 3)" onmouseover="showTip(event, 'App.fs:45-46_fs3', 3)" class="i">handler</span> <span class="o">=</span>&#10;    <span class="i">bindReq</span> (<span class="i">bindForm</span> <span onmouseout="hideTip(event, 'App.fs:45-46_fs2', 4)" onmouseover="showTip(event, 'App.fs:45-46_fs2', 4)" class="i">form</span>) <span onmouseout="hideTip(event, 'App.fs:45-46_fs3', 5)" onmouseover="showTip(event, 'App.fs:45-46_fs3', 5)" class="i">handler</span> <span class="i">BAD_REQUEST</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:45-46_fs1">val bindToForm : form:&#39;a -&gt; handler:&#39;b -&gt; &#39;c<br /><br />Full name: CDocument.bindToForm</div>&#10;<div class="tip" id="App.fs:45-46_fs2">val form : &#39;a</div>&#10;<div class="tip" id="App.fs:45-46_fs3">val handler : &#39;b</div>&#10;&#10;
 
 It requires a few modules to be open, namely:
 
@@ -259,31 +138,11 @@ There are just 2 more things before we're good to go with creating album functio
 
 We need `createAlbum` for the `Db` module (the created album is piped to `ignore` function, because we don't need it afterwards):
 
-```fsharp
-let createAlbum (artistId, genreId, price, title) (ctx : DbContext) =
-    ctx.``[dbo].[Albums]``.Create(artistId, genreId, price, title) |> ignore
-    ctx.SubmitUpdates()
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'Db.fs:52-54_fs1', 1)" onmouseover="showTip(event, 'Db.fs:52-54_fs1', 1)" class="f">createAlbum</span> (<span onmouseout="hideTip(event, 'Db.fs:52-54_fs2', 2)" onmouseover="showTip(event, 'Db.fs:52-54_fs2', 2)" class="i">artistId</span>, <span onmouseout="hideTip(event, 'Db.fs:52-54_fs3', 3)" onmouseover="showTip(event, 'Db.fs:52-54_fs3', 3)" class="i">genreId</span>, <span onmouseout="hideTip(event, 'Db.fs:52-54_fs4', 4)" onmouseover="showTip(event, 'Db.fs:52-54_fs4', 4)" class="i">price</span>, <span onmouseout="hideTip(event, 'Db.fs:52-54_fs5', 5)" onmouseover="showTip(event, 'Db.fs:52-54_fs5', 5)" class="i">title</span>) (<span onmouseout="hideTip(event, 'Db.fs:52-54_fs6', 6)" onmouseover="showTip(event, 'Db.fs:52-54_fs6', 6)" class="i">ctx</span> <span class="o">:</span> <span class="i">DbContext</span>) <span class="o">=</span>&#10;    <span onmouseout="hideTip(event, 'Db.fs:52-54_fs6', 7)" onmouseover="showTip(event, 'Db.fs:52-54_fs6', 7)" class="i">ctx</span><span class="o">.</span><span class="i">``[dbo].[Albums]``</span><span class="o">.</span><span class="i">Create</span>(<span onmouseout="hideTip(event, 'Db.fs:52-54_fs2', 8)" onmouseover="showTip(event, 'Db.fs:52-54_fs2', 8)" class="i">artistId</span>, <span onmouseout="hideTip(event, 'Db.fs:52-54_fs3', 9)" onmouseover="showTip(event, 'Db.fs:52-54_fs3', 9)" class="i">genreId</span>, <span onmouseout="hideTip(event, 'Db.fs:52-54_fs4', 10)" onmouseover="showTip(event, 'Db.fs:52-54_fs4', 10)" class="i">price</span>, <span onmouseout="hideTip(event, 'Db.fs:52-54_fs5', 11)" onmouseover="showTip(event, 'Db.fs:52-54_fs5', 11)" class="i">title</span>) <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'Db.fs:52-54_fs7', 12)" onmouseover="showTip(event, 'Db.fs:52-54_fs7', 12)" class="f">ignore</span>&#10;    <span onmouseout="hideTip(event, 'Db.fs:52-54_fs6', 13)" onmouseover="showTip(event, 'Db.fs:52-54_fs6', 13)" class="i">ctx</span><span class="o">.</span><span class="i">SubmitUpdates</span>()&#10;</div></pre>&#10;<div class="tip" id="Db.fs:52-54_fs1">val createAlbum : artistId:&#39;a * genreId:&#39;b * price:&#39;c * title:&#39;d -&gt; ctx:&#39;e -&gt; &#39;f<br /><br />Full name: CDocument.createAlbum</div>&#10;<div class="tip" id="Db.fs:52-54_fs2">val artistId : &#39;a</div>&#10;<div class="tip" id="Db.fs:52-54_fs3">val genreId : &#39;b</div>&#10;<div class="tip" id="Db.fs:52-54_fs4">val price : &#39;c</div>&#10;<div class="tip" id="Db.fs:52-54_fs5">val title : &#39;d</div>&#10;<div class="tip" id="Db.fs:52-54_fs6">val ctx : &#39;e</div>&#10;<div class="tip" id="Db.fs:52-54_fs7">val ignore : value:&#39;T -&gt; unit<br /><br />Full name: Microsoft.FSharp.Core.Operators.ignore</div>&#10;&#10;
 
 as well as POST handler inside the `createAlbum` WebPart:
 
-```fsharp
-let createAlbum =
-    let ctx = Db.getContext()
-    choose [
-        GET >=> warbler (fun _ -> 
-            let genres = 
-                Db.getGenres ctx 
-                |> List.map (fun g -> decimal g.GenreId, g.Name)
-            let artists = 
-                Db.getArtists ctx
-                |> List.map (fun g -> decimal g.ArtistId, g.Name)
-            html (View.createAlbum genres artists))
-        POST >=> bindToForm Form.album (fun form ->
-            Db.createAlbum (int form.ArtistId, int form.GenreId, form.Price, form.Title) ctx
-            Redirection.FOUND Path.Admin.manage)
-    ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs1', 1)" onmouseover="showTip(event, 'App.fs:48-62_fs1', 1)" class="i">createAlbum</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs2', 2)" onmouseover="showTip(event, 'App.fs:48-62_fs2', 2)" class="i">ctx</span> <span class="o">=</span> <span class="i">Db</span><span class="o">.</span><span class="i">getContext</span>()&#10;    <span class="i">choose</span> [&#10;        <span class="i">GET</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">warbler</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> &#10;            <span class="k">let</span> <span class="i">genres</span> <span class="o">=</span> &#10;                <span class="i">Db</span><span class="o">.</span><span class="i">getGenres</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs2', 3)" onmouseover="showTip(event, 'App.fs:48-62_fs2', 3)" class="i">ctx</span> &#10;                <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs3', 4)" onmouseover="showTip(event, 'App.fs:48-62_fs3', 4)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:48-62_fs4', 5)" onmouseover="showTip(event, 'App.fs:48-62_fs4', 5)" class="i">map</span> (<span class="k">fun</span> <span class="i">g</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs5', 6)" onmouseover="showTip(event, 'App.fs:48-62_fs5', 6)" class="i">decimal</span> <span class="i">g</span><span class="o">.</span><span class="i">GenreId</span>, <span class="i">g</span><span class="o">.</span><span class="i">Name</span>)&#10;            <span class="k">let</span> <span class="i">artists</span> <span class="o">=</span> &#10;                <span class="i">Db</span><span class="o">.</span><span class="i">getArtists</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs2', 7)" onmouseover="showTip(event, 'App.fs:48-62_fs2', 7)" class="i">ctx</span>&#10;                <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs3', 8)" onmouseover="showTip(event, 'App.fs:48-62_fs3', 8)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:48-62_fs4', 9)" onmouseover="showTip(event, 'App.fs:48-62_fs4', 9)" class="i">map</span> (<span class="k">fun</span> <span class="i">g</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'App.fs:48-62_fs5', 10)" onmouseover="showTip(event, 'App.fs:48-62_fs5', 10)" class="i">decimal</span> <span class="i">g</span><span class="o">.</span><span class="i">ArtistId</span>, <span class="i">g</span><span class="o">.</span><span class="i">Name</span>)&#10;            <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span class="i">createAlbum</span> <span class="i">genres</span> <span class="i">artists</span>))&#10;        <span class="i">POST</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">bindToForm</span> <span class="i">Form</span><span class="o">.</span><span class="i">album</span> (<span class="k">fun</span> <span class="i">form</span> <span class="k">-&gt;</span>&#10;            <span class="i">Db</span><span class="o">.</span><span class="i">createAlbum</span> (<span onmouseout="hideTip(event, 'App.fs:48-62_fs6', 11)" onmouseover="showTip(event, 'App.fs:48-62_fs6', 11)" class="i">int</span> <span class="i">form</span><span class="o">.</span><span class="i">ArtistId</span>, <span onmouseout="hideTip(event, 'App.fs:48-62_fs6', 12)" onmouseover="showTip(event, 'App.fs:48-62_fs6', 12)" class="i">int</span> <span class="i">form</span><span class="o">.</span><span class="i">GenreId</span>, <span class="i">form</span><span class="o">.</span><span class="i">Price</span>, <span class="i">form</span><span class="o">.</span><span class="i">Title</span>) <span onmouseout="hideTip(event, 'App.fs:48-62_fs2', 13)" onmouseover="showTip(event, 'App.fs:48-62_fs2', 13)" class="i">ctx</span>&#10;            <span class="i">Redirection</span><span class="o">.</span><span class="i">FOUND</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">manage</span>)&#10;    ]&#10;</div></pre>&#10;<div class="tip" id="App.fs:48-62_fs1">val createAlbum : obj<br /><br />Full name: CDocument.createAlbum</div>&#10;<div class="tip" id="App.fs:48-62_fs2">val ctx : obj</div>&#10;<div class="tip" id="App.fs:48-62_fs3">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>&#10;<div class="tip" id="App.fs:48-62_fs4">val map : mapping:(&#39;T -&gt; &#39;U) -&gt; list:&#39;T list -&gt; &#39;U list<br /><br />Full name: Microsoft.FSharp.Collections.List.map</div>&#10;<div class="tip" id="App.fs:48-62_fs5">Multiple items<br />val decimal : value:&#39;T -&gt; decimal (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.decimal<br /><br />--------------------<br />type decimal = System.Decimal<br /><br />Full name: Microsoft.FSharp.Core.decimal<br /><br />--------------------<br />type decimal&lt;&#39;Measure&gt; = decimal<br /><br />Full name: Microsoft.FSharp.Core.decimal&lt;_&gt;</div>&#10;<div class="tip" id="App.fs:48-62_fs6">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>&#10;&#10;
 
 
 ---
@@ -292,9 +151,9 @@ GitHub commit: [79c56f6521df52b449bbd2ece994e13e342a9b0c](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	Db.fs
-* A	Form.fs
-* M	Path.fs
-* M	SuaveMusicStore.fsproj
-* M	View.fs
+* App.fs (modified)
+* Db.fs (modified)
+* Form.fs (added)
+* Path.fs (modified)
+* SuaveMusicStore.fsproj (modified)
+* View.fs (modified)

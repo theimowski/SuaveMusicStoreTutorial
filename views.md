@@ -14,21 +14,13 @@ To use the package, we need to take a dependency on the following NuGet:
 
 Before we start defining views, let's organize our `App.fs` source file by adding following line at the beginning of the file:
 
-```fsharp
-﻿module SuaveMusicStore.App
-
-open Suave
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span class="i">Suave</span>&#10;</div></pre>&#10;&#10;
 
 The line means that whatever we define in the file will be placed in `SuaveMusicStore.App` module.
 Read [here](http://fsharpforfunandprofit.com/posts/recipe-part3/) for more info about organizing and structuring F# code.
 Now let's add a new file `View.fs` to the project just before the `App.fs` file and place the following module definition at the very top:
 
-```fsharp
-﻿module SuaveMusicStore.View
-
-open Suave.Html
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Html</span>&#10;</div></pre>&#10;&#10;
 
 We'll follow this convention throughout the tutorial to have a clear understanding of the project structure.
 
@@ -41,7 +33,7 @@ GitHub commit: [3e1055756b2cfb652382261561a53035e78aee8e](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	SuaveMusicStore.fsproj
-* A	View.fs
-* M	packages.config
+* App.fs (modified)
+* SuaveMusicStore.fsproj (modified)
+* View.fs (added)
+* packages.config (modified)

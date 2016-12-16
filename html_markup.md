@@ -3,18 +3,14 @@
 It's time to replace plain text placeholders in containers with meaningful content.
 First, define `h2` in `View` module to output HTML header of level 2:
 
-```fsharp
-let h2 s = tag "h2" [] (text s)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:7-7_fs1', 1)" onmouseover="showTip(event, 'View.fs:7-7_fs1', 1)" class="f">h2</span> <span onmouseout="hideTip(event, 'View.fs:7-7_fs2', 2)" onmouseover="showTip(event, 'View.fs:7-7_fs2', 2)" class="i">s</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;h2&quot;</span> [] (<span class="i">text</span> <span onmouseout="hideTip(event, 'View.fs:7-7_fs2', 3)" onmouseover="showTip(event, 'View.fs:7-7_fs2', 3)" class="i">s</span>)&#10;</div></pre>&#10;<div class="tip" id="View.fs:7-7_fs1">val h2 : s:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.h2</div>&#10;<div class="tip" id="View.fs:7-7_fs2">val s : &#39;a</div>&#10;&#10;
 
 and replace `text` with a new `h2` in each of the 4 containers.
 
 We'd like the "/store" route to output hyperlinks to all genres in our Music Store.
 Let's add a helper function in `Path` module, that will be responsible for formatting HTTP urls with a key-value parameter:
 
-```fsharp
-let withParam (key,value) path = sprintf "%s?%s=%s" path key value
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:5-5_fs1', 1)" onmouseover="showTip(event, 'Path.fs:5-5_fs1', 1)" class="f">withParam</span> (<span onmouseout="hideTip(event, 'Path.fs:5-5_fs2', 2)" onmouseover="showTip(event, 'Path.fs:5-5_fs2', 2)" class="i">key</span>,<span onmouseout="hideTip(event, 'Path.fs:5-5_fs3', 3)" onmouseover="showTip(event, 'Path.fs:5-5_fs3', 3)" class="i">value</span>) <span onmouseout="hideTip(event, 'Path.fs:5-5_fs4', 4)" onmouseover="showTip(event, 'Path.fs:5-5_fs4', 4)" class="i">path</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'Path.fs:5-5_fs5', 5)" onmouseover="showTip(event, 'Path.fs:5-5_fs5', 5)" class="f">sprintf</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">?</span><span class="pf">%s</span><span class="s">=</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'Path.fs:5-5_fs4', 6)" onmouseover="showTip(event, 'Path.fs:5-5_fs4', 6)" class="i">path</span> <span onmouseout="hideTip(event, 'Path.fs:5-5_fs2', 7)" onmouseover="showTip(event, 'Path.fs:5-5_fs2', 7)" class="i">key</span> <span onmouseout="hideTip(event, 'Path.fs:5-5_fs3', 8)" onmouseover="showTip(event, 'Path.fs:5-5_fs3', 8)" class="i">value</span>&#10;</div></pre>&#10;<div class="tip" id="Path.fs:5-5_fs1">val withParam : key:string * value:string -&gt; path:string -&gt; string<br /><br />Full name: CDocument.withParam</div>&#10;<div class="tip" id="Path.fs:5-5_fs2">val key : string</div>&#10;<div class="tip" id="Path.fs:5-5_fs3">val value : string</div>&#10;<div class="tip" id="Path.fs:5-5_fs4">val path : string</div>&#10;<div class="tip" id="Path.fs:5-5_fs5">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>&#10;&#10;
 
 The `withParam` function takes a tuple `(key,value)` as its first argument, `path` as the second and returns a properly formatted url.
 A tuple (or a pair) is a widely used structure in F#. It allows us to group two values into one in an easy manner.
@@ -23,42 +19,20 @@ Follow [this link](http://fsharpforfunandprofit.com/posts/tuples/) to learn more
 
 Add also a string key for the url parameter "/store/browse" in `Path.Store` module:
 
-```fsharp
-module Store =
-    let overview = "/store"
-    let browse = "/store/browse"
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">module</span> <span onmouseout="hideTip(event, 'Path.fs:9-11_fs1', 1)" onmouseover="showTip(event, 'Path.fs:9-11_fs1', 1)" class="t">Store</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:9-11_fs2', 2)" onmouseover="showTip(event, 'Path.fs:9-11_fs2', 2)" class="i">overview</span> <span class="o">=</span> <span class="s">&quot;/store&quot;</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:9-11_fs3', 3)" onmouseover="showTip(event, 'Path.fs:9-11_fs3', 3)" class="i">browse</span> <span class="o">=</span> <span class="s">&quot;/store/browse&quot;</span>&#10;</div></pre>&#10;<div class="tip" id="Path.fs:9-11_fs1">module Store<br /><br />from CDocument</div>&#10;<div class="tip" id="Path.fs:9-11_fs2">val overview : string<br /><br />Full name: CDocument.Store.overview</div>&#10;<div class="tip" id="Path.fs:9-11_fs3">val browse : string<br /><br />Full name: CDocument.Store.browse</div>&#10;&#10;
 
 We'll use it in `App` module:
 
-```fsharp
-let browse =
-    request (fun r -> 
-        match r.queryParam Path.Store.browseKey with
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:12-14_fs1', 1)" onmouseover="showTip(event, 'App.fs:12-14_fs1', 1)" class="i">browse</span> <span class="o">=</span>&#10;    <span class="i">request</span> (<span class="k">fun</span> <span class="i">r</span> <span class="k">-&gt;</span> &#10;        <span class="k">match</span> <span class="i">r</span><span class="o">.</span><span class="i">queryParam</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">browseKey</span> <span class="k">with</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:12-14_fs1">val browse : obj<br /><br />Full name: CDocument.browse</div>&#10;&#10;
 
 Now, add the following for working with the unordered list (`ul`) and list item (`li`) elements in HTML:
 
-```fsharp
-let ul xml = tag "ul" [] (flatten xml)
-let li = tag "li" []
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-11_fs1', 1)" onmouseover="showTip(event, 'View.fs:10-11_fs1', 1)" class="f">ul</span> <span onmouseout="hideTip(event, 'View.fs:10-11_fs2', 2)" onmouseover="showTip(event, 'View.fs:10-11_fs2', 2)" class="i">xml</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;ul&quot;</span> [] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:10-11_fs2', 3)" onmouseover="showTip(event, 'View.fs:10-11_fs2', 3)" class="i">xml</span>)&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-11_fs3', 4)" onmouseover="showTip(event, 'View.fs:10-11_fs3', 4)" class="i">li</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;li&quot;</span> []&#10;</div></pre>&#10;<div class="tip" id="View.fs:10-11_fs1">val ul : xml:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.ul</div>&#10;<div class="tip" id="View.fs:10-11_fs2">val xml : &#39;a</div>&#10;<div class="tip" id="View.fs:10-11_fs3">val li : obj<br /><br />Full name: CDocument.li</div>&#10;&#10;
 
 `flatten` takes a list of `Xml` and "flattens" it into a single `Xml` object model.
 The actual container for `store` can now look like the following:
 
-```fsharp
-let store genres = [
-    h2 "Browse Genres"
-    p [
-        text (sprintf "Select from %d genres:" (List.length genres))
-    ]
-    ul [
-        for g in genres -> 
-            li (aHref (Path.Store.browse |> Path.withParam (Path.Store.browseKey, g)) (text g))
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:17-26_fs1', 1)" onmouseover="showTip(event, 'View.fs:17-26_fs1', 1)" class="f">store</span> <span onmouseout="hideTip(event, 'View.fs:17-26_fs2', 2)" onmouseover="showTip(event, 'View.fs:17-26_fs2', 2)" class="i">genres</span> <span class="o">=</span> [&#10;    <span class="i">h2</span> <span class="s">&quot;Browse Genres&quot;</span>&#10;    <span class="i">p</span> [&#10;        <span class="i">text</span> (<span onmouseout="hideTip(event, 'View.fs:17-26_fs3', 3)" onmouseover="showTip(event, 'View.fs:17-26_fs3', 3)" class="i">sprintf</span> <span class="s">&quot;Select from %d genres:&quot;</span> (<span onmouseout="hideTip(event, 'View.fs:17-26_fs4', 4)" onmouseover="showTip(event, 'View.fs:17-26_fs4', 4)" class="i">List</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:17-26_fs5', 5)" onmouseover="showTip(event, 'View.fs:17-26_fs5', 5)" class="i">length</span> <span onmouseout="hideTip(event, 'View.fs:17-26_fs2', 6)" onmouseover="showTip(event, 'View.fs:17-26_fs2', 6)" class="i">genres</span>))&#10;    ]&#10;    <span class="i">ul</span> [&#10;        <span class="k">for</span> <span class="i">g</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'View.fs:17-26_fs2', 7)" onmouseover="showTip(event, 'View.fs:17-26_fs2', 7)" class="i">genres</span> <span class="k">-&gt;</span> &#10;            <span class="i">li</span> (<span class="i">aHref</span> (<span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">browse</span> <span class="o">|&gt;</span> <span class="i">Path</span><span class="o">.</span><span class="i">withParam</span> (<span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">browseKey</span>, <span class="i">g</span>)) (<span class="i">text</span> <span class="i">g</span>))&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:17-26_fs1">val store : genres:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.store</div>&#10;<div class="tip" id="View.fs:17-26_fs2">val genres : &#39;a</div>&#10;<div class="tip" id="View.fs:17-26_fs3">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>&#10;<div class="tip" id="View.fs:17-26_fs4">Multiple items<br />module List<br /><br />from Microsoft.FSharp.Collections<br /><br />--------------------<br />type List&lt;&#39;T&gt; =<br />&#160;&#160;| ( [] )<br />&#160;&#160;| ( :: ) of Head: &#39;T * Tail: &#39;T list<br />&#160;&#160;interface IEnumerable<br />&#160;&#160;interface IEnumerable&lt;&#39;T&gt;<br />&#160;&#160;member GetSlice : startIndex:int option * endIndex:int option -&gt; &#39;T list<br />&#160;&#160;member Head : &#39;T<br />&#160;&#160;member IsEmpty : bool<br />&#160;&#160;member Item : index:int -&gt; &#39;T with get<br />&#160;&#160;member Length : int<br />&#160;&#160;member Tail : &#39;T list<br />&#160;&#160;static member Cons : head:&#39;T * tail:&#39;T list -&gt; &#39;T list<br />&#160;&#160;static member Empty : &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.List&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:17-26_fs5">val length : list:&#39;T list -&gt; int<br /><br />Full name: Microsoft.FSharp.Collections.List.length</div>&#10;&#10;
 
 Things worth commenting in the above snippet:
 
@@ -68,9 +42,7 @@ Things worth commenting in the above snippet:
 
 To use `View.store` from `App` module, let's simply pass a hardcoded list for `genres` like following:
 
-```fsharp
-        path Path.Store.overview >=> html (View.store ["Rock"; "Disco"; "Pop"])
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">overview</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span class="i">store</span> [<span class="s">&quot;Rock&quot;</span>; <span class="s">&quot;Disco&quot;</span>; <span class="s">&quot;Pop&quot;</span>])&#10;</div></pre>&#10;&#10;
 
 
 ---
@@ -79,6 +51,6 @@ GitHub commit: [4116ee213ae519ad745f5882ba9eb62e1d4fea4f](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	Path.fs
-* M	View.fs
+* App.fs (modified)
+* Path.fs (modified)
+* View.fs (modified)

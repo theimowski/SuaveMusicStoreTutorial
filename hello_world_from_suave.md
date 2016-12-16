@@ -7,12 +7,7 @@ Now we can add NuGet reference to Suave. To do that, in Package Manager Console 
 Alternatively, you can use the NuGet GUI to find and install the Suave package.
 Rename the `Program.fs` file to `App.fs` to better reflect the purpose of the file, and replace its contents completely with the following code:
 
-```fsharp
-﻿open Suave                 // always open suave
-open Suave.Successful      // for OK-result
-
-startWebServer defaultConfig (OK "Hello World!")
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Successful</span>      <span class="c">// for OK-result</span>&#10;&#10;<span class="i">startWebServer</span> <span class="i">defaultConfig</span> (<span class="i">OK</span> <span class="s">&quot;Hello World!&quot;</span>)&#10;</div></pre>&#10;&#10;
 
 Guess what, if you press F5 to run the project, your application is now up and running!
 By default it should be available under `http://localhost:8083`.
@@ -27,10 +22,10 @@ GitHub commit: [c5d42dd6e7a4391f718d752f78567b573b32f281](https://github.com/the
 
 Files changed:
 
-* A	.gitignore
-* A	App.config
-* A	App.fs
-* A	AssemblyInfo.fs
-* A	SuaveMusicStore.fsproj
-* A	SuaveMusicStore.sln
-* A	packages.config
+* .gitignore (added)
+* App.config (added)
+* App.fs (added)
+* AssemblyInfo.fs (added)
+* SuaveMusicStore.fsproj (added)
+* SuaveMusicStore.sln (added)
+* packages.config (added)

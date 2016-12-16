@@ -2,18 +2,7 @@
 
 Before we move on to defining views for the rest of the application, let's introduce one more file - `Path.fs` and insert it **before** `View.fs`:
 
-```fsharp
-﻿module SuaveMusicStore.Path
-
-type IntPath = PrintfFormat<(int -> string),unit,string,string,int>
-
-let home = "/"
-
-module Store =
-    let overview = "/store"
-    let browse = "/store/browse"
-    let details : IntPath = "/store/details/%d"
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">type</span> <span class="i">IntPath</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'Path.fs_fs1', 1)" onmouseover="showTip(event, 'Path.fs_fs1', 1)" class="i">PrintfFormat</span><span class="o">&lt;</span>(<span onmouseout="hideTip(event, 'Path.fs_fs2', 2)" onmouseover="showTip(event, 'Path.fs_fs2', 2)" class="i">int</span> <span class="k">-&gt;</span> <span onmouseout="hideTip(event, 'Path.fs_fs3', 3)" onmouseover="showTip(event, 'Path.fs_fs3', 3)" class="i">string</span>),<span onmouseout="hideTip(event, 'Path.fs_fs4', 4)" onmouseover="showTip(event, 'Path.fs_fs4', 4)" class="i">unit</span>,<span onmouseout="hideTip(event, 'Path.fs_fs3', 5)" onmouseover="showTip(event, 'Path.fs_fs3', 5)" class="i">string</span>,<span onmouseout="hideTip(event, 'Path.fs_fs3', 6)" onmouseover="showTip(event, 'Path.fs_fs3', 6)" class="i">string</span>,<span onmouseout="hideTip(event, 'Path.fs_fs2', 7)" onmouseover="showTip(event, 'Path.fs_fs2', 7)" class="i">int</span><span class="o">&gt;</span>&#10;&#10;<span class="k">let</span> <span class="i">home</span> <span class="o">=</span> <span class="s">&quot;/&quot;</span>&#10;&#10;<span class="k">module</span> <span class="i">Store</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span class="i">overview</span> <span class="o">=</span> <span class="s">&quot;/store&quot;</span>&#10;    <span class="k">let</span> <span class="i">browse</span> <span class="o">=</span> <span class="s">&quot;/store/browse&quot;</span>&#10;    <span class="k">let</span> <span class="i">details</span> <span class="o">:</span> <span class="i">IntPath</span> <span class="o">=</span> <span class="s">&quot;/store/details/%d&quot;</span>&#10;</div></pre>&#10;<div class="tip" id="Path.fs_fs1">Multiple items<br />type PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result&gt; =<br />&#160;&#160;new : value:string -&gt; PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result&gt;<br />&#160;&#160;member Value : string<br /><br />Full name: Microsoft.FSharp.Core.PrintfFormat&lt;_,_,_,_&gt;<br /><br />--------------------<br />type PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result,&#39;Tuple&gt; =<br />&#160;&#160;inherit PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result&gt;<br />&#160;&#160;new : value:string -&gt; PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result,&#39;Tuple&gt;<br /><br />Full name: Microsoft.FSharp.Core.PrintfFormat&lt;_,_,_,_,_&gt;<br /><br />--------------------<br />new : value:string -&gt; PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result&gt;<br /><br />--------------------<br />new : value:string -&gt; PrintfFormat&lt;&#39;Printer,&#39;State,&#39;Residue,&#39;Result,&#39;Tuple&gt;</div>&#10;<div class="tip" id="Path.fs_fs2">Multiple items<br />val int : value:&#39;T -&gt; int (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.int<br /><br />--------------------<br />type int = int32<br /><br />Full name: Microsoft.FSharp.Core.int<br /><br />--------------------<br />type int&lt;&#39;Measure&gt; = int<br /><br />Full name: Microsoft.FSharp.Core.int&lt;_&gt;</div>&#10;<div class="tip" id="Path.fs_fs3">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>&#10;<div class="tip" id="Path.fs_fs4">type unit = Unit<br /><br />Full name: Microsoft.FSharp.Core.unit</div>&#10;&#10;
 
 The module will contain all valid routes in our application.
 We'll keep them here in one place, in order to be able to reuse both in `App` and `View` modules.
@@ -27,23 +16,11 @@ We'll see in a moment how we can use `details` in `App` and `View` modules, with
 
 Let's use the routes from `Path` module in our `App`:
 
-```fsharp
-let webPart = 
-    choose [
-        path Path.home >=> (OK View.index)
-        path Path.Store.overview >=> (OK "Store")
-        path Path.Store.browse >=> browse
-        pathScan Path.Store.details (fun id -> OK (sprintf "Details %d" id))
-    ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:15-21_fs1', 1)" onmouseover="showTip(event, 'App.fs:15-21_fs1', 1)" class="i">webPart</span> <span class="o">=</span> &#10;    <span class="i">choose</span> [&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="i">View</span><span class="o">.</span><span class="i">index</span>)&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">overview</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="s">&quot;Store&quot;</span>)&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">browse</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">browse</span>&#10;        <span class="i">pathScan</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">details</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'App.fs:15-21_fs2', 2)" onmouseover="showTip(event, 'App.fs:15-21_fs2', 2)" class="i">id</span> <span class="k">-&gt;</span> <span class="i">OK</span> (<span onmouseout="hideTip(event, 'App.fs:15-21_fs3', 3)" onmouseover="showTip(event, 'App.fs:15-21_fs3', 3)" class="i">sprintf</span> <span class="s">&quot;Details %d&quot;</span> <span onmouseout="hideTip(event, 'App.fs:15-21_fs2', 4)" onmouseover="showTip(event, 'App.fs:15-21_fs2', 4)" class="i">id</span>))&#10;    ]&#10;</div></pre>&#10;<div class="tip" id="App.fs:15-21_fs1">val webPart : obj<br /><br />Full name: CDocument.webPart</div>&#10;<div class="tip" id="App.fs:15-21_fs2">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>&#10;<div class="tip" id="App.fs:15-21_fs3">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>&#10;&#10;
 
 as well as in our `View` for `aHref` to `home`:
 
-```fsharp
-            divId "header" [
-                h1 (aHref Path.home (text "F# Suave Music Store"))
-            ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp">            <span class="i">divId</span> <span class="s">&quot;header&quot;</span> [&#10;                <span class="i">h1</span> (<span class="i">aHref</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> (<span class="i">text</span> <span class="s">&quot;F# Suave Music Store&quot;</span>))&#10;            ]&#10;</div></pre>&#10;&#10;
 
 Note, that in `App` module we still benefit from the static typed routes feature that Suave gives us - the `id` parameter is inferred by the compiler to be of integer type.
 If you're not familiar with type inference mechanism, you can follow up [this link](http://fsharpforfunandprofit.com/posts/type-inference/).
@@ -55,7 +32,7 @@ GitHub commit: [f2131c0ba81031ea8e47f3cf67ecf8f89c84c466](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* A	Path.fs
-* M	SuaveMusicStore.fsproj
-* M	View.fs
+* App.fs (modified)
+* Path.fs (added)
+* SuaveMusicStore.fsproj (modified)
+* View.fs (modified)

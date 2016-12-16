@@ -7,16 +7,7 @@ Add the `Site.css` stylesheet to the project, and don't forget to set the `Copy 
 
 In order to include the stylesheet in our HTML markup, let's add the following to our `View`:
 
-```fsharp
-let cssLink href = linkAttr [ "href", href; " rel", "stylesheet"; " type", "text/css" ]
-
-let index = 
-    html [
-        head [
-            title "Suave Music Store"
-            cssLink "/Site.css"
-        ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:8-15_fs1', 1)" onmouseover="showTip(event, 'View.fs:8-15_fs1', 1)" class="f">cssLink</span> <span onmouseout="hideTip(event, 'View.fs:8-15_fs2', 2)" onmouseover="showTip(event, 'View.fs:8-15_fs2', 2)" class="i">href</span> <span class="o">=</span> <span class="i">linkAttr</span> [ <span class="s">&quot;href&quot;</span>, <span onmouseout="hideTip(event, 'View.fs:8-15_fs2', 3)" onmouseover="showTip(event, 'View.fs:8-15_fs2', 3)" class="i">href</span>; <span class="s">&quot; rel&quot;</span>, <span class="s">&quot;stylesheet&quot;</span>; <span class="s">&quot; type&quot;</span>, <span class="s">&quot;text/css&quot;</span> ]&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:8-15_fs3', 4)" onmouseover="showTip(event, 'View.fs:8-15_fs3', 4)" class="i">index</span> <span class="o">=</span> &#10;    <span class="i">html</span> [&#10;        <span class="i">head</span> [&#10;            <span class="i">title</span> <span class="s">&quot;Suave Music Store&quot;</span>&#10;            <span onmouseout="hideTip(event, 'View.fs:8-15_fs1', 5)" onmouseover="showTip(event, 'View.fs:8-15_fs1', 5)" class="i">cssLink</span> <span class="s">&quot;/Site.css&quot;</span>&#10;        ]&#10;</div></pre>&#10;<div class="tip" id="View.fs:8-15_fs1">val cssLink : href:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.cssLink</div>&#10;<div class="tip" id="View.fs:8-15_fs2">val href : &#39;a</div>&#10;<div class="tip" id="View.fs:8-15_fs3">val index : obj<br /><br />Full name: CDocument.index</div>&#10;&#10;
 
 This enables us to output the link HTML element with `href` attribute pointing to the CSS stylesheet.
 
@@ -40,9 +31,7 @@ The CSS depends on `logo.png` asset, which can be downloaded from [here](https:/
 Add `logo.png` to the project, and again don't forget to select `Copy If Newer` for `Copy To Output Directory` property for the asset.
 Again, when the browser wants to render an image asset, it needs to GET it from the server, so we need to extend our regular expression to allow browsing of `.png` files as well:
 
-```fsharp
-        pathRegex "(.*)\.(css|png)" >=> Files.browseHome
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">pathRegex</span> <span class="s">&quot;(.*)\.(css|png)&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">Files</span><span class="o">.</span><span class="i">browseHome</span>&#10;</div></pre>&#10;&#10;
 
 Now you should be able to see the styles applied to our HTML markup.
 
@@ -53,8 +42,8 @@ GitHub commit: [d40731ce9a0b0d7328de480815aa90fdf2d77a88](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* A	Site.css
-* M	SuaveMusicStore.fsproj
-* M	View.fs
-* A	logo.png
+* App.fs (modified)
+* Site.css (added)
+* SuaveMusicStore.fsproj (modified)
+* View.fs (modified)
+* logo.png (added)

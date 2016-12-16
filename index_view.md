@@ -2,36 +2,7 @@
 
 With the `View.fs` file in place, let's add our first view:
 
-```fsharp
-﻿module SuaveMusicStore.View
-
-open Suave.Html
-
-let divId id = divAttr ["id", id]
-let h1 xml = tag "h1" [] xml
-let aHref href = tag "a" ["href", href]
-
-let index = 
-    html [
-        head [
-            title "Suave Music Store"
-        ]
-
-        body [
-            divId "header" [
-                h1 (aHref "/" (text "F# Suave Music Store"))
-            ]
-
-            divId "footer" [
-                text "built with "
-                aHref "http://fsharp.org" (text "F#")
-                text " and "
-                aHref "http://suave.io" (text "Suave.IO")
-            ]
-        ]
-    ]
-    |> xmlToString
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Html</span>&#10;&#10;<span class="k">let</span> <span class="i">divId</span> <span onmouseout="hideTip(event, 'View.fs_fs1', 1)" onmouseover="showTip(event, 'View.fs_fs1', 1)" class="i">id</span> <span class="o">=</span> <span class="i">divAttr</span> [<span class="s">&quot;id&quot;</span>, <span onmouseout="hideTip(event, 'View.fs_fs1', 2)" onmouseover="showTip(event, 'View.fs_fs1', 2)" class="i">id</span>]&#10;<span class="k">let</span> <span class="i">h1</span> <span class="i">xml</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;h1&quot;</span> [] <span class="i">xml</span>&#10;<span class="k">let</span> <span class="i">aHref</span> <span class="i">href</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;a&quot;</span> [<span class="s">&quot;href&quot;</span>, <span class="i">href</span>]&#10;&#10;<span class="k">let</span> <span class="i">index</span> <span class="o">=</span> &#10;    <span class="i">html</span> [&#10;        <span class="i">head</span> [&#10;            <span class="i">title</span> <span class="s">&quot;Suave Music Store&quot;</span>&#10;        ]&#10;&#10;        <span class="i">body</span> [&#10;            <span class="i">divId</span> <span class="s">&quot;header&quot;</span> [&#10;                <span class="i">h1</span> (<span class="i">aHref</span> <span class="s">&quot;/&quot;</span> (<span class="i">text</span> <span class="s">&quot;F# Suave Music Store&quot;</span>))&#10;            ]&#10;&#10;            <span class="i">divId</span> <span class="s">&quot;footer&quot;</span> [&#10;                <span class="i">text</span> <span class="s">&quot;built with &quot;</span>&#10;                <span class="i">aHref</span> <span class="s">&quot;http://fsharp.org&quot;</span> (<span class="i">text</span> <span class="s">&quot;F#&quot;</span>)&#10;                <span class="i">text</span> <span class="s">&quot; and &quot;</span>&#10;                <span class="i">aHref</span> <span class="s">&quot;http://suave.io&quot;</span> (<span class="i">text</span> <span class="s">&quot;Suave.IO&quot;</span>)&#10;            ]&#10;        ]&#10;    ]&#10;    <span class="o">|&gt;</span> <span class="i">xmlToString</span>&#10;</div></pre>&#10;<div class="tip" id="View.fs_fs1">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>&#10;&#10;
 
 This will serve as a common layout in our application.
 A few remarks about the above snippet:
@@ -62,9 +33,7 @@ In this very case it simply means: invoke the `xmlToString` function on the HTML
 
 Let's test the `index` view in our `App.fs`:
 
-```fsharp
-        path "/" >=> (OK View.index)
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">path</span> <span class="s">&quot;/&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="i">View</span><span class="o">.</span><span class="i">index</span>)&#10;</div></pre>&#10;&#10;
 
 If you navigate to the root url of the application, you should see that proper HTML has been returned.
 
@@ -75,5 +44,5 @@ GitHub commit: [750cac6586d20a790c0b672d0ec0eac0e8ebaba8](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	View.fs
+* App.fs (modified)
+* View.fs (modified)

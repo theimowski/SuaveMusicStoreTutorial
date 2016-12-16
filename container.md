@@ -3,93 +3,37 @@
 With styles in place, let's get our hands on extracting a shared layout for all future views to come.
 Start by adding `container` parameter to `index` in `View`:
 
-```fsharp
-let index container = 
-    html [
-        head [
-            title "Suave Music Store"
-            cssLink "/Site.css"
-        ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:26-31_fs1', 1)" onmouseover="showTip(event, 'View.fs:26-31_fs1', 1)" class="f">index</span> <span onmouseout="hideTip(event, 'View.fs:26-31_fs2', 2)" onmouseover="showTip(event, 'View.fs:26-31_fs2', 2)" class="i">container</span> <span class="o">=</span> &#10;    <span class="i">html</span> [&#10;        <span class="i">head</span> [&#10;            <span class="i">title</span> <span class="s">&quot;Suave Music Store&quot;</span>&#10;            <span class="i">cssLink</span> <span class="s">&quot;/Site.css&quot;</span>&#10;        ]&#10;</div></pre>&#10;<div class="tip" id="View.fs:26-31_fs1">val index : container:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.index</div>&#10;<div class="tip" id="View.fs:26-31_fs2">val container : &#39;a</div>&#10;&#10;
 
 and div with id "container" just after the div "header":
 
-```fsharp
-        body [
-            divId "header" [
-                h1 (aHref Path.home (text "F# Suave Music Store"))
-            ]
-
-            divId "container" container
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">body</span> [&#10;            <span class="i">divId</span> <span class="s">&quot;header&quot;</span> [&#10;                <span class="i">h1</span> (<span class="i">aHref</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> (<span class="i">text</span> <span class="s">&quot;F# Suave Music Store&quot;</span>))&#10;            ]&#10;&#10;            <span class="i">divId</span> <span class="s">&quot;container&quot;</span> <span class="i">container</span>&#10;</div></pre>&#10;&#10;
 
 `index` previously was a constant value, but it has now become a function taking `container` as parameter.
 
 We can now define the actual container for the "home" page:
 
-```fsharp
-let home = [
-    text "Home"
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-12_fs1', 1)" onmouseover="showTip(event, 'View.fs:10-12_fs1', 1)" class="i">home</span> <span class="o">=</span> [&#10;    <span class="i">text</span> <span class="s">&quot;Home&quot;</span>&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:10-12_fs1">val home : obj list<br /><br />Full name: CDocument.home</div>&#10;&#10;
 
 For now it will only contain plain "Home" text.
 Let's also extract a common function for creating the WebPart, parametrized with the container itself.
 Add to `App` module, just before the `browse` WebPart the following:
 
-```fsharp
-let html container =
-    OK (View.index container)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:9-10_fs1', 1)" onmouseover="showTip(event, 'App.fs:9-10_fs1', 1)" class="f">html</span> <span onmouseout="hideTip(event, 'App.fs:9-10_fs2', 2)" onmouseover="showTip(event, 'App.fs:9-10_fs2', 2)" class="i">container</span> <span class="o">=</span>&#10;    <span class="i">OK</span> (<span class="i">View</span><span class="o">.</span><span class="i">index</span> <span onmouseout="hideTip(event, 'App.fs:9-10_fs2', 3)" onmouseover="showTip(event, 'App.fs:9-10_fs2', 3)" class="i">container</span>)&#10;</div></pre>&#10;<div class="tip" id="App.fs:9-10_fs1">val html : container:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.html</div>&#10;<div class="tip" id="App.fs:9-10_fs2">val container : &#39;a</div>&#10;&#10;
 
 Usage for the home page looks like this:
 
-```fsharp
-    choose [
-        path Path.home >=> html View.home
-```
+<pre class="fssnip highlighted"><div lang="fsharp">    <span class="i">choose</span> [&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">html</span> <span class="i">View</span><span class="o">.</span><span class="i">home</span>&#10;</div></pre>&#10;&#10;
 
 Next, containers for each valid route in our application can be defined in `View` module:
 
-```fsharp
-let home = [
-    text "Home"
-]
-
-let store = [
-    text "Store"
-]
-
-let browse genre = [
-    text (sprintf "Genre: %s" genre)
-]
-
-let details id = [
-    text (sprintf "Details %d" id)
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs1', 1)" onmouseover="showTip(event, 'View.fs:10-24_fs1', 1)" class="i">home</span> <span class="o">=</span> [&#10;    <span class="i">text</span> <span class="s">&quot;Home&quot;</span>&#10;]&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs2', 2)" onmouseover="showTip(event, 'View.fs:10-24_fs2', 2)" class="i">store</span> <span class="o">=</span> [&#10;    <span class="i">text</span> <span class="s">&quot;Store&quot;</span>&#10;]&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs3', 3)" onmouseover="showTip(event, 'View.fs:10-24_fs3', 3)" class="f">browse</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs4', 4)" onmouseover="showTip(event, 'View.fs:10-24_fs4', 4)" class="i">genre</span> <span class="o">=</span> [&#10;    <span class="i">text</span> (<span onmouseout="hideTip(event, 'View.fs:10-24_fs5', 5)" onmouseover="showTip(event, 'View.fs:10-24_fs5', 5)" class="i">sprintf</span> <span class="s">&quot;Genre: %s&quot;</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs4', 6)" onmouseover="showTip(event, 'View.fs:10-24_fs4', 6)" class="i">genre</span>)&#10;]&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs6', 7)" onmouseover="showTip(event, 'View.fs:10-24_fs6', 7)" class="f">details</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs7', 8)" onmouseover="showTip(event, 'View.fs:10-24_fs7', 8)" class="i">id</span> <span class="o">=</span> [&#10;    <span class="i">text</span> (<span onmouseout="hideTip(event, 'View.fs:10-24_fs5', 9)" onmouseover="showTip(event, 'View.fs:10-24_fs5', 9)" class="i">sprintf</span> <span class="s">&quot;Details %d&quot;</span> <span onmouseout="hideTip(event, 'View.fs:10-24_fs7', 10)" onmouseover="showTip(event, 'View.fs:10-24_fs7', 10)" class="i">id</span>)&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:10-24_fs1">val home : obj list<br /><br />Full name: CDocument.home</div>&#10;<div class="tip" id="View.fs:10-24_fs2">val store : obj list<br /><br />Full name: CDocument.store</div>&#10;<div class="tip" id="View.fs:10-24_fs3">val browse : genre:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.browse</div>&#10;<div class="tip" id="View.fs:10-24_fs4">val genre : &#39;a</div>&#10;<div class="tip" id="View.fs:10-24_fs5">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>&#10;<div class="tip" id="View.fs:10-24_fs6">val details : id:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.details</div>&#10;<div class="tip" id="View.fs:10-24_fs7">val id : &#39;a</div>&#10;&#10;
 
 Note that both `home` and `store` are constant values, while `browse` and `details` are parametrized with `genre` and `id` respectively.
 
 `html` can be now reused for all 4 views:
 
-```fsharp
-let browse =
-    request (fun r ->
-        match r.queryParam "genre" with
-        | Choice1Of2 genre -> html (View.browse genre)
-        | Choice2Of2 msg -> BAD_REQUEST msg)
-
-let webPart = 
-    choose [
-        path Path.home >=> html View.home
-        path Path.Store.overview >=> html View.store
-        path Path.Store.browse >=> browse
-        pathScan Path.Store.details (fun id -> html (View.details id))
-
-        pathRegex "(.*)\.(css|png)" >=> Files.browseHome
-    ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:12-26_fs1', 1)" onmouseover="showTip(event, 'App.fs:12-26_fs1', 1)" class="i">browse</span> <span class="o">=</span>&#10;    <span class="i">request</span> (<span class="k">fun</span> <span class="i">r</span> <span class="k">-&gt;</span>&#10;        <span class="k">match</span> <span class="i">r</span><span class="o">.</span><span class="i">queryParam</span> <span class="s">&quot;genre&quot;</span> <span class="k">with</span>&#10;        | <span onmouseout="hideTip(event, 'App.fs:12-26_fs2', 2)" onmouseover="showTip(event, 'App.fs:12-26_fs2', 2)" class="i">Choice1Of2</span> <span class="i">genre</span> <span class="k">-&gt;</span> <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:12-26_fs1', 3)" onmouseover="showTip(event, 'App.fs:12-26_fs1', 3)" class="i">browse</span> <span class="i">genre</span>)&#10;        | <span onmouseout="hideTip(event, 'App.fs:12-26_fs3', 4)" onmouseover="showTip(event, 'App.fs:12-26_fs3', 4)" class="i">Choice2Of2</span> <span class="i">msg</span> <span class="k">-&gt;</span> <span class="i">BAD_REQUEST</span> <span class="i">msg</span>)&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:12-26_fs4', 5)" onmouseover="showTip(event, 'App.fs:12-26_fs4', 5)" class="i">webPart</span> <span class="o">=</span> &#10;    <span class="i">choose</span> [&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">html</span> <span class="i">View</span><span class="o">.</span><span class="i">home</span>&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">overview</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">html</span> <span class="i">View</span><span class="o">.</span><span class="i">store</span>&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:12-26_fs1', 6)" onmouseover="showTip(event, 'App.fs:12-26_fs1', 6)" class="i">browse</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span onmouseout="hideTip(event, 'App.fs:12-26_fs1', 7)" onmouseover="showTip(event, 'App.fs:12-26_fs1', 7)" class="i">browse</span>&#10;        <span class="i">pathScan</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">details</span> (<span class="k">fun</span> <span onmouseout="hideTip(event, 'App.fs:12-26_fs5', 8)" onmouseover="showTip(event, 'App.fs:12-26_fs5', 8)" class="i">id</span> <span class="k">-&gt;</span> <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span class="i">details</span> <span onmouseout="hideTip(event, 'App.fs:12-26_fs5', 9)" onmouseover="showTip(event, 'App.fs:12-26_fs5', 9)" class="i">id</span>))&#10;&#10;        <span class="i">pathRegex</span> <span class="s">&quot;(.*)\.(css|png)&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">Files</span><span class="o">.</span><span class="i">browseHome</span>&#10;    ]&#10;</div></pre>&#10;<div class="tip" id="App.fs:12-26_fs1">val browse : obj<br /><br />Full name: CDocument.browse</div>&#10;<div class="tip" id="App.fs:12-26_fs2">union case Choice.Choice1Of2: &#39;T1 -&gt; Choice&lt;&#39;T1,&#39;T2&gt;</div>&#10;<div class="tip" id="App.fs:12-26_fs3">union case Choice.Choice2Of2: &#39;T2 -&gt; Choice&lt;&#39;T1,&#39;T2&gt;</div>&#10;<div class="tip" id="App.fs:12-26_fs4">val webPart : obj<br /><br />Full name: CDocument.webPart</div>&#10;<div class="tip" id="App.fs:12-26_fs5">val id : x:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.id</div>&#10;&#10;
 
 
 ---
@@ -98,5 +42,5 @@ GitHub commit: [e8499a0e5f47635b6045a749e3dce32fd8c08c41](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	View.fs
+* App.fs (modified)
+* View.fs (modified)

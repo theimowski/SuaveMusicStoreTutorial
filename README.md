@@ -22,6 +22,3 @@ The code for the application can be found
 ---
 
 GitHub commit: [a95129a350926c2e1c36d6445488e2a6c30c2fd1](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/a95129a350926c2e1c36d6445488e2a6c30c2fd1)
-
-Files changed:
-

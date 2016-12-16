@@ -2,40 +2,15 @@
 
 Let's start by adding `manage` to our `View` module:
 
-```fsharp
-let manage (albums : Db.AlbumDetails list) = [ 
-    h2 "Index"
-    table [
-        yield tr [
-            for t in ["Artist";"Title";"Genre";"Price"] -> th [ text t ]
-        ]
-
-        for album in albums -> 
-        tr [
-            for t in [ truncate 25 album.Artist; truncate 25 album.Title; album.Genre; formatDec album.Price ] ->
-                td [ text t ]
-        ]
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:64-77_fs1', 1)" onmouseover="showTip(event, 'View.fs:64-77_fs1', 1)" class="f">manage</span> (<span onmouseout="hideTip(event, 'View.fs:64-77_fs2', 2)" onmouseover="showTip(event, 'View.fs:64-77_fs2', 2)" class="i">albums</span> <span class="o">:</span> <span class="i">Db</span><span class="o">.</span><span class="i">AlbumDetails</span> <span onmouseout="hideTip(event, 'View.fs:64-77_fs3', 3)" onmouseover="showTip(event, 'View.fs:64-77_fs3', 3)" class="t">list</span>) <span class="o">=</span> [ &#10;    <span class="i">h2</span> <span class="s">&quot;Index&quot;</span>&#10;    <span class="i">table</span> [&#10;        <span class="k">yield</span> <span class="i">tr</span> [&#10;            <span class="k">for</span> <span class="i">t</span> <span class="k">in</span> [<span class="s">&quot;Artist&quot;</span>;<span class="s">&quot;Title&quot;</span>;<span class="s">&quot;Genre&quot;</span>;<span class="s">&quot;Price&quot;</span>] <span class="k">-&gt;</span> <span class="i">th</span> [ <span class="i">text</span> <span class="i">t</span> ]&#10;        ]&#10;&#10;        <span class="k">for</span> <span class="i">album</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'View.fs:64-77_fs2', 4)" onmouseover="showTip(event, 'View.fs:64-77_fs2', 4)" class="i">albums</span> <span class="k">-&gt;</span> &#10;        <span class="i">tr</span> [&#10;            <span class="k">for</span> <span class="i">t</span> <span class="k">in</span> [ <span onmouseout="hideTip(event, 'View.fs:64-77_fs4', 5)" onmouseover="showTip(event, 'View.fs:64-77_fs4', 5)" class="i">truncate</span> <span class="n">25</span> <span class="i">album</span><span class="o">.</span><span class="i">Artist</span>; <span onmouseout="hideTip(event, 'View.fs:64-77_fs4', 6)" onmouseover="showTip(event, 'View.fs:64-77_fs4', 6)" class="i">truncate</span> <span class="n">25</span> <span class="i">album</span><span class="o">.</span><span class="i">Title</span>; <span class="i">album</span><span class="o">.</span><span class="i">Genre</span>; <span class="i">formatDec</span> <span class="i">album</span><span class="o">.</span><span class="i">Price</span> ] <span class="k">-&gt;</span>&#10;                <span class="i">td</span> [ <span class="i">text</span> <span class="i">t</span> ]&#10;        ]&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:64-77_fs1">val manage : albums:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.manage</div>&#10;<div class="tip" id="View.fs:64-77_fs2">val albums : &#39;a</div>&#10;<div class="tip" id="View.fs:64-77_fs3">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:64-77_fs4">val truncate : value:&#39;T -&gt; &#39;T (requires member Truncate)<br /><br />Full name: Microsoft.FSharp.Core.Operators.truncate</div>&#10;&#10;
 
 The view requires a few of new helper functions for table HTML markup:
 
-```fsharp
-let table x = tag "table" [] (flatten x)
-let th x = tag "th" [] (flatten x)
-let tr x = tag "tr" [] (flatten x)
-let td x = tag "td" [] (flatten x)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs1', 1)" onmouseover="showTip(event, 'View.fs:17-20_fs1', 1)" class="f">table</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 2)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 2)" class="i">x</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;table&quot;</span> [] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 3)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 3)" class="i">x</span>)&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs3', 4)" onmouseover="showTip(event, 'View.fs:17-20_fs3', 4)" class="f">th</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 5)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 5)" class="i">x</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;th&quot;</span> [] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 6)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 6)" class="i">x</span>)&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs4', 7)" onmouseover="showTip(event, 'View.fs:17-20_fs4', 7)" class="f">tr</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 8)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 8)" class="i">x</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;tr&quot;</span> [] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 9)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 9)" class="i">x</span>)&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs5', 10)" onmouseover="showTip(event, 'View.fs:17-20_fs5', 10)" class="f">td</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 11)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 11)" class="i">x</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;td&quot;</span> [] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:17-20_fs2', 12)" onmouseover="showTip(event, 'View.fs:17-20_fs2', 12)" class="i">x</span>)&#10;</div></pre>&#10;<div class="tip" id="View.fs:17-20_fs1">val table : x:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.table</div>&#10;<div class="tip" id="View.fs:17-20_fs2">val x : &#39;a</div>&#10;<div class="tip" id="View.fs:17-20_fs3">val th : x:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.th</div>&#10;<div class="tip" id="View.fs:17-20_fs4">val tr : x:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.tr</div>&#10;<div class="tip" id="View.fs:17-20_fs5">val td : x:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.td</div>&#10;&#10;
 
 as well as a `truncate` function that will ensure our cell content doesn't span over a maximum number of characters:
 
-```fsharp
-let truncate k (s : string) =
-    if s.Length > k then
-        s.Substring(0, k - 3) + "..."
-    else s
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:24-27_fs1', 1)" onmouseover="showTip(event, 'View.fs:24-27_fs1', 1)" class="f">truncate</span> <span onmouseout="hideTip(event, 'View.fs:24-27_fs2', 2)" onmouseover="showTip(event, 'View.fs:24-27_fs2', 2)" class="i">k</span> (<span onmouseout="hideTip(event, 'View.fs:24-27_fs3', 3)" onmouseover="showTip(event, 'View.fs:24-27_fs3', 3)" class="i">s</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'View.fs:24-27_fs4', 4)" onmouseover="showTip(event, 'View.fs:24-27_fs4', 4)" class="t">string</span>) <span class="o">=</span>&#10;    <span class="k">if</span> <span onmouseout="hideTip(event, 'View.fs:24-27_fs3', 5)" onmouseover="showTip(event, 'View.fs:24-27_fs3', 5)" class="i">s</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:24-27_fs5', 6)" onmouseover="showTip(event, 'View.fs:24-27_fs5', 6)" class="i">Length</span> <span class="o">&gt;</span> <span onmouseout="hideTip(event, 'View.fs:24-27_fs2', 7)" onmouseover="showTip(event, 'View.fs:24-27_fs2', 7)" class="i">k</span> <span class="k">then</span>&#10;        <span onmouseout="hideTip(event, 'View.fs:24-27_fs3', 8)" onmouseover="showTip(event, 'View.fs:24-27_fs3', 8)" class="i">s</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:24-27_fs6', 9)" onmouseover="showTip(event, 'View.fs:24-27_fs6', 9)" class="f">Substring</span>(<span class="n">0</span>, <span onmouseout="hideTip(event, 'View.fs:24-27_fs2', 10)" onmouseover="showTip(event, 'View.fs:24-27_fs2', 10)" class="i">k</span> <span class="o">-</span> <span class="n">3</span>) <span class="o">+</span> <span class="s">&quot;...&quot;</span>&#10;    <span class="k">else</span> <span onmouseout="hideTip(event, 'View.fs:24-27_fs3', 11)" onmouseover="showTip(event, 'View.fs:24-27_fs3', 11)" class="i">s</span>&#10;</div></pre>&#10;<div class="tip" id="View.fs:24-27_fs1">val truncate : k:int -&gt; s:string -&gt; string<br /><br />Full name: CDocument.truncate</div>&#10;<div class="tip" id="View.fs:24-27_fs2">val k : int</div>&#10;<div class="tip" id="View.fs:24-27_fs3">val s : string</div>&#10;<div class="tip" id="View.fs:24-27_fs4">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>&#10;<div class="tip" id="View.fs:24-27_fs5">property System.String.Length: int</div>&#10;<div class="tip" id="View.fs:24-27_fs6">System.String.Substring(startIndex: int) : string<br />System.String.Substring(startIndex: int, length: int) : string</div>&#10;&#10;
 
 Remarks:
 
@@ -46,36 +21,22 @@ Remarks:
 We are going to need to fetch the list of all `AlbumDetail`s from the database.
 For this reason, let's create following query in `Db` module:
 
-```fsharp
-let getAlbumsDetails (ctx : DbContext) : AlbumDetails list = 
-    ctx.``[dbo].[AlbumDetails]`` |> Seq.toList
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'Db.fs:38-39_fs1', 1)" onmouseover="showTip(event, 'Db.fs:38-39_fs1', 1)" class="f">getAlbumsDetails</span> (<span onmouseout="hideTip(event, 'Db.fs:38-39_fs2', 2)" onmouseover="showTip(event, 'Db.fs:38-39_fs2', 2)" class="i">ctx</span> <span class="o">:</span> <span class="i">DbContext</span>) <span class="o">:</span> <span class="i">AlbumDetails</span> <span onmouseout="hideTip(event, 'Db.fs:38-39_fs3', 3)" onmouseover="showTip(event, 'Db.fs:38-39_fs3', 3)" class="t">list</span> <span class="o">=</span> &#10;    <span onmouseout="hideTip(event, 'Db.fs:38-39_fs2', 4)" onmouseover="showTip(event, 'Db.fs:38-39_fs2', 4)" class="i">ctx</span><span class="o">.</span><span class="i">``[dbo].[AlbumDetails]``</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'Db.fs:38-39_fs4', 5)" onmouseover="showTip(event, 'Db.fs:38-39_fs4', 5)" class="t">Seq</span><span class="o">.</span><span onmouseout="hideTip(event, 'Db.fs:38-39_fs5', 6)" onmouseover="showTip(event, 'Db.fs:38-39_fs5', 6)" class="f">toList</span>&#10;</div></pre>&#10;<div class="tip" id="Db.fs:38-39_fs1">val getAlbumsDetails : ctx:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.getAlbumsDetails</div>&#10;<div class="tip" id="Db.fs:38-39_fs2">val ctx : &#39;a</div>&#10;<div class="tip" id="Db.fs:38-39_fs3">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;<div class="tip" id="Db.fs:38-39_fs4">module Seq<br /><br />from Microsoft.FSharp.Collections</div>&#10;<div class="tip" id="Db.fs:38-39_fs5">val toList : source:seq&lt;&#39;T&gt; -&gt; &#39;T list<br /><br />Full name: Microsoft.FSharp.Collections.Seq.toList</div>&#10;&#10;
 
 Now we're ready to define an actual handler to display the list of albums.
 Let's add a new sub-module to `Path`:
 
-```fsharp
-module Admin =
-    let manage = "/admin/manage"
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">module</span> <span onmouseout="hideTip(event, 'Path.fs:16-17_fs1', 1)" onmouseover="showTip(event, 'Path.fs:16-17_fs1', 1)" class="t">Admin</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:16-17_fs2', 2)" onmouseover="showTip(event, 'Path.fs:16-17_fs2', 2)" class="i">manage</span> <span class="o">=</span> <span class="s">&quot;/admin/manage&quot;</span>&#10;</div></pre>&#10;<div class="tip" id="Path.fs:16-17_fs1">module Admin<br /><br />from CDocument</div>&#10;<div class="tip" id="Path.fs:16-17_fs2">val manage : string<br /><br />Full name: CDocument.Admin.manage</div>&#10;&#10;
 
 The `Admin` sub-module will contain all album management paths or routes if you will.
 
 `manage` WebPart in `App` module can be implemented in following way:
 
-```fsharp
-let manage = warbler (fun _ ->
-    Db.getContext()
-    |> Db.getAlbumsDetails
-    |> View.manage
-    |> html)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:37-41_fs1', 1)" onmouseover="showTip(event, 'App.fs:37-41_fs1', 1)" class="i">manage</span> <span class="o">=</span> <span class="i">warbler</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span>&#10;    <span class="i">Db</span><span class="o">.</span><span class="i">getContext</span>()&#10;    <span class="o">|&gt;</span> <span class="i">Db</span><span class="o">.</span><span class="i">getAlbumsDetails</span>&#10;    <span class="o">|&gt;</span> <span class="i">View</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:37-41_fs1', 2)" onmouseover="showTip(event, 'App.fs:37-41_fs1', 2)" class="i">manage</span>&#10;    <span class="o">|&gt;</span> <span class="i">html</span>)&#10;</div></pre>&#10;<div class="tip" id="App.fs:37-41_fs1">val manage : obj<br /><br />Full name: CDocument.manage</div>&#10;&#10;
 
 and used in the main `choose` WebPart:
 
-```fsharp
-        path Path.Admin.manage >=> manage
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">manage</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">manage</span>&#10;</div></pre>&#10;&#10;
 
 Don't forget about the `warbler` for `manage` WebPart - we don't use an parameters for this WebPart, so we need to prevent it's eager evaluation.
 
@@ -88,7 +49,7 @@ GitHub commit: [3c1325de71a6e671f4a9121b1efadbab931d5cae](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	Db.fs
-* M	Path.fs
-* M	View.fs
+* App.fs (modified)
+* Db.fs (modified)
+* Path.fs (modified)
+* View.fs (modified)

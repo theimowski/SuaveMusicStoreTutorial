@@ -2,15 +2,7 @@
 
 Moving to our next WebPart "browse", let's first adjust it in `View` module:
 
-```fsharp
-let browse genre (albums : Db.Album list) = [
-    h2 (sprintf "Genre: %s" genre)
-    ul [
-        for a in albums ->
-            li (aHref (sprintf Path.Store.details a.AlbumId) (text a.Title))
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:28-34_fs1', 1)" onmouseover="showTip(event, 'View.fs:28-34_fs1', 1)" class="f">browse</span> <span onmouseout="hideTip(event, 'View.fs:28-34_fs2', 2)" onmouseover="showTip(event, 'View.fs:28-34_fs2', 2)" class="i">genre</span> (<span onmouseout="hideTip(event, 'View.fs:28-34_fs3', 3)" onmouseover="showTip(event, 'View.fs:28-34_fs3', 3)" class="i">albums</span> <span class="o">:</span> <span class="i">Db</span><span class="o">.</span><span class="i">Album</span> <span onmouseout="hideTip(event, 'View.fs:28-34_fs4', 4)" onmouseover="showTip(event, 'View.fs:28-34_fs4', 4)" class="t">list</span>) <span class="o">=</span> [&#10;    <span class="i">h2</span> (<span onmouseout="hideTip(event, 'View.fs:28-34_fs5', 5)" onmouseover="showTip(event, 'View.fs:28-34_fs5', 5)" class="i">sprintf</span> <span class="s">&quot;Genre: %s&quot;</span> <span onmouseout="hideTip(event, 'View.fs:28-34_fs2', 6)" onmouseover="showTip(event, 'View.fs:28-34_fs2', 6)" class="i">genre</span>)&#10;    <span class="i">ul</span> [&#10;        <span class="k">for</span> <span class="i">a</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'View.fs:28-34_fs3', 7)" onmouseover="showTip(event, 'View.fs:28-34_fs3', 7)" class="i">albums</span> <span class="k">-&gt;</span>&#10;            <span class="i">li</span> (<span class="i">aHref</span> (<span onmouseout="hideTip(event, 'View.fs:28-34_fs5', 8)" onmouseover="showTip(event, 'View.fs:28-34_fs5', 8)" class="i">sprintf</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">details</span> <span class="i">a</span><span class="o">.</span><span class="i">AlbumId</span>) (<span class="i">text</span> <span class="i">a</span><span class="o">.</span><span class="i">Title</span>))&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:28-34_fs1">val browse : genre:&#39;a -&gt; albums:&#39;b -&gt; &#39;c list<br /><br />Full name: CDocument.browse</div>&#10;<div class="tip" id="View.fs:28-34_fs2">val genre : &#39;a</div>&#10;<div class="tip" id="View.fs:28-34_fs3">val albums : &#39;b</div>&#10;<div class="tip" id="View.fs:28-34_fs4">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:28-34_fs5">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>&#10;&#10;
 
 so that it takes two arguments: name of the genre (string) and a list of albums for that genre.
 For each album we'll display a list item with a direct link to album's details.
@@ -19,17 +11,7 @@ For each album we'll display a list item with a direct link to album's details.
 
 Now, we can modify the `browse` WebPart itself:
 
-```fsharp
-let browse =
-    request (fun r -> 
-        match r.queryParam Path.Store.browseKey with
-        | Choice1Of2 genre -> 
-            Db.getContext()
-            |> Db.getAlbumsForGenre genre
-            |> View.browse genre
-            |> html
-        | Choice2Of2 msg -> BAD_REQUEST msg)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:13-21_fs1', 1)" onmouseover="showTip(event, 'App.fs:13-21_fs1', 1)" class="i">browse</span> <span class="o">=</span>&#10;    <span class="i">request</span> (<span class="k">fun</span> <span class="i">r</span> <span class="k">-&gt;</span> &#10;        <span class="k">match</span> <span class="i">r</span><span class="o">.</span><span class="i">queryParam</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">browseKey</span> <span class="k">with</span>&#10;        | <span onmouseout="hideTip(event, 'App.fs:13-21_fs2', 2)" onmouseover="showTip(event, 'App.fs:13-21_fs2', 2)" class="i">Choice1Of2</span> <span class="i">genre</span> <span class="k">-&gt;</span> &#10;            <span class="i">Db</span><span class="o">.</span><span class="i">getContext</span>()&#10;            <span class="o">|&gt;</span> <span class="i">Db</span><span class="o">.</span><span class="i">getAlbumsForGenre</span> <span class="i">genre</span>&#10;            <span class="o">|&gt;</span> <span class="i">View</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:13-21_fs1', 3)" onmouseover="showTip(event, 'App.fs:13-21_fs1', 3)" class="i">browse</span> <span class="i">genre</span>&#10;            <span class="o">|&gt;</span> <span class="i">html</span>&#10;        | <span onmouseout="hideTip(event, 'App.fs:13-21_fs3', 4)" onmouseover="showTip(event, 'App.fs:13-21_fs3', 4)" class="i">Choice2Of2</span> <span class="i">msg</span> <span class="k">-&gt;</span> <span class="i">BAD_REQUEST</span> <span class="i">msg</span>)&#10;</div></pre>&#10;<div class="tip" id="App.fs:13-21_fs1">val browse : obj<br /><br />Full name: CDocument.browse</div>&#10;<div class="tip" id="App.fs:13-21_fs2">union case Choice.Choice1Of2: &#39;T1 -&gt; Choice&lt;&#39;T1,&#39;T2&gt;</div>&#10;<div class="tip" id="App.fs:13-21_fs3">union case Choice.Choice2Of2: &#39;T2 -&gt; Choice&lt;&#39;T1,&#39;T2&gt;</div>&#10;&#10;
 
 Again, usage of pipe operator makes it clear what happens in case the `genre` is resolved from the query parameter.
 
@@ -39,11 +21,7 @@ Again, usage of pipe operator makes it clear what happens in case the `genre` is
 If you navigate to "/store/browse?genre=Latin", you may notice there are some characters displayed incorrectly.
 Let's fix this by setting the "Content-Type" header with correct charset for each HTTP response:
 
-```fsharp
-let html container =
-    OK (View.index container)
-    >=> Writers.setMimeType "text/html; charset=utf-8"
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:9-11_fs1', 1)" onmouseover="showTip(event, 'App.fs:9-11_fs1', 1)" class="f">html</span> <span onmouseout="hideTip(event, 'App.fs:9-11_fs2', 2)" onmouseover="showTip(event, 'App.fs:9-11_fs2', 2)" class="i">container</span> <span class="o">=</span>&#10;    <span class="i">OK</span> (<span class="i">View</span><span class="o">.</span><span class="i">index</span> <span onmouseout="hideTip(event, 'App.fs:9-11_fs2', 3)" onmouseover="showTip(event, 'App.fs:9-11_fs2', 3)" class="i">container</span>)&#10;    <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">Writers</span><span class="o">.</span><span class="i">setMimeType</span> <span class="s">&quot;text/html; charset=utf-8&quot;</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:9-11_fs1">val html : container:&#39;a -&gt; obj<br /><br />Full name: CDocument.html</div>&#10;<div class="tip" id="App.fs:9-11_fs2">val container : &#39;a</div>&#10;&#10;
 
 
 ---
@@ -52,5 +30,5 @@ GitHub commit: [603d1dc26bac864f73294aff864bec52a2b7b5d4](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	View.fs
+* App.fs (modified)
+* View.fs (modified)

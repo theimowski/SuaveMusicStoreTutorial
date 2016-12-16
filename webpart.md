@@ -31,6 +31,3 @@ If the above explanation of `WebPart` doesn't yet make much sense to you, or you
 ---
 
 GitHub commit: [537ce73ce96351b62555907a1e5783d72a6149f2](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/537ce73ce96351b62555907a1e5783d72a6149f2)
-
-Files changed:
-

@@ -12,12 +12,7 @@ Now, let's restrict our WebPart, so that the "Hello World" response is sent only
 `let webPart = path "/" >=> OK "Hello World"`
 `path` function is defined in `Suave.Filters` module, thus we need to open it at the beggining of `App.fs`. `Suave.Operators` and `Suave.Successful` modules will also be crucial - let's open them as well.
 
-```fsharp
-﻿open Suave
-open Suave.Filters
-open Suave.Operators
-open Suave.Successful
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Filters</span>&#10;<span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span onmouseout="hideTip(event, 'App.fs:1-4_fs1', 1)" onmouseover="showTip(event, 'App.fs:1-4_fs1', 1)" class="i">Operators</span>&#10;<span class="k">open</span> <span class="i">Suave</span><span class="o">.</span><span class="i">Successful</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:1-4_fs1">module Operators<br /><br />from Microsoft.FSharp.Core</div>&#10;&#10;
 
 `path` is a function of type:
 `string -> WebPart`
@@ -28,17 +23,7 @@ The `>=>` operator comes also from Suave library. It composes two WebParts into 
 Let's move on to configuring a few routes in our application.
 To achieve that, we can use the `choose` function, which takes a list of WebParts, and chooses the first one that applies (returns `Some`), or if none WebPart applies, then choose will also return `None`:
 
-```fsharp
-let webPart = 
-    choose [
-        path "/" >=> (OK "Home")
-        path "/store" >=> (OK "Store")
-        path "/store/browse" >=> (OK "Store")
-        path "/store/details" >=> (OK "Details")
-    ]
-
-startWebServer defaultConfig webPart
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:6-14_fs1', 1)" onmouseover="showTip(event, 'App.fs:6-14_fs1', 1)" class="i">webPart</span> <span class="o">=</span> &#10;    <span class="i">choose</span> [&#10;        <span class="i">path</span> <span class="s">&quot;/&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="s">&quot;Home&quot;</span>)&#10;        <span class="i">path</span> <span class="s">&quot;/store&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="s">&quot;Store&quot;</span>)&#10;        <span class="i">path</span> <span class="s">&quot;/store/browse&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="s">&quot;Store&quot;</span>)&#10;        <span class="i">path</span> <span class="s">&quot;/store/details&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> (<span class="i">OK</span> <span class="s">&quot;Details&quot;</span>)&#10;    ]&#10;&#10;<span class="i">startWebServer</span> <span class="i">defaultConfig</span> <span onmouseout="hideTip(event, 'App.fs:6-14_fs1', 2)" onmouseover="showTip(event, 'App.fs:6-14_fs1', 2)" class="i">webPart</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:6-14_fs1">val webPart : obj<br /><br />Full name: CDocument.webPart</div>&#10;&#10;
 
 
 ---
@@ -47,4 +32,4 @@ GitHub commit: [4105c21e3f1e1aa432de98e0388f71f89b693234](https://github.com/the
 
 Files changed:
 
-* M	App.fs
+* App.fs (modified)

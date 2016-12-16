@@ -3,28 +3,11 @@
 It's time to read album's details from the database.
 Start by adjusting the `details` in `View` module:
 
-```fsharp
-let details (album : Db.AlbumDetails) = [
-    h2 album.Title
-    p [ imgSrc album.AlbumArtUrl ]
-    divId "album-details" [
-        for (caption,t) in ["Genre:",album.Genre;"Artist:",album.Artist;"Price:",formatDec album.Price] ->
-            p [
-                em caption
-                text t
-            ]
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:42-52_fs1', 1)" onmouseover="showTip(event, 'View.fs:42-52_fs1', 1)" class="f">details</span> (<span onmouseout="hideTip(event, 'View.fs:42-52_fs2', 2)" onmouseover="showTip(event, 'View.fs:42-52_fs2', 2)" class="i">album</span> <span class="o">:</span> <span class="i">Db</span><span class="o">.</span><span class="i">AlbumDetails</span>) <span class="o">=</span> [&#10;    <span class="i">h2</span> <span onmouseout="hideTip(event, 'View.fs:42-52_fs2', 3)" onmouseover="showTip(event, 'View.fs:42-52_fs2', 3)" class="i">album</span><span class="o">.</span><span class="i">Title</span>&#10;    <span class="i">p</span> [ <span class="i">imgSrc</span> <span onmouseout="hideTip(event, 'View.fs:42-52_fs2', 4)" onmouseover="showTip(event, 'View.fs:42-52_fs2', 4)" class="i">album</span><span class="o">.</span><span class="i">AlbumArtUrl</span> ]&#10;    <span class="i">divId</span> <span class="s">&quot;album-details&quot;</span> [&#10;        <span class="k">for</span> (<span class="i">caption</span>,<span class="i">t</span>) <span class="k">in</span> [<span class="s">&quot;Genre:&quot;</span>,<span onmouseout="hideTip(event, 'View.fs:42-52_fs2', 5)" onmouseover="showTip(event, 'View.fs:42-52_fs2', 5)" class="i">album</span><span class="o">.</span><span class="i">Genre</span>;<span class="s">&quot;Artist:&quot;</span>,<span onmouseout="hideTip(event, 'View.fs:42-52_fs2', 6)" onmouseover="showTip(event, 'View.fs:42-52_fs2', 6)" class="i">album</span><span class="o">.</span><span class="i">Artist</span>;<span class="s">&quot;Price:&quot;</span>,<span class="i">formatDec</span> <span onmouseout="hideTip(event, 'View.fs:42-52_fs2', 7)" onmouseover="showTip(event, 'View.fs:42-52_fs2', 7)" class="i">album</span><span class="o">.</span><span class="i">Price</span>] <span class="k">-&gt;</span>&#10;            <span class="i">p</span> [&#10;                <span class="i">em</span> <span class="i">caption</span>&#10;                <span class="i">text</span> <span class="i">t</span>&#10;            ]&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:42-52_fs1">val details : album:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.details</div>&#10;<div class="tip" id="View.fs:42-52_fs2">val album : &#39;a</div>&#10;&#10;
 
 Above snippet requires defining a few more helper functions in `View`:
 
-```fsharp
-let imgSrc src = imgAttr [ "src", src ]
-let em s = tag "em" [] (text s)
-
-let formatDec (d : Decimal) = d.ToString(Globalization.CultureInfo.InvariantCulture)
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs1', 1)" onmouseover="showTip(event, 'View.fs:14-17_fs1', 1)" class="f">imgSrc</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs2', 2)" onmouseover="showTip(event, 'View.fs:14-17_fs2', 2)" class="i">src</span> <span class="o">=</span> <span class="i">imgAttr</span> [ <span class="s">&quot;src&quot;</span>, <span onmouseout="hideTip(event, 'View.fs:14-17_fs2', 3)" onmouseover="showTip(event, 'View.fs:14-17_fs2', 3)" class="i">src</span> ]&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs3', 4)" onmouseover="showTip(event, 'View.fs:14-17_fs3', 4)" class="f">em</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs4', 5)" onmouseover="showTip(event, 'View.fs:14-17_fs4', 5)" class="i">s</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;em&quot;</span> [] (<span class="i">text</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs4', 6)" onmouseover="showTip(event, 'View.fs:14-17_fs4', 6)" class="i">s</span>)&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs5', 7)" onmouseover="showTip(event, 'View.fs:14-17_fs5', 7)" class="f">formatDec</span> (<span onmouseout="hideTip(event, 'View.fs:14-17_fs6', 8)" onmouseover="showTip(event, 'View.fs:14-17_fs6', 8)" class="i">d</span> <span class="o">:</span> <span class="i">Decimal</span>) <span class="o">=</span> <span onmouseout="hideTip(event, 'View.fs:14-17_fs6', 9)" onmouseover="showTip(event, 'View.fs:14-17_fs6', 9)" class="i">d</span><span class="o">.</span><span onmouseout="hideTip(event, 'View.fs:14-17_fs7', 10)" onmouseover="showTip(event, 'View.fs:14-17_fs7', 10)" class="f">ToString</span>(<span class="i">Globalization</span><span class="o">.</span><span class="i">CultureInfo</span><span class="o">.</span><span class="i">InvariantCulture</span>)&#10;</div></pre>&#10;<div class="tip" id="View.fs:14-17_fs1">val imgSrc : src:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.imgSrc</div>&#10;<div class="tip" id="View.fs:14-17_fs2">val src : &#39;a</div>&#10;<div class="tip" id="View.fs:14-17_fs3">val em : s:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.em</div>&#10;<div class="tip" id="View.fs:14-17_fs4">val s : &#39;a</div>&#10;<div class="tip" id="View.fs:14-17_fs5">val formatDec : d:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.formatDec</div>&#10;<div class="tip" id="View.fs:14-17_fs6">val d : &#39;a</div>&#10;<div class="tip" id="View.fs:14-17_fs7">System.Object.ToString() : string</div>&#10;&#10;
 
 as well as opening the `System` namespace at the top of the file.
 
@@ -38,18 +21,9 @@ The `AlbumDetails` database view turns out to be handy now, because we can use a
 
 To read the album's details in `App` module we can do following:
 
-```fsharp
-let details id =
-    match Db.getAlbumDetails id (Db.getContext()) with
-    | Some album ->
-        html (View.details album)
-    | None ->
-        never
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:30-35_fs1', 1)" onmouseover="showTip(event, 'App.fs:30-35_fs1', 1)" class="f">details</span> <span onmouseout="hideTip(event, 'App.fs:30-35_fs2', 2)" onmouseover="showTip(event, 'App.fs:30-35_fs2', 2)" class="i">id</span> <span class="o">=</span>&#10;    <span class="k">match</span> <span class="i">Db</span><span class="o">.</span><span class="i">getAlbumDetails</span> <span onmouseout="hideTip(event, 'App.fs:30-35_fs2', 3)" onmouseover="showTip(event, 'App.fs:30-35_fs2', 3)" class="i">id</span> (<span class="i">Db</span><span class="o">.</span><span class="i">getContext</span>()) <span class="k">with</span>&#10;    | <span onmouseout="hideTip(event, 'App.fs:30-35_fs3', 4)" onmouseover="showTip(event, 'App.fs:30-35_fs3', 4)" class="p">Some</span> <span onmouseout="hideTip(event, 'App.fs:30-35_fs4', 5)" onmouseover="showTip(event, 'App.fs:30-35_fs4', 5)" class="i">album</span> <span class="k">-&gt;</span>&#10;        <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span class="i">details</span> <span onmouseout="hideTip(event, 'App.fs:30-35_fs4', 6)" onmouseover="showTip(event, 'App.fs:30-35_fs4', 6)" class="i">album</span>)&#10;    | <span onmouseout="hideTip(event, 'App.fs:30-35_fs5', 7)" onmouseover="showTip(event, 'App.fs:30-35_fs5', 7)" class="p">None</span> <span class="k">-&gt;</span>&#10;        <span class="i">never</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:30-35_fs1">val details : id:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.details</div>&#10;<div class="tip" id="App.fs:30-35_fs2">val id : &#39;a</div>&#10;<div class="tip" id="App.fs:30-35_fs3">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>&#10;<div class="tip" id="App.fs:30-35_fs4">val album : obj</div>&#10;<div class="tip" id="App.fs:30-35_fs5">union case Option.None: Option&lt;&#39;T&gt;</div>&#10;&#10;
 
-```fsharp
-        pathScan Path.Store.details details
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">pathScan</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">details</span> <span class="i">details</span>&#10;</div></pre>&#10;&#10;
 
 A few remarks regarding above snippet:
 
@@ -68,34 +42,11 @@ Don't forget to set "Copy To Output Directory", as well as add new file extensio
 You might have noticed, that when you try to access a missing resource (for example entering album details url with arbitrary album id) then no response is sent.
 In order to fix that, let's add a "Page Not Found" handler to our main `choose` WebPart as a last resort:
 
-```fsharp
-let webPart = 
-    choose [
-        path Path.home >=> html View.home
-        path Path.Store.overview >=> overview
-        path Path.Store.browse >=> browse
-        pathScan Path.Store.details details
-
-        pathRegex "(.*)\.(css|png|gif)" >=> Files.browseHome
-
-        html View.notFound
-    ]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:37-47_fs1', 1)" onmouseover="showTip(event, 'App.fs:37-47_fs1', 1)" class="i">webPart</span> <span class="o">=</span> &#10;    <span class="i">choose</span> [&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">html</span> <span class="i">View</span><span class="o">.</span><span class="i">home</span>&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">overview</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">overview</span>&#10;        <span class="i">path</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">browse</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">browse</span>&#10;        <span class="i">pathScan</span> <span class="i">Path</span><span class="o">.</span><span class="i">Store</span><span class="o">.</span><span class="i">details</span> <span class="i">details</span>&#10;&#10;        <span class="i">pathRegex</span> <span class="s">&quot;(.*)\.(css|png|gif)&quot;</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">Files</span><span class="o">.</span><span class="i">browseHome</span>&#10;&#10;        <span class="i">html</span> <span class="i">View</span><span class="o">.</span><span class="i">notFound</span>&#10;    ]&#10;</div></pre>&#10;<div class="tip" id="App.fs:37-47_fs1">val webPart : obj<br /><br />Full name: CDocument.webPart</div>&#10;&#10;
 
 the `View.notFound` can then look like:
 
-```fsharp
-let notFound = [
-    h2 "Page not found"
-    p [
-        text "Could not find the requested resource"
-    ]
-    p [
-        text "Back to "
-        aHref Path.home (text "Home")
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:54-63_fs1', 1)" onmouseover="showTip(event, 'View.fs:54-63_fs1', 1)" class="i">notFound</span> <span class="o">=</span> [&#10;    <span class="i">h2</span> <span class="s">&quot;Page not found&quot;</span>&#10;    <span class="i">p</span> [&#10;        <span class="i">text</span> <span class="s">&quot;Could not find the requested resource&quot;</span>&#10;    ]&#10;    <span class="i">p</span> [&#10;        <span class="i">text</span> <span class="s">&quot;Back to &quot;</span>&#10;        <span class="i">aHref</span> <span class="i">Path</span><span class="o">.</span><span class="i">home</span> (<span class="i">text</span> <span class="s">&quot;Home&quot;</span>)&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:54-63_fs1">val notFound : obj list<br /><br />Full name: CDocument.notFound</div>&#10;&#10;
 
 
 ---
@@ -104,7 +55,7 @@ GitHub commit: [b9039a2f8faad3dd9ddceb458c64abed86b07e05](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	SuaveMusicStore.fsproj
-* M	View.fs
-* A	placeholder.gif
+* App.fs (modified)
+* SuaveMusicStore.fsproj (modified)
+* View.fs (modified)
+* placeholder.gif (added)

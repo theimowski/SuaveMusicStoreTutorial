@@ -7,6 +7,3 @@ This will be a simple Create, Update, Delete functionality with a grid to displa
 ---
 
 GitHub commit: [62918b35cfb959c079f760c4516e05db06635b9d](https://github.com/theimowski/SuaveMusicStoreTutorial/commit/62918b35cfb959c079f760c4516e05db06635b9d)
-
-Files changed:
-

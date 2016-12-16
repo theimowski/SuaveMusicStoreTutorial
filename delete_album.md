@@ -3,34 +3,11 @@
 We can't make any operation on an album yet.
 To fix this, let's first add the delete functionality:
 
-```fsharp
-let deleteAlbum albumTitle = [
-    h2 "Delete Confirmation"
-    p [ 
-        text "Are you sure you want to delete the album titled"
-        br
-        strong albumTitle
-        text "?"
-    ]
-    
-    form [
-        submitInput "Delete"
-    ]
-
-    div [
-        aHref Path.Admin.manage (text "Back to list")
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:87-103_fs1', 1)" onmouseover="showTip(event, 'View.fs:87-103_fs1', 1)" class="f">deleteAlbum</span> <span onmouseout="hideTip(event, 'View.fs:87-103_fs2', 2)" onmouseover="showTip(event, 'View.fs:87-103_fs2', 2)" class="i">albumTitle</span> <span class="o">=</span> [&#10;    <span class="i">h2</span> <span class="s">&quot;Delete Confirmation&quot;</span>&#10;    <span class="i">p</span> [ &#10;        <span class="i">text</span> <span class="s">&quot;Are you sure you want to delete the album titled&quot;</span>&#10;        <span class="i">br</span>&#10;        <span class="i">strong</span> <span onmouseout="hideTip(event, 'View.fs:87-103_fs2', 3)" onmouseover="showTip(event, 'View.fs:87-103_fs2', 3)" class="i">albumTitle</span>&#10;        <span class="i">text</span> <span class="s">&quot;?&quot;</span>&#10;    ]&#10;    &#10;    <span class="i">form</span> [&#10;        <span class="i">submitInput</span> <span class="s">&quot;Delete&quot;</span>&#10;    ]&#10;&#10;    <span class="i">div</span> [&#10;        <span class="i">aHref</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">manage</span> (<span class="i">text</span> <span class="s">&quot;Back to list&quot;</span>)&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:87-103_fs1">val deleteAlbum : albumTitle:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.deleteAlbum</div>&#10;<div class="tip" id="View.fs:87-103_fs2">val albumTitle : &#39;a</div>&#10;&#10;
 
 `deleteAlbum` is to be placed in the `View` module. It requires new markup functions:
 
-```fsharp
-let strong s = tag "strong" [] (text s)
-
-let form x = tag "form" ["method", "POST"] (flatten x)
-let submitInput value = inputAttr ["type", "submit"; "value", value]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs1', 1)" onmouseover="showTip(event, 'View.fs:16-19_fs1', 1)" class="f">strong</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs2', 2)" onmouseover="showTip(event, 'View.fs:16-19_fs2', 2)" class="i">s</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;strong&quot;</span> [] (<span class="i">text</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs2', 3)" onmouseover="showTip(event, 'View.fs:16-19_fs2', 3)" class="i">s</span>)&#10;&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs3', 4)" onmouseover="showTip(event, 'View.fs:16-19_fs3', 4)" class="f">form</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs4', 5)" onmouseover="showTip(event, 'View.fs:16-19_fs4', 5)" class="i">x</span> <span class="o">=</span> <span class="i">tag</span> <span class="s">&quot;form&quot;</span> [<span class="s">&quot;method&quot;</span>, <span class="s">&quot;POST&quot;</span>] (<span class="i">flatten</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs4', 6)" onmouseover="showTip(event, 'View.fs:16-19_fs4', 6)" class="i">x</span>)&#10;<span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs5', 7)" onmouseover="showTip(event, 'View.fs:16-19_fs5', 7)" class="f">submitInput</span> <span onmouseout="hideTip(event, 'View.fs:16-19_fs6', 8)" onmouseover="showTip(event, 'View.fs:16-19_fs6', 8)" class="i">value</span> <span class="o">=</span> <span class="i">inputAttr</span> [<span class="s">&quot;type&quot;</span>, <span class="s">&quot;submit&quot;</span>; <span class="s">&quot;value&quot;</span>, <span onmouseout="hideTip(event, 'View.fs:16-19_fs6', 9)" onmouseover="showTip(event, 'View.fs:16-19_fs6', 9)" class="i">value</span>]&#10;</div></pre>&#10;<div class="tip" id="View.fs:16-19_fs1">val strong : s:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.strong</div>&#10;<div class="tip" id="View.fs:16-19_fs2">val s : &#39;a</div>&#10;<div class="tip" id="View.fs:16-19_fs3">val form : x:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.form</div>&#10;<div class="tip" id="View.fs:16-19_fs4">val x : &#39;a</div>&#10;<div class="tip" id="View.fs:16-19_fs5">val submitInput : value:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.submitInput</div>&#10;<div class="tip" id="View.fs:16-19_fs6">val value : &#39;a</div>&#10;&#10;
 
 - `strong` is just an emphasis
 - `form` is HTML element for a form with it's "method" attribute set to "POST"
@@ -38,23 +15,12 @@ let submitInput value = inputAttr ["type", "submit"; "value", value]
 
 A couple of snippets to handle `deleteAlbum` are still needed, starting with `Db`:
 
-```fsharp
-let getAlbum id (ctx : DbContext) : Album option = 
-    query { 
-        for album in ctx.``[dbo].[Albums]`` do
-            where (album.AlbumId = id)
-            select album
-    } |> firstOrNone
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs1', 1)" onmouseover="showTip(event, 'Db.fs:41-46_fs1', 1)" class="f">getAlbum</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs2', 2)" onmouseover="showTip(event, 'Db.fs:41-46_fs2', 2)" class="i">id</span> (<span onmouseout="hideTip(event, 'Db.fs:41-46_fs3', 3)" onmouseover="showTip(event, 'Db.fs:41-46_fs3', 3)" class="i">ctx</span> <span class="o">:</span> <span class="i">DbContext</span>) <span class="o">:</span> <span class="i">Album</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs4', 4)" onmouseover="showTip(event, 'Db.fs:41-46_fs4', 4)" class="t">option</span> <span class="o">=</span> &#10;    <span onmouseout="hideTip(event, 'Db.fs:41-46_fs5', 5)" onmouseover="showTip(event, 'Db.fs:41-46_fs5', 5)" class="i">query</span> { &#10;        <span class="k">for</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs6', 6)" onmouseover="showTip(event, 'Db.fs:41-46_fs6', 6)" class="i">album</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs3', 7)" onmouseover="showTip(event, 'Db.fs:41-46_fs3', 7)" class="i">ctx</span><span class="o">.</span><span class="i">``[dbo].[Albums]``</span> <span class="k">do</span>&#10;            <span onmouseout="hideTip(event, 'Db.fs:41-46_fs7', 8)" onmouseover="showTip(event, 'Db.fs:41-46_fs7', 8)" class="k">where</span> (<span onmouseout="hideTip(event, 'Db.fs:41-46_fs6', 9)" onmouseover="showTip(event, 'Db.fs:41-46_fs6', 9)" class="i">album</span><span class="o">.</span><span class="i">AlbumId</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs2', 10)" onmouseover="showTip(event, 'Db.fs:41-46_fs2', 10)" class="i">id</span>)&#10;            <span onmouseout="hideTip(event, 'Db.fs:41-46_fs8', 11)" onmouseover="showTip(event, 'Db.fs:41-46_fs8', 11)" class="k">select</span> <span onmouseout="hideTip(event, 'Db.fs:41-46_fs6', 12)" onmouseover="showTip(event, 'Db.fs:41-46_fs6', 12)" class="i">album</span>&#10;    } <span class="o">|&gt;</span> <span class="i">firstOrNone</span>&#10;</div></pre>&#10;<div class="tip" id="Db.fs:41-46_fs1">val getAlbum : id:&#39;a -&gt; ctx:&#39;b -&gt; &#39;c (requires equality)<br /><br />Full name: CDocument.getAlbum</div>&#10;<div class="tip" id="Db.fs:41-46_fs2">val id : &#39;a (requires equality)</div>&#10;<div class="tip" id="Db.fs:41-46_fs3">val ctx : &#39;b</div>&#10;<div class="tip" id="Db.fs:41-46_fs4">type &#39;T option = Option&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.option&lt;_&gt;</div>&#10;<div class="tip" id="Db.fs:41-46_fs5">val query : Linq.QueryBuilder<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.query</div>&#10;<div class="tip" id="Db.fs:41-46_fs6">val album : obj</div>&#10;<div class="tip" id="Db.fs:41-46_fs7">custom operation: where (bool)<br /><br />Calls Linq.QueryBuilder.Where </div>&#10;<div class="tip" id="Db.fs:41-46_fs8">custom operation: select (&#39;Result)<br /><br />Calls Linq.QueryBuilder.Select </div>&#10;&#10;
 
 for getting `Album option` (not `AlbumDetails`).
 New route in `Path`:
 
-```fsharp
-module Admin =
-    let manage = "/admin/manage"
-    let deleteAlbum : IntPath = "/admin/delete/%d"
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">module</span> <span onmouseout="hideTip(event, 'Path.fs:16-18_fs1', 1)" onmouseover="showTip(event, 'Path.fs:16-18_fs1', 1)" class="t">Admin</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:16-18_fs2', 2)" onmouseover="showTip(event, 'Path.fs:16-18_fs2', 2)" class="i">manage</span> <span class="o">=</span> <span class="s">&quot;/admin/manage&quot;</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'Path.fs:16-18_fs3', 3)" onmouseover="showTip(event, 'Path.fs:16-18_fs3', 3)" class="i">deleteAlbum</span> <span class="o">:</span> <span class="i">IntPath</span> <span class="o">=</span> <span class="s">&quot;/admin/delete/%d&quot;</span>&#10;</div></pre>&#10;<div class="tip" id="Path.fs:16-18_fs1">module Admin<br /><br />from CDocument</div>&#10;<div class="tip" id="Path.fs:16-18_fs2">val manage : string<br /><br />Full name: CDocument.Admin.manage</div>&#10;<div class="tip" id="Path.fs:16-18_fs3">val deleteAlbum : string<br /><br />Full name: CDocument.Admin.deleteAlbum</div>&#10;&#10;
 
 Finally we can put following in the `App` module:
 
@@ -67,9 +33,7 @@ let deleteAlbum id =
         never
 ```
 
-```fsharp
-        pathScan Path.Admin.deleteAlbum deleteAlbum
-```
+<pre class="fssnip highlighted"><div lang="fsharp">        <span class="i">pathScan</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">deleteAlbum</span> <span class="i">deleteAlbum</span>&#10;</div></pre>&#10;&#10;
 
 Note that the code above allows us to navigate to to "/admin/delete/%d", but we still are not able to actually delete an album.
 That's because there's no handler in our app to delete the album from database.
@@ -77,31 +41,13 @@ For the moment both GET and POST requests will do the same, which is return HTML
 
 In order to implement the deletion, add `deleteAlbum` to `Db` module:
 
-```fsharp
-let deleteAlbum (album : Album) (ctx : DbContext) = 
-    album.Delete()
-    ctx.SubmitUpdates()
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'Db.fs:48-50_fs1', 1)" onmouseover="showTip(event, 'Db.fs:48-50_fs1', 1)" class="f">deleteAlbum</span> (<span onmouseout="hideTip(event, 'Db.fs:48-50_fs2', 2)" onmouseover="showTip(event, 'Db.fs:48-50_fs2', 2)" class="i">album</span> <span class="o">:</span> <span class="i">Album</span>) (<span onmouseout="hideTip(event, 'Db.fs:48-50_fs3', 3)" onmouseover="showTip(event, 'Db.fs:48-50_fs3', 3)" class="i">ctx</span> <span class="o">:</span> <span class="i">DbContext</span>) <span class="o">=</span> &#10;    <span onmouseout="hideTip(event, 'Db.fs:48-50_fs2', 4)" onmouseover="showTip(event, 'Db.fs:48-50_fs2', 4)" class="i">album</span><span class="o">.</span><span class="i">Delete</span>()&#10;    <span onmouseout="hideTip(event, 'Db.fs:48-50_fs3', 5)" onmouseover="showTip(event, 'Db.fs:48-50_fs3', 5)" class="i">ctx</span><span class="o">.</span><span class="i">SubmitUpdates</span>()&#10;</div></pre>&#10;<div class="tip" id="Db.fs:48-50_fs1">val deleteAlbum : album:&#39;a -&gt; ctx:&#39;b -&gt; &#39;c<br /><br />Full name: CDocument.deleteAlbum</div>&#10;<div class="tip" id="Db.fs:48-50_fs2">val album : &#39;a</div>&#10;<div class="tip" id="Db.fs:48-50_fs3">val ctx : &#39;b</div>&#10;&#10;
 
 The snippet takes an `Album` as a parameter - instance of this type comes from database, and we can invoke `Delete()` member on it - SQLProvider keeps track of such changes, and upon `ctx.SubmitUpdates()` executes necessary SQL commands. This is somewhat similar to the "Active Record" concept.
 
 Now, in `App` module we can distinguish between GET and POST requests:
 
-```fsharp
-let deleteAlbum id =
-    let ctx = Db.getContext()
-    match Db.getAlbum id ctx with
-    | Some album ->
-        choose [ 
-            GET >=> warbler (fun _ -> 
-                html (View.deleteAlbum album.Title))
-            POST >=> warbler (fun _ -> 
-                Db.deleteAlbum album ctx; 
-                Redirection.FOUND Path.Admin.manage)
-        ]
-    | None ->
-        never
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs1', 1)" onmouseover="showTip(event, 'App.fs:43-55_fs1', 1)" class="f">deleteAlbum</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs2', 2)" onmouseover="showTip(event, 'App.fs:43-55_fs2', 2)" class="i">id</span> <span class="o">=</span>&#10;    <span class="k">let</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs3', 3)" onmouseover="showTip(event, 'App.fs:43-55_fs3', 3)" class="i">ctx</span> <span class="o">=</span> <span class="i">Db</span><span class="o">.</span><span class="i">getContext</span>()&#10;    <span class="k">match</span> <span class="i">Db</span><span class="o">.</span><span class="i">getAlbum</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs2', 4)" onmouseover="showTip(event, 'App.fs:43-55_fs2', 4)" class="i">id</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs3', 5)" onmouseover="showTip(event, 'App.fs:43-55_fs3', 5)" class="i">ctx</span> <span class="k">with</span>&#10;    | <span onmouseout="hideTip(event, 'App.fs:43-55_fs4', 6)" onmouseover="showTip(event, 'App.fs:43-55_fs4', 6)" class="p">Some</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs5', 7)" onmouseover="showTip(event, 'App.fs:43-55_fs5', 7)" class="i">album</span> <span class="k">-&gt;</span>&#10;        <span class="i">choose</span> [ &#10;            <span class="i">GET</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">warbler</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> &#10;                <span class="i">html</span> (<span class="i">View</span><span class="o">.</span><span class="i">deleteAlbum</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs5', 8)" onmouseover="showTip(event, 'App.fs:43-55_fs5', 8)" class="i">album</span><span class="o">.</span><span class="i">Title</span>))&#10;            <span class="i">POST</span> <span class="o">&gt;</span><span class="o">=&gt;</span> <span class="i">warbler</span> (<span class="k">fun</span> _ <span class="k">-&gt;</span> &#10;                <span class="i">Db</span><span class="o">.</span><span class="i">deleteAlbum</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs5', 9)" onmouseover="showTip(event, 'App.fs:43-55_fs5', 9)" class="i">album</span> <span onmouseout="hideTip(event, 'App.fs:43-55_fs3', 10)" onmouseover="showTip(event, 'App.fs:43-55_fs3', 10)" class="i">ctx</span>; &#10;                <span class="i">Redirection</span><span class="o">.</span><span class="i">FOUND</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">manage</span>)&#10;        ]&#10;    | <span onmouseout="hideTip(event, 'App.fs:43-55_fs6', 11)" onmouseover="showTip(event, 'App.fs:43-55_fs6', 11)" class="p">None</span> <span class="k">-&gt;</span>&#10;        <span class="i">never</span>&#10;</div></pre>&#10;<div class="tip" id="App.fs:43-55_fs1">val deleteAlbum : id:&#39;a -&gt; &#39;b<br /><br />Full name: CDocument.deleteAlbum</div>&#10;<div class="tip" id="App.fs:43-55_fs2">val id : &#39;a</div>&#10;<div class="tip" id="App.fs:43-55_fs3">val ctx : obj</div>&#10;<div class="tip" id="App.fs:43-55_fs4">union case Option.Some: Value: &#39;T -&gt; Option&lt;&#39;T&gt;</div>&#10;<div class="tip" id="App.fs:43-55_fs5">val album : obj</div>&#10;<div class="tip" id="App.fs:43-55_fs6">union case Option.None: Option&lt;&#39;T&gt;</div>&#10;&#10;
 
 - `deleteAlbum` WebPart gets passed the `choose` with two possibilities.
 - `GET` and `POST` are WebParts that succeed (return `Some x`) only if the incoming HTTP request is of GET or POST verb respectively.
@@ -111,26 +57,7 @@ let deleteAlbum id =
 
 The grid can now contain a column with link to delete the album in question:
 
-```fsharp
-let manage (albums : Db.AlbumDetails list) = [ 
-    h2 "Index"
-    table [
-        yield tr [
-            for t in ["Artist";"Title";"Genre";"Price";""] -> th [ text t ]
-        ]
-
-        for album in albums -> 
-        tr [
-            for t in [ truncate 25 album.Artist; truncate 25 album.Title; album.Genre; formatDec album.Price ] ->
-                td [ text t ]
-
-            yield td [
-                aHref (sprintf Path.Admin.deleteAlbum album.AlbumId) (text "Delete")
-            ]
-        ]
-    ]
-]
-```
+<pre class="fssnip highlighted"><div lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'View.fs:68-85_fs1', 1)" onmouseover="showTip(event, 'View.fs:68-85_fs1', 1)" class="f">manage</span> (<span onmouseout="hideTip(event, 'View.fs:68-85_fs2', 2)" onmouseover="showTip(event, 'View.fs:68-85_fs2', 2)" class="i">albums</span> <span class="o">:</span> <span class="i">Db</span><span class="o">.</span><span class="i">AlbumDetails</span> <span onmouseout="hideTip(event, 'View.fs:68-85_fs3', 3)" onmouseover="showTip(event, 'View.fs:68-85_fs3', 3)" class="t">list</span>) <span class="o">=</span> [ &#10;    <span class="i">h2</span> <span class="s">&quot;Index&quot;</span>&#10;    <span class="i">table</span> [&#10;        <span class="k">yield</span> <span class="i">tr</span> [&#10;            <span class="k">for</span> <span class="i">t</span> <span class="k">in</span> [<span class="s">&quot;Artist&quot;</span>;<span class="s">&quot;Title&quot;</span>;<span class="s">&quot;Genre&quot;</span>;<span class="s">&quot;Price&quot;</span>;<span class="s">&quot;&quot;</span>] <span class="k">-&gt;</span> <span class="i">th</span> [ <span class="i">text</span> <span class="i">t</span> ]&#10;        ]&#10;&#10;        <span class="k">for</span> <span class="i">album</span> <span class="k">in</span> <span onmouseout="hideTip(event, 'View.fs:68-85_fs2', 4)" onmouseover="showTip(event, 'View.fs:68-85_fs2', 4)" class="i">albums</span> <span class="k">-&gt;</span> &#10;        <span class="i">tr</span> [&#10;            <span class="k">for</span> <span class="i">t</span> <span class="k">in</span> [ <span onmouseout="hideTip(event, 'View.fs:68-85_fs4', 5)" onmouseover="showTip(event, 'View.fs:68-85_fs4', 5)" class="i">truncate</span> <span class="n">25</span> <span class="i">album</span><span class="o">.</span><span class="i">Artist</span>; <span onmouseout="hideTip(event, 'View.fs:68-85_fs4', 6)" onmouseover="showTip(event, 'View.fs:68-85_fs4', 6)" class="i">truncate</span> <span class="n">25</span> <span class="i">album</span><span class="o">.</span><span class="i">Title</span>; <span class="i">album</span><span class="o">.</span><span class="i">Genre</span>; <span class="i">formatDec</span> <span class="i">album</span><span class="o">.</span><span class="i">Price</span> ] <span class="k">-&gt;</span>&#10;                <span class="i">td</span> [ <span class="i">text</span> <span class="i">t</span> ]&#10;&#10;            <span class="k">yield</span> <span class="i">td</span> [&#10;                <span class="i">aHref</span> (<span onmouseout="hideTip(event, 'View.fs:68-85_fs5', 7)" onmouseover="showTip(event, 'View.fs:68-85_fs5', 7)" class="i">sprintf</span> <span class="i">Path</span><span class="o">.</span><span class="i">Admin</span><span class="o">.</span><span class="i">deleteAlbum</span> <span class="i">album</span><span class="o">.</span><span class="i">AlbumId</span>) (<span class="i">text</span> <span class="s">&quot;Delete&quot;</span>)&#10;            ]&#10;        ]&#10;    ]&#10;]&#10;</div></pre>&#10;<div class="tip" id="View.fs:68-85_fs1">val manage : albums:&#39;a -&gt; &#39;b list<br /><br />Full name: CDocument.manage</div>&#10;<div class="tip" id="View.fs:68-85_fs2">val albums : &#39;a</div>&#10;<div class="tip" id="View.fs:68-85_fs3">type &#39;T list = List&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Collections.list&lt;_&gt;</div>&#10;<div class="tip" id="View.fs:68-85_fs4">val truncate : value:&#39;T -&gt; &#39;T (requires member Truncate)<br /><br />Full name: Microsoft.FSharp.Core.Operators.truncate</div>&#10;<div class="tip" id="View.fs:68-85_fs5">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>&#10;&#10;
 
 - there's a new empty column header in the first row
 - in the last column of each album row comes a cell with link to delete the album
@@ -143,7 +70,7 @@ GitHub commit: [d545de17a544bdde37d3a61065493c03c19d3ff3](https://github.com/the
 
 Files changed:
 
-* M	App.fs
-* M	Db.fs
-* M	Path.fs
-* M	View.fs
+* App.fs (modified)
+* Db.fs (modified)
+* Path.fs (modified)
+* View.fs (modified)
