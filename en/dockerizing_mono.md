@@ -88,7 +88,7 @@ The `COPY` instruction will place the script in a special directory inside the c
 The second image on the other hand will make use of the official fsharp image:
 
 ```bash
-FROM fsharp/fsharp:latest
+FROM fsharp:latest
 
 COPY ./bin/Debug /app
 
