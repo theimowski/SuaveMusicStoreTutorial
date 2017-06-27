@@ -48,9 +48,9 @@ The generated types have a bit cumbersome names, but we can define type aliases 
 
 ```fsharp
 type DbContext = Sql.dataContext
-type Album = DbContext.``[dbo].[Albums]Entity``
-type Genre = DbContext.``[dbo].[Genres]Entity``
-type AlbumDetails = DbContext.``[dbo].[AlbumDetails]Entity``
+type Album = DbContext.``dbo.AlbumsEntity``
+type Genre = DbContext.``dbo.GenresEntity``
+type AlbumDetails = DbContext.``dbo.AlbumDetailsEntity``
 ```
 
 `DbContext` is our data context.
